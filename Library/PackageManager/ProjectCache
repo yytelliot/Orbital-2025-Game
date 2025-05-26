@@ -5,7 +5,11 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
+<<<<<<< Updated upstream
       ticks: 638838456483899994
+=======
+      ticks: 638838453890991809
+>>>>>>> Stashed changes
     m_Hash: 3300211075
   m_LockFileStatus:
     m_FilePath: E:/Unity/Orbital-2025-Game/Packages/packages-lock.json
@@ -13,7 +17,11 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
+<<<<<<< Updated upstream
       ticks: 638838456483909994
+=======
+      ticks: 638838453891147825
+>>>>>>> Stashed changes
     m_Hash: 2371163139
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
