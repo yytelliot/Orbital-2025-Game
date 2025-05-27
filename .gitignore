@@ -75,3 +75,13 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # End of https://www.toptal.com/developers/gitignore/api/unity
+Logs/shadercompiler-UnityShaderCompiler.exe0.log
+Library/StateCache/MainStageHierarchy/4d/4d2a36d9faf65734f0bbefb3ee623532.json
+Library/SourceAssetDB-lock
+Library/SourceAssetDB
+Library/SceneVisibilityState.asset
+Library/PackageManager/ProjectCache
+Library/expandedItems
+Library/ArtifactDB-lock
+Library/ArtifactDB
+Library/APIUpdater/project-dependencies.graph
