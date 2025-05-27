@@ -83,13 +83,3 @@ crashlytics-build.properties
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db.meta
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers
 /[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
-*.log
-Logs/shadercompiler-UnityShaderCompiler.exe0.log
-Library/SourceAssetDB-lock
-Library/SourceAssetDB
-Library/SceneVisibilityState.asset
-Library/PackageManager/ProjectCache.md5
-Library/PackageManager/ProjectCache
-Library/ArtifactDB-lock
-Library/ArtifactDB
-/Library
