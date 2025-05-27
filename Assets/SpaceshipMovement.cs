@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class SpaceshipScript : MonoBehaviour
+public class SpaceshipMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Vector2 movement;
