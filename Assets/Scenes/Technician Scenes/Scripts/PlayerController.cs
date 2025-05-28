@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
-    public bool isMoving;
-    public Vector2 input;
-
+    private bool isMoving;
+    private Vector2 input;
     private Animator animator;
+    public LayerMask solidObjectsLayer;
 
     private void Awake()
     {
@@ -35,14 +35,19 @@ public class PlayerController : MonoBehaviour
             {
                 animator.SetFloat("moveX", input.x); // Give animator input
                 animator.SetFloat("moveY", input.y);
-                
+
                 var targetPos = transform.position;
                 targetPos.x += input.x;
                 targetPos.y += input.y;
 
-                StartCoroutine(Move(targetPos));
+                if (IsWalkable(targetPos))
+                {
+                    StartCoroutine(Move(targetPos));
+                }
             }
         }
+
+        //animator.SetBool("isMoving", isMoving);
     }
 
     IEnumerator Move(Vector3 targetPos) // Character Movement
@@ -57,6 +62,16 @@ public class PlayerController : MonoBehaviour
         transform.position = targetPos;
 
         isMoving = false;
+    }
+
+    private bool IsWalkable(Vector3 targetPos)
+    {
+        if (Physics2D.OverlapCircle(targetPos, 0.2f, solidObjectsLayer) != null)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     
