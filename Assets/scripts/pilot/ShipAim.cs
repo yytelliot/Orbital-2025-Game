@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceshipAim : MonoBehaviour
+public class ShipAim : MonoBehaviour
 {
     public Rigidbody2D rb;
     void Awake()

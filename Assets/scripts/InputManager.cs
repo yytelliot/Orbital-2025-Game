@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    // Player actions
-    public enum Action { Fire, Dash }
 
-    // Controls 
-    static Dictionary<Action, KeyCode> bindings = new Dictionary<Action, Keycode>()
+    // Dictionary of key bindings 
+    static Dictionary<string, KeyCode> bindings = new Dictionary<string, KeyCode>()
     {
-        { Action.Fire, KeyCode.Mouse0 }
+        { "fire", KeyCode.Mouse0 }
     };
 
-    public static bool GetKeyDown(Action a) 
-    { 
-
+    // Takes: Action name (string)
+    // Returns: if the input key for that action is pressed
+    public static bool GetKeyDown(string action)
+    {
+        return Input.GetKeyDown(bindings[action]);
     }
 }
