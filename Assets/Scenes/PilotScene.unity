@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 148390542}
   - component: {fileID: 148390541}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: SimpleBulletPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93dbe9ca2076a2a4eb57c36109ec5d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 90
   speed: 100
+  lifetime: 2
 --- !u!61 &148390542
 BoxCollider2D:
   m_ObjectHideFlags: 0
