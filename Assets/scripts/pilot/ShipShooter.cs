@@ -8,10 +8,13 @@ public class ShipShooter : MonoBehaviour
 
 
     [Header("Shoot Settings")]
-    public GameObject bulletPrefab; // bullet to be fired
+    public GameObject ammoType; // bullet to be fired
     public Transform firePoint;     // point where bullet is fired from
     public float bulletSpeed = 1f; // bullet speed
-    
+    public float fireRate = 0.2f;  // time between shots
+
+
+    Coroutine firingRoutine;
 
     // Start is called before the first frame update
     void Start()
@@ -22,10 +25,26 @@ public class ShipShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputManager.GetKeyDown("fire"))
-            ShootAtMouse();
+        if (InputManager.GetKeyDown("fire") && firingRoutine == null)
+        {
+            firingRoutine = StartCoroutine(AutoFire());
+        }
+            
     }
 
+    // Auto Fire Coroutine
+    IEnumerator AutoFire()
+    {
+        while (InputManager.GetKey("fire"))
+        {
+            ShootAtMouse();
+            yield return new WaitForSeconds(fireRate);
+        }
+        firingRoutine = null;
+        
+    }
+
+    // Shoots the bullet at the mouse
     void ShootAtMouse()
     {
         // get the mouse position
@@ -36,7 +55,7 @@ public class ShipShooter : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         // Spawn bullet
-        GameObject bullet = Instantiate(bulletPrefab,
+        GameObject bullet = Instantiate(ammoType,
                                         firePoint.position,
                                         Quaternion.identity);
 

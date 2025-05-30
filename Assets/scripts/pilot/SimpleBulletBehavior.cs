@@ -29,7 +29,7 @@ public class SimpleBulletBehavior : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle - offset);
 
         // set initial velocity
-        rb.velocity = direction * speed * speedMult;
+        rb.velocity = direction.normalized * speed * speedMult;
 
         // schedule self destruct
         Destroy(gameObject, lifetime);

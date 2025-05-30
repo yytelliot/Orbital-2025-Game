@@ -11,10 +11,18 @@ public class InputManager : MonoBehaviour
         { "fire", KeyCode.Mouse0 }
     };
 
-    // Takes: Action name (string)
-    // Returns: if the input key for that action is pressed
     public static bool GetKeyDown(string action)
     {
         return Input.GetKeyDown(bindings[action]);
+    }
+
+    public static bool GetKeyUp(string action)
+    {
+        return Input.GetKeyUp(bindings[action]);
+    }
+
+    public static bool GetKey(string action)
+    {
+        return Input.GetKey(bindings[action]);
     }
 }
