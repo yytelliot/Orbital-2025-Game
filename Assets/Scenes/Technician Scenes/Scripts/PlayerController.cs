@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,7 +9,15 @@ public class PlayerController : MonoBehaviour
     private bool isMoving;
     private Vector2 input;
     private Animator animator;
+
+    //private bool interacting;
+
+
+
     public LayerMask solidObjectsLayer;
+    public LayerMask interactablesLayer;
+
+    [SerializeField] private float colliderAdjustment = 0.2f;
 
     private void Awake()
     {
@@ -40,7 +49,7 @@ public class PlayerController : MonoBehaviour
                 targetPos.x += input.x;
                 targetPos.y += input.y;
 
-                if (IsWalkable(targetPos))
+                if (IsWalkable(targetPos) && !(AnimatorIsPlaying("InteractLeft") || AnimatorIsPlaying("InteractRight")))
                 {
                     StartCoroutine(Move(targetPos));
                 }
@@ -48,6 +57,19 @@ public class PlayerController : MonoBehaviour
         }
 
         //animator.SetBool("isMoving", isMoving);
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            //interacting = true;
+            animator.SetBool("isInteracting", true);
+            Interact();
+
+        }
+        else
+        {
+            //interacting = false;
+            animator.SetBool("isInteracting", false);
+        }
     }
 
     IEnumerator Move(Vector3 targetPos) // Character Movement
@@ -66,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsWalkable(Vector3 targetPos)
     {
-        if (Physics2D.OverlapCircle(targetPos, 0.2f, solidObjectsLayer) != null)
+        if (Physics2D.OverlapCircle(targetPos, colliderAdjustment, solidObjectsLayer | interactablesLayer) != null)
         {
             return false;
         }
@@ -74,7 +96,27 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
-    
+    void Interact()
+    {
+        var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        var interactPos = transform.position + facingDir;
 
+        var collider = Physics2D.OverlapCircle(interactPos, colliderAdjustment, interactablesLayer);
+        if (collider != null)
+        {
+            collider.GetComponent<Interactable>()?.Interact();
+        }
+    }
+
+    bool AnimatorIsPlaying()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).length >
+            animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
+
+    bool AnimatorIsPlaying(string stateName)
+    {
+        return AnimatorIsPlaying() && animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+    }
 }
     
