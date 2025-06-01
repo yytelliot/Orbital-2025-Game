@@ -13,7 +13,8 @@ public class ShipShooter : MonoBehaviour
     public float bulletSpeed = 1f; // bullet speed
     public float fireRate = 0.2f;  // time between shots
 
-
+    [Header("Events")]
+    public GameEvent onShotFired;
     Coroutine firingRoutine;
 
     // Start is called before the first frame update
@@ -62,5 +63,8 @@ public class ShipShooter : MonoBehaviour
         // Initialize bullet
         SimpleBulletBehavior bb = bullet.GetComponent<SimpleBulletBehavior>();
         bb.Initialize(dir, angle, bulletSpeed);
+
+        // Raise onShoot Event
+        onShotFired.Raise();
     }
 }
