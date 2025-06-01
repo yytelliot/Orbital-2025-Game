@@ -1,4 +1,4 @@
-# Orbital 2025 Game
+# Stellar
 An Asymetrical Multiplayer Sparcefaring Roguelite
 
 Summary
