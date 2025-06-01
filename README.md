@@ -3,7 +3,9 @@ An Asymetrical Multiplayer Sparcefaring Roguelite
 
 Summary
 
-Starship Game is an asymmetrical co-operative shoot-em up game. Players must work together to ensure the ship survives its voyage through the stars! Each player takes one of 2 roles: the pilot and the mechanic. The pilot must shoot down enemies and avoid hazards while flying through space. Meanwhile, the mechanic has to perform vital functions to ensure the spacecraft is in ship shape, like loading ammunition, implementing upgrades and repairing damage the pilot has sustained in real time. Damage sustained by the pilot and errors made by the mechanic will affect both players. So they must be in sync if they want to survive their stellar odyssey.
+Starship Game is an rogue-lite asymmetrical co-operative shoot-em up game. 
+
+Players must work together to ensure the ship survives its voyage through the stars! Each player takes one of 2 roles: the pilot and the mechanic. The pilot must shoot down enemies and avoid hazards while flying through space. Meanwhile, the mechanic has to perform vital functions to ensure the spacecraft is in ship shape, like loading ammunition, implementing upgrades and repairing damage the pilot has sustained in real time. Damage sustained by the pilot and errors made by the mechanic will affect both players. So they must be in sync if they want to survive their stellar odyssey.
 
 Motivation
 
