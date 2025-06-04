@@ -2231,7 +2231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469200460f683144bbfbfe5fc636d1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 6
   solidObjectsLayer:
     serializedVersion: 2
     m_Bits: 64

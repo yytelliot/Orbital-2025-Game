@@ -24,8 +24,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>(); //Start the animation upon awake
     }
 
-
-    private void Update()
+    private void FixedUpdate()
     {
         if (!isMoving)
         {
@@ -55,6 +54,12 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    private void Update()
+    {
+        
 
         //animator.SetBool("isMoving", isMoving);
 
