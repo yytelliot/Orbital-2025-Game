@@ -68,12 +68,12 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         Debug.Log($"Player joined: {newPlayer.NickName}");
     }
 
-    private void ShowError(string message)
+    private void ShowError(string message)  //status error messages
     {
         statusText.text = message;
         StartCoroutine(ClearErrorAfterDelay(2f));
     }
-    private IEnumerator ClearErrorAfterDelay(float seconds)
+    private IEnumerator ClearErrorAfterDelay(float seconds) // clears the error after a period of time
 {
     yield return new WaitForSeconds(seconds);
     statusText.text = "";

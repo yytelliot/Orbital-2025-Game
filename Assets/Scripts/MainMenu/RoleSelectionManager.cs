@@ -20,6 +20,12 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        if (FindObjectsOfType<RoleSelectionManager>().Length > 1) //singleton class, only one exist
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         // Get or add PhotonView component with new name
         myPhotonView = GetComponent<PhotonView>();
         if (myPhotonView == null)
@@ -27,10 +33,13 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
             myPhotonView = gameObject.AddComponent<PhotonView>();
             myPhotonView.OwnershipTransfer = OwnershipOption.Takeover;
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
+        if (myPhotonView == null) return;   //ensures there is always a main host
+
         // Initialize buttons
         confirmButton.gameObject.SetActive(false); // Hide on startup
         technicianButton.onClick.AddListener(() => SelectRole("Technician"));
@@ -44,7 +53,7 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
 
     private void SelectRole(string role)
     {
-        if (hasConfirmed) return;
+        if (hasConfirmed || myPhotonView == null) return;
 
         selectedRole = role;
         confirmButton.gameObject.SetActive(true);
@@ -58,12 +67,12 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
 
     private void ConfirmSelection()
     {
-        if (string.IsNullOrEmpty(selectedRole)) return;
+        if (string.IsNullOrEmpty(selectedRole) || myPhotonView == null) return;
 
         hasConfirmed = true;
 
         // Store selection in Photon custom properties
-        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable
+        var props = new ExitGames.Client.Photon.Hashtable
         {
             {"PlayerRole", selectedRole},
             {"HasConfirmed", true}
@@ -78,15 +87,16 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
         UpdateStatus($"Waiting for other player...\nYou are: {selectedRole}");
 
         // Check if both players are ready
-        if (PhotonNetwork.IsMasterClient)
+        /*if (PhotonNetwork.IsMasterClient)
         {
             CheckAllPlayersReady();
-        }
+        }*/
+        CheckAllPlayersReady();
     }
 
     private void CheckAllPlayersReady()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount < 2) return;
+        if (myPhotonView == null || PhotonNetwork.CurrentRoom.PlayerCount < 2 ) return;
 
         bool allConfirmed = true;
         foreach (Player player in PhotonNetwork.PlayerList)
@@ -98,47 +108,35 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
             }
         }
 
-        if (allConfirmed & AllPlayersReady())
+        if (allConfirmed && PhotonNetwork.IsMasterClient) //& AllPlayersReady())
         {
-            if (myPhotonView != null)
-            {
-                // Using nameof() for safety
-                myPhotonView.RPC(nameof(LoadRoleScene), RpcTarget.All); //photonView.RPC("LoadRoleScene", RpcTarget.All);
-            }
-            else
-            {
-                Debug.LogError("PhotonView reference missing!");
-            }
-
-
+            myPhotonView.RPC(nameof(LoadRoleScene), RpcTarget.All); //photonView.RPC("LoadRoleScene", RpcTarget.All);
         }
     }
 
     [PunRPC]
     private void LoadRoleScene()
     {
-        string role = (string)PhotonNetwork.LocalPlayer.CustomProperties["PlayerRole"];
+        //string role = (string)PhotonNetwork.LocalPlayer.CustomProperties["PlayerRole"];
 
-        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("PlayerRole", out object roleObj))
-        {
-            role = (string)roleObj;
-            PhotonNetwork.LoadLevel(role + "Scene");
-        }
+        if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("PlayerRole", out object role)) return;
 
-        if (role == "Pilot")
+        PhotonNetwork.LoadLevel((string)role + "Scene");
+
+        /*if (role == "Pilot")
         {
             PhotonNetwork.LoadLevel("PilotScene");
         }
         else if (role == "Technician")
         {
             PhotonNetwork.LoadLevel("TechnicianScene");
-        }
+        }*/
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
         // If master client and this is another player updating their status
-        if (PhotonNetwork.IsMasterClient && targetPlayer != PhotonNetwork.LocalPlayer)
+        if (myPhotonView != null && PhotonNetwork.IsMasterClient && targetPlayer != PhotonNetwork.LocalPlayer)
         {
             CheckAllPlayersReady();
         }
@@ -146,10 +144,17 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
 
     private void UpdateStatus(string message)
     {
-        statusText.text = message;
+        if (statusText != null) statusText.text = message;
+    }
+    void OnDestroy()
+    {
+        if (PhotonNetwork.IsConnected && myPhotonView != null)
+        {
+            PhotonNetwork.RemoveRPCs(myPhotonView);
+        }
     }
     
-    private bool AllPlayersReady()
+    /*private bool AllPlayersReady()
     {
         if (!PhotonNetwork.InRoom) return false;
         
@@ -162,6 +167,6 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
             }
         }
         return true;
-    }
+    }*/
 
 }
