@@ -1,127 +1,91 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed;
-    private bool isMoving;
-    private Vector2 input;
+    [Header("Movement")]
+    public float moveSpeed = 5f;
+
+    private Rigidbody2D rb;
     private Animator animator;
+    private Vector2 input;
+    private Collider2D hitbox;
 
-    //private bool interacting;
-
-
-
-    public LayerMask solidObjectsLayer;
+    [Header("Interaction")]
     public LayerMask interactablesLayer;
-
-    [SerializeField] private float colliderAdjustment = 0.2f;
+    [SerializeField] private float interactRange = 0.2f;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>(); //Start the animation upon awake
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        hitbox = GetComponent<BoxCollider2D>();
     }
-
-    private void FixedUpdate()
-    {
-        if (!isMoving)
-        {
-            input.x = Input.GetAxisRaw("Horizontal"); // Get keyboard input
-            input.y = Input.GetAxisRaw("Vertical");
-
-
-
-            if (input.x != 0) // No diagonal movement
-            {
-                input.y = 0;
-            }
-
-
-            if (input != Vector2.zero)
-            {
-                animator.SetFloat("moveX", input.x); // Give animator input
-                animator.SetFloat("moveY", input.y);
-
-                var targetPos = transform.position;
-                targetPos.x += input.x;
-                targetPos.y += input.y;
-
-                if (IsWalkable(targetPos) && !(AnimatorIsPlaying("InteractLeft") || AnimatorIsPlaying("InteractRight")))
-                {
-                    StartCoroutine(Move(targetPos));
-                }
-            }
-        }
-    }
-
 
     private void Update()
     {
-        
+        // Read input
+        input.x = Input.GetAxisRaw("Horizontal");
+        input.y = Input.GetAxisRaw("Vertical");
 
-        //animator.SetBool("isMoving", isMoving);
-
-        if (Input.GetKeyDown(KeyCode.Z))
+        // Update animator
+        if (input.sqrMagnitude > 0f)
         {
-            //interacting = true;
-            animator.SetBool("isInteracting", true);
-            Interact();
-
+            animator.SetFloat("moveX", input.x);
+            animator.SetFloat("moveY", input.y);
+            animator.SetBool("isMoving", true);
         }
         else
         {
-            //interacting = false;
+            animator.SetBool("isMoving", false);
+        }
+
+        // 3) Check for interaction
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            animator.SetBool("isInteracting", true);
+            TryInteract();
+        }
+        else
+        {
             animator.SetBool("isInteracting", false);
         }
     }
 
-    IEnumerator Move(Vector3 targetPos) // Character Movement
+    private void FixedUpdate()
     {
-        isMoving = true;
-
-        while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-            yield return null;
-        }
-        transform.position = targetPos;
-
-        isMoving = false;
+        Vector2 v = input.normalized * moveSpeed;
+        rb.velocity = v;
     }
 
-    private bool IsWalkable(Vector3 targetPos)
+    private void TryInteract()
     {
-        if (Physics2D.OverlapCircle(targetPos, colliderAdjustment, solidObjectsLayer | interactablesLayer) != null)
+
+        Vector2 facingDir = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        if (facingDir.sqrMagnitude == 0f)
         {
-            return false;
+            // if no input, set default (I think this can be changed to last facing direction stored in animator)
+            facingDir = Vector2.down;
         }
 
-        return true;
-    }
-
-    void Interact()
-    {
-        var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
-        var interactPos = transform.position + facingDir;
-
-        var collider = Physics2D.OverlapCircle(interactPos, colliderAdjustment, interactablesLayer);
-        if (collider != null)
+        // Cast a small circle in the facing direction to find an interactable
+        Vector2 interactPos = (Vector2)transform.position + hitbox.offset + facingDir.normalized * interactRange;
+        Collider2D hit = Physics2D.OverlapCircle(interactPos, 0.1f, interactablesLayer);
+        if (hit != null)
         {
-            collider.GetComponent<Interactable>()?.Interact();
+            hit.GetComponent<Interactable>()?.Interact();
         }
     }
 
-    bool AnimatorIsPlaying()
+    // Debug: show the interaction hitbox in the editor (switch to editor after pressing interact to view)
+    private void OnDrawGizmosSelected()
     {
-        return animator.GetCurrentAnimatorStateInfo(0).length >
-            animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-    }
-
-    bool AnimatorIsPlaying(string stateName)
-    {
-        return AnimatorIsPlaying() && animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+        if (animator == null) return;
+        Vector2 facingDir = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        if (facingDir.sqrMagnitude == 0f) facingDir = Vector2.down;
+        Vector2 interactPos = (Vector2)transform.position + hitbox.offset + facingDir.normalized * interactRange;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(interactPos, 0.1f);
     }
 }
-    
