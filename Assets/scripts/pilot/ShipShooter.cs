@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ShipShooter : MonoBehaviour
 {
+    public ShipProperties shipProperties;
 
 
     [Header("Shoot Settings")]
@@ -14,7 +15,9 @@ public class ShipShooter : MonoBehaviour
     public float fireRate = 0.2f;  // time between shots
 
     [Header("Events")]
-    public GameEvent onShotFired;
+    public GameEvent shotFired;
+    public GameEvent outOfAmmo;
+    public GameEvent ammoCountChange;
     Coroutine firingRoutine;
 
     // Start is called before the first frame update
@@ -48,23 +51,32 @@ public class ShipShooter : MonoBehaviour
     // Shoots the bullet at the mouse
     void ShootAtMouse()
     {
-        // get the mouse position
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (shipProperties.DeductAmmo())
+        {
+            // get the mouse position
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        // get the direction vector and angle from the ship's firePoint to the mouse
-        Vector2 dir = (mousePosition - firePoint.position).normalized;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            // get the direction vector and angle from the ship's firePoint to the mouse
+            Vector2 dir = (mousePosition - firePoint.position).normalized;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-        // Spawn bullet
-        GameObject bullet = Instantiate(ammoType,
-                                        firePoint.position,
-                                        Quaternion.identity);
+            // Spawn bullet
+            GameObject bullet = Instantiate(ammoType,
+                                            firePoint.position,
+                                            Quaternion.identity);
 
-        // Initialize bullet
-        SimpleBulletBehavior bb = bullet.GetComponent<SimpleBulletBehavior>();
-        bb.Initialize(dir, angle, bulletSpeed);
+            // Initialize bullet
+            SimpleBulletBehavior bb = bullet.GetComponent<SimpleBulletBehavior>();
+            bb.Initialize(dir, angle, bulletSpeed);
 
-        // Raise onShoot Event
-        onShotFired.Raise();
+            // Raise onShoot Event
+            shotFired.Raise();
+            ammoCountChange.Raise();
+        }
+        else
+        {
+            outOfAmmo.Raise();
+        }
+       
     }
 }
