@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         Vector2 facingDir = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
         if (facingDir.sqrMagnitude == 0f)
         {
-            // if no input, set default (I think this can be changed to last facing direction stored in animator)
+            // if no input, set default
             facingDir = Vector2.down;
         }
 
