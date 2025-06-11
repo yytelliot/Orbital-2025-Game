@@ -41,6 +41,17 @@ MonoBehaviour:
   - RespawnSpaceship
   - LoadRoleScene
   - NotifyFullRoom
+  - ChangeDirection
+  - death
+  - Destroy
+  - FlipSprite_Left
+  - FlipSprite_Right
+  - HealthUpdate
+  - Revive
+  - SendMsg
+  - UpdatePlayerList
+  - YouGotKilledBy
+  - YouKilled
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

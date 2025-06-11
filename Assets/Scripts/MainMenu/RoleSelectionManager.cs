@@ -6,6 +6,7 @@ using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(PhotonView))]
 public class RoleSelectionManager : MonoBehaviourPunCallbacks
 {
     [Header("UI Elements")]
@@ -96,7 +97,7 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
 
     private void CheckAllPlayersReady()
     {
-        if (myPhotonView == null || PhotonNetwork.CurrentRoom.PlayerCount < 2 ) return;
+        if (myPhotonView == null || PhotonNetwork.CurrentRoom.PlayerCount < 2) return;
 
         bool allConfirmed = true;
         foreach (Player player in PhotonNetwork.PlayerList)
@@ -153,7 +154,7 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
             PhotonNetwork.RemoveRPCs(myPhotonView);
         }
     }
-    
+
     /*private bool AllPlayersReady()
     {
         if (!PhotonNetwork.InRoom) return false;
