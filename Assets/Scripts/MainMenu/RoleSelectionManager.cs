@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using WebSocketSharp;
 
 [RequireComponent(typeof(PhotonView))]
 public class RoleSelectionManager : MonoBehaviourPunCallbacks
@@ -17,6 +18,7 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
 
     private string selectedRole = "";
     private bool hasConfirmed = false;
+    private string OtherPlayerSelected = "";
     private PhotonView myPhotonView;
 
     private void Awake()
@@ -34,6 +36,7 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
             myPhotonView = gameObject.AddComponent<PhotonView>();
             myPhotonView.OwnershipTransfer = OwnershipOption.Takeover;
         }
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -45,30 +48,65 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
         confirmButton.gameObject.SetActive(false); // Hide on startup
         technicianButton.onClick.AddListener(() => SelectRole("Technician"));
         pilotButton.onClick.AddListener(() => SelectRole("Pilot"));
-
         confirmButton.onClick.AddListener(ConfirmSelection);
 
-        confirmButton.gameObject.SetActive(false);
         UpdateStatus("Select your role");
     }
 
     private void SelectRole(string role)
     {
-        if (hasConfirmed || myPhotonView == null) return;
+        if (hasConfirmed) return;
 
         selectedRole = role;
         confirmButton.gameObject.SetActive(true);
 
         // Visual feedback
-        technicianButton.interactable = (role != "Technician");
-        pilotButton.interactable = (role != "Pilot");
+        if (OtherPlayerSelected.IsNullOrEmpty())
+        {
+            technicianButton.interactable = role != "Technician";
+            pilotButton.interactable = role != "Pilot";
+        }
+        else
+        {
+            technicianButton.interactable = false;
+            pilotButton.interactable = false;
+        }
+        
 
         UpdateStatus($"Selected: {role}\nPress Confirm");
     }
 
+    /*private void SelectTechnicianRole()
+    {
+        if (hasConfirmed) return;
+
+        selectedRole = "Technician";
+        confirmButton.gameObject.SetActive(true);
+
+        // Visual feedback
+        technicianButton.interactable = false;
+
+        UpdateStatus($"Selected: {selectedRole}\nPress Confirm");
+    }
+
+    private void SelectPilotRole()
+    {
+        if (hasConfirmed) return;
+
+        selectedRole = "Pilot";
+        confirmButton.gameObject.SetActive(true);
+
+        // Visual feedback
+        pilotButton.interactable = false;
+
+        UpdateStatus($"Selected: {selectedRole}\nPress Confirm");
+    }*/
+    
+
+
     private void ConfirmSelection()
     {
-        if (string.IsNullOrEmpty(selectedRole) || myPhotonView == null) return;
+        if (string.IsNullOrEmpty(selectedRole)) return;
 
         hasConfirmed = true;
 
@@ -80,6 +118,8 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
         };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
 
+        RemoveThisRoleOption(selectedRole);
+
         // Lock all buttons
         technicianButton.interactable = false;
         pilotButton.interactable = false;
@@ -87,11 +127,8 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
 
         UpdateStatus($"Waiting for other player...\nYou are: {selectedRole}");
 
-        // Check if both players are ready
-        /*if (PhotonNetwork.IsMasterClient)
-        {
-            CheckAllPlayersReady();
-        }*/
+
+
         CheckAllPlayersReady();
     }
 
@@ -109,34 +146,37 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
             }
         }
 
-        if (allConfirmed && PhotonNetwork.IsMasterClient) //& AllPlayersReady())
+        if (allConfirmed && PhotonNetwork.IsMasterClient) 
         {
-            myPhotonView.RPC(nameof(LoadRoleScene), RpcTarget.All); //photonView.RPC("LoadRoleScene", RpcTarget.All);
+            myPhotonView.RPC(nameof(LoadRoleScene), RpcTarget.All); 
         }
+    }
+
+    public void RemoveThisRoleOption(string selectedRole)
+    {
+        myPhotonView.RPC(nameof(RemoveRoleOption), RpcTarget.All, selectedRole);
     }
 
     [PunRPC]
     private void LoadRoleScene()
     {
-        //string role = (string)PhotonNetwork.LocalPlayer.CustomProperties["PlayerRole"];
-
         if (!PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("PlayerRole", out object role)) return;
 
         PhotonNetwork.LoadLevel((string)role + "Scene");
+    }
 
-        /*if (role == "Pilot")
-        {
-            PhotonNetwork.LoadLevel("PilotScene");
-        }
-        else if (role == "Technician")
-        {
-            PhotonNetwork.LoadLevel("TechnicianScene");
-        }*/
+    [PunRPC]
+    private void RemoveRoleOption(string selectedRole)
+    {
+        OtherPlayerSelected = selectedRole;
+        // Visual feedback
+        technicianButton.interactable = selectedRole != "Technician";
+        pilotButton.interactable = selectedRole != "Pilot";
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
-        // If master client and this is another player updating their status
+        // If any player presses on the confirm button and update their player properties, this will run and check if all players are ready.
         if (myPhotonView != null && PhotonNetwork.IsMasterClient && targetPlayer != PhotonNetwork.LocalPlayer)
         {
             CheckAllPlayersReady();
@@ -154,20 +194,5 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
             PhotonNetwork.RemoveRPCs(myPhotonView);
         }
     }
-
-    /*private bool AllPlayersReady()
-    {
-        if (!PhotonNetwork.InRoom) return false;
-        
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            if (!player.CustomProperties.ContainsKey("IsReady") || 
-                !(bool)player.CustomProperties["IsReady"])
-            {
-                return false;
-            }
-        }
-        return true;
-    }*/
 
 }

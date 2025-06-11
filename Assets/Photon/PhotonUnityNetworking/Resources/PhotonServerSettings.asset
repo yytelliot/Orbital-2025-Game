@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 8c494d25-95c1-4a2a-a69d-fef185cade76
+    AppIdRealtime: 93433a50-7715-43b1-ae0d-87b6ea0817b7
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
@@ -52,6 +52,7 @@ MonoBehaviour:
   - UpdatePlayerList
   - YouGotKilledBy
   - YouKilled
+  - RemoveRoleOption
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
