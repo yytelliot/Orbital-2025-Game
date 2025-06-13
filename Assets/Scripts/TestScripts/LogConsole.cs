@@ -5,8 +5,17 @@ using UnityEngine;
 
 public class LogConsole : MonoBehaviour
 {
-    public void ConsoleMessage()
+    public void ConsoleMessage(Component sender, object data)
     {
-        Debug.Log("test");
+        if (data is int)
+        {
+            int amount = (int)data;
+            string caller = sender.ToString();
+            Debug.Log($"Recieved {amount} from {caller}");
+        }
+        else
+        {
+            Debug.Log("test");
+        }
     }
 }

@@ -11,11 +11,11 @@ public class GameEvent : ScriptableObject
 
     // calling Raise() signals that an the GameEvent is currently happening,
     // invoking all event listeners
-    public void Raise()
+    public void Raise(Component sender, object data)
     {
         for (int i = 0; i < listeners.Count; i++)
         {
-            listeners[i].OnEventRaised();
+            listeners[i].OnEventRaised(sender, data);
         }
     }
 

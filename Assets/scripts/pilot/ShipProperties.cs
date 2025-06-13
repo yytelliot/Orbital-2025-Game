@@ -7,11 +7,15 @@ public class ShipProperties : MonoBehaviour
     public int health;
     public int ammoCount;
 
+    [Header("Events")]
+    public GameEvent onAmmoCountChange;
+
     public bool DeductAmmo()
     {
         if (ammoCount > 0)
         {
             ammoCount--;
+            onAmmoCountChange.Raise(this, -1);
             return true;
         }
         else
@@ -23,6 +27,7 @@ public class ShipProperties : MonoBehaviour
         if (ammoCount >= amount)
         {
             ammoCount -= amount;
+            onAmmoCountChange.Raise(this, -amount);
             return true;
         }
         else
