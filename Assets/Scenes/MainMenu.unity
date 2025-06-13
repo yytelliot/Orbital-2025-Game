@@ -892,8 +892,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1199856551}
-  - component: {fileID: 1199856550}
   - component: {fileID: 1199856553}
+  - component: {fileID: 1199856550}
   - component: {fileID: 1199856552}
   m_Layer: 0
   m_Name: CrossSceneNetworkManager

@@ -13,7 +13,7 @@ public class ReloadStationController : MonoBehaviour, Interactable
     {
         if (PhotonNetwork.LocalPlayer.CustomProperties["PlayerRole"].ToString() == "Technician")
         {
-            CrossSceneNetworkManager.Instance.SendTechnicianInteraction(stationID);
+            // CrossSceneNetworkManager.Instance.SendTechnicianInteraction(stationID);
 
             // Local technician effects
             //PlayLocalEffects();
