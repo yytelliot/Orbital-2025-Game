@@ -11,18 +11,18 @@ public class CrossSceneNetworkManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameEvent onShotFired;
     public static CrossSceneNetworkManager Instance;
 
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    // void Awake()
+    // {
+    //     if (Instance == null)
+    //     {
+    //         Instance = this;
+    //         DontDestroyOnLoad(gameObject);
+    //     }
+    //     else
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // }
 
     /*public void SendTechnicianInteraction()
     {

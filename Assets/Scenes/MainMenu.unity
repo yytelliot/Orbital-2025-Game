@@ -893,6 +893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1199856551}
   - component: {fileID: 1199856550}
+  - component: {fileID: 1199856553}
   - component: {fileID: 1199856552}
   m_Layer: 0
   m_Name: CrossSceneNetworkManager
@@ -922,8 +923,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199856549}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 727.70465, y: 495.16876, z: -1.8929476}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 727.70465, y: 495.16876, z: -1.8929477}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -951,6 +952,18 @@ MonoBehaviour:
   sceneViewId: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1199856553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199856549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f239f9944cf19b247a8dc82fa4f57273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1454787171
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,5 +1741,5 @@ SceneRoots:
   - {fileID: 1730772566}
   - {fileID: 610208739}
   - {fileID: 1454787173}
-  - {fileID: 2143381385}
   - {fileID: 1199856551}
+  - {fileID: 2143381385}
