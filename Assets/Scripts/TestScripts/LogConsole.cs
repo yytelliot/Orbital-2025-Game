@@ -11,7 +11,7 @@ public class LogConsole : MonoBehaviour
         if (data is int)
         {
             int amount = (int)data;
-            string caller = sender.ToString();
+            string caller = sender != null ? sender.ToString() : "<Unknown Sender>";
             Debug.Log($"Recieved {amount} from {caller}");
         }
         else
