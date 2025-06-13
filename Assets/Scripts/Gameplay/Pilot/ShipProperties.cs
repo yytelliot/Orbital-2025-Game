@@ -15,7 +15,7 @@ public class ShipProperties : MonoBehaviour
         if (ammoCount > 0)
         {
             ammoCount--;
-            onAmmoCountChange.Raise(this, -1);
+            onAmmoCountChange.RaiseNetworked(this, -1);
             return true;
         }
         else
@@ -27,7 +27,7 @@ public class ShipProperties : MonoBehaviour
         if (ammoCount >= amount)
         {
             ammoCount -= amount;
-            onAmmoCountChange.Raise(this, -amount);
+            onAmmoCountChange.RaiseNetworked(this, -amount);
             return true;
         }
         else

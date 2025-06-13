@@ -17,11 +17,22 @@ public class CrossSceneNetworkManager : MonoBehaviourPunCallbacks
 
     void Awake()
     {
-        // Load all GameEvents from Resources/Events
-        gameEvents = Resources.LoadAll<GameEvent>("Events").ToList();
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
 
-        // Build look up dictionary to map eventIds
-        idToEvent = gameEvents.Where(e => e != null).ToDictionary(e => e.eventId, e => e);
+            // Load all GameEvents from Resources/Events
+            gameEvents = Resources.LoadAll<GameEvent>("Events").ToList();
+
+            // Build look up dictionary to map eventIds
+            idToEvent = gameEvents.Where(e => e != null).ToDictionary(e => e.eventId, e => e);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
 
     }
     public void SendNetworkEvent(GameEvent gameEvent, Component sender, object data = null)

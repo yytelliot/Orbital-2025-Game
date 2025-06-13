@@ -10,6 +10,6 @@ public static class GameEventExtensions
         object data = null
     )
     {
-        //NetworkedEvents.Broadcast(e, sender, data);
+        NetworkedEvents.Broadcast(e, sender, data);
     }
 }
