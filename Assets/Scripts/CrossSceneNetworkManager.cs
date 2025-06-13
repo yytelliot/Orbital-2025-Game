@@ -53,7 +53,7 @@ public class CrossSceneNetworkManager : MonoBehaviourPunCallbacks
         if (SceneManager.GetActiveScene().name == "PilotScene")
         {
             // Forward to Pilot's UI
-            onShotFired.Raise();
+            onShotFired.Raise(this, null);
             //RoleSelectionManager.Instance?.ReceivePilotFeedback(stationID);
         }
     }
