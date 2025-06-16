@@ -6,12 +6,15 @@ using UnityEngine;
 public class GameEvent : ScriptableObject
 {
 
+    [Tooltip("Unique ID - set once only")]
+    public int eventId = -1;
+
     // list of active event listeners
     public List<GameEventListener> listeners = new List<GameEventListener>();
 
     // calling Raise() signals that an the GameEvent is currently happening,
     // invoking all event listeners
-    public void Raise(Component sender, object data)
+    public void Raise(Component sender, object data = null)
     {
         for (int i = 0; i < listeners.Count; i++)
         {

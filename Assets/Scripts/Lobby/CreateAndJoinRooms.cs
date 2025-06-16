@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
@@ -51,6 +52,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
             return;
         }
         PhotonNetwork.LoadLevel("MainMenu");
+
+
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)

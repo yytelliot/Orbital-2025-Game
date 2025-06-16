@@ -70,11 +70,11 @@ public class ShipShooter : MonoBehaviour
             bb.Initialize(dir, angle, bulletSpeed);
 
             // Raise onShoot Event
-            shotFired.Raise(this, null);
+            shotFired.RaiseNetworked(this, null);
         }
         else
         {
-            outOfAmmo.Raise(this, null);
+            outOfAmmo.RaiseNetworked(this, null);
         }
        
     }
