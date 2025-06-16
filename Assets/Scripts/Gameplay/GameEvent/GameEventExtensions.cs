@@ -12,4 +12,9 @@ public static class GameEventExtensions
     {
         NetworkedEvents.Broadcast(e, sender, data);
     }
+
+    public static void RaiseNetworked(this GameEvent e, object data = null)
+    {
+        NetworkedEvents.Broadcast(e, null, data);
+    }
 }
