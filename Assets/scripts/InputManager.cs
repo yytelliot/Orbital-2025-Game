@@ -8,7 +8,8 @@ public class InputManager : MonoBehaviour
     // Dictionary of key bindings 
     static Dictionary<string, KeyCode> bindings = new Dictionary<string, KeyCode>()
     {
-        { "fire", KeyCode.Mouse0 }
+        { "fire", KeyCode.Mouse0 },
+        { "interact", KeyCode.Z }
     };
 
     public static bool GetKeyDown(string action)
