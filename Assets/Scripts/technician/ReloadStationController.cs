@@ -9,6 +9,7 @@ using Photon.Pun;
 public class ReloadStationController : MonoBehaviour, Interactable
 {
     [SerializeField] private string stationID = "AmmoReload";
+    //[SerializeField] public Component station;
     public void Interact()
     {
         if (PhotonNetwork.LocalPlayer.CustomProperties["PlayerRole"].ToString() == "Technician")
