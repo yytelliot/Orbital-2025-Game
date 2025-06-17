@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Check for interaction
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (InputManager.GetKeyDown("interact"))
         {
             animator.SetBool("isInteracting", true);
             TryInteract();

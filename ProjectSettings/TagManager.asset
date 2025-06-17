@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - AmmoCountUI
+  - Activator
+  - Stopper
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - UI
   - SolidObjects
   - Interactable
-  - 
+  - Minigames
   - 
   - 
   - 
@@ -48,9 +50,15 @@ TagManager:
   - name: Background
     uniqueID: 532493783
     locked: 0
+  - name: Highlights
+    uniqueID: 1051243531
+    locked: 0
   - name: Foreground
     uniqueID: 810967599
     locked: 0
   - name: Player
     uniqueID: 3999844871
+    locked: 0
+  - name: Minigames
+    uniqueID: 2400281151
     locked: 0
