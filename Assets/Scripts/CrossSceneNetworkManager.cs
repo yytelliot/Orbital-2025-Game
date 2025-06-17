@@ -8,7 +8,7 @@ using Photon.Pun;
 public class CrossSceneNetworkManager : MonoBehaviourPunCallbacks
 {
     
-    [SerializeField] private GameEvent onShotFired;
+    [SerializeField] private GameEvent onAmmoConutChanged;
     public static CrossSceneNetworkManager Instance;
 
     void Awake()
@@ -42,18 +42,21 @@ public class CrossSceneNetworkManager : MonoBehaviourPunCallbacks
     }*/
 
     
-    public void SendTechnicianInteraction(string stationID)
+    public void SendTechnicianInteraction(Component sender, object data)
     {
-        photonView.RPC(nameof(RPC_RelayToPilot), RpcTarget.All, stationID);
+        photonView.RPC(nameof(RPC_RelayToPilot), RpcTarget.All, sender, data);
     }
 
     [PunRPC]
-    private void RPC_RelayToPilot(string stationID)
+    private void RPC_RelayToPilot(Component sender, object data)
     {
         if (SceneManager.GetActiveScene().name == "PilotScene")
         {
+            int amount = (int)data;
+            string caller = sender.ToString();
+            Debug.Log($"Recieved {amount} from {caller}");
             // Forward to Pilot's UI
-            onShotFired.Raise(this, null);
+            onAmmoConutChanged.Raise(sender, data);
             //RoleSelectionManager.Instance?.ReceivePilotFeedback(stationID);
         }
     }

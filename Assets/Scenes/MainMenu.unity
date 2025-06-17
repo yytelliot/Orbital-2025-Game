@@ -913,7 +913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b900fc3cf36d9d642bcd9cb1f3045617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onShotFired: {fileID: 11400000, guid: df2ed1ec8c737fd41a3747c78a0d2187, type: 2}
+  onAmmoConutChanged: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
 --- !u!4 &1199856551
 Transform:
   m_ObjectHideFlags: 0

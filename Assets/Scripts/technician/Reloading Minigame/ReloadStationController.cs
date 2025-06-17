@@ -10,7 +10,25 @@ public class ReloadStationController : MonoBehaviour, Interactable
 {
     [SerializeField] private string stationID = "AmmoReload";
     [SerializeField] public GameObject miniGame;
+    public static ReloadStationController Instance; // Singleton pattern
     public GameObject highlight;
+
+    [Header("Events")]
+    public GameEvent onAmmoMinigameComplete;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
 
     private void OnEnable()
     {
@@ -23,7 +41,7 @@ public class ReloadStationController : MonoBehaviour, Interactable
         {
             highlight.SetActive(true);
         }
-        
+
     }
 
     private void OnTriggerExit2D(UnityEngine.Collider2D other)
@@ -37,14 +55,17 @@ public class ReloadStationController : MonoBehaviour, Interactable
     public void Interact()
     {
         Debug.Log("Reload minigame start!");
+        miniGame.SetActive(true);
 
-        if (PhotonNetwork.LocalPlayer.CustomProperties["PlayerRole"].ToString() == "Technician")
-        {
-            //miniGame.SetActive(true);
-            CrossSceneNetworkManager.Instance.SendTechnicianInteraction(stationID);
-            Debug.Log("hit");
-            // Local technician effects
-            //PlayLocalEffects();
-        }
+
+
     }
+
+    public void SendResult(int score)
+    { 
+        Debug.Log(score + "end");
+        onAmmoMinigameComplete.Raise(null, score);
+    }
+    
+
 }
