@@ -37,7 +37,7 @@ public class AmmoScroller : MonoBehaviour
     public void SetScrolling(bool shouldScroll)
     {
         ToggleScrolling = shouldScroll;
-        Debug.Log(shouldScroll ? "Scrolling RESUMED" : "Scrolling PAUSED");
+        //Debug.Log(shouldScroll ? "Scrolling RESUMED" : "Scrolling PAUSED");
     }
 
     public bool IsScrolling()
@@ -49,5 +49,10 @@ public class AmmoScroller : MonoBehaviour
     {
         ammoReloaded++;
         statusText.text = "Ammo: " + ammoReloaded;
+    }
+
+    public int GetScore()
+    {
+        return ammoReloaded;
     }
 }

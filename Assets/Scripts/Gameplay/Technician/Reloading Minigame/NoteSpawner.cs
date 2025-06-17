@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class NoteSpawner : MonoBehaviour
 {
+    [SerializeField] public GameObject miniGame;
+    
     [Header("Note Prefabs (4 lanes)")]
     public GameObject[] notePrefabs = new GameObject[4]; // Assign 4 prefabs in Inspector
 
     [Header("Timing and Spawning")]
-    [SerializeField] private float spawnInterval = 0.5f; // Spawn every 0.5 seconds
-    [SerializeField] private float gameDuration = 10f;   // Duration of the tapping phase
+    [SerializeField] private float spawnInterval = 0.15f; // Spawn every 0.5 seconds
+    [SerializeField] private float gameDuration = 15f;   // Duration of the tapping phase
     public Transform[] ammoPos = new Transform[4];        // Where notes start spawning (e.g. top of the screen)
 
     [SerializeField] private float verticalPos;
     [SerializeField] private Transform noteParent;
+    
+
 
     //public int numberOfNotes = 10;              // How many notes to spawn
     //public float spacingBetweenNotes = 2f;      // Vertical spacing between notes
@@ -21,7 +25,7 @@ public class NoteSpawner : MonoBehaviour
 
     //[Header("Note Keys")]
     //public KeyCode[] keyOptions = new KeyCode[4]; 
-    
+
     private float startTime;
     private bool isRunning = false;
 
@@ -50,9 +54,17 @@ public class NoteSpawner : MonoBehaviour
         }
 
         //Game ends here
+        int score = AmmoScroller.Instance.GetScore();
+        ReloadStationController.Instance.SendResult(score);
         isRunning = false;
         AmmoScroller.Instance?.SetScrolling(false);
         Debug.Log("Times up");
+        miniGame.SetActive(false);
+
+
+        
+        
+ 
     }
 
     void SpawnNote()
