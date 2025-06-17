@@ -8,8 +8,8 @@ public class NoteSpawner : MonoBehaviour
     public GameObject[] notePrefabs = new GameObject[4]; // Assign 4 prefabs in Inspector
 
     [Header("Timing and Spawning")]
-    [SerializeField] private float spawnInterval = 0.5f; // Spawn every 0.5 seconds
-    [SerializeField] private float gameDuration = 10f;   // Duration of the tapping phase
+    [SerializeField] private float spawnInterval = 0.15f; // Spawn every 0.5 seconds
+    [SerializeField] private float gameDuration = 15f;   // Duration of the tapping phase
     public Transform[] ammoPos = new Transform[4];        // Where notes start spawning (e.g. top of the screen)
 
     [SerializeField] private float verticalPos;
