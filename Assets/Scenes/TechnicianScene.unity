@@ -4328,11 +4328,11 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838704860}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.6045184, y: 0.6045184, z: 0.6045184}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 50, y: 50, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2064718608}
+  m_Father: {fileID: 1557701490}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4352,7 +4352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beatTempo: 480
-  ToggleScrolling: 1
+  ToggleScrolling: 0
 --- !u!1 &844891162
 GameObject:
   m_ObjectHideFlags: 0
@@ -8723,6 +8723,7 @@ RectTransform:
   - {fileID: 1941113448}
   - {fileID: 1928658598}
   - {fileID: 527404050}
+  - {fileID: 838704861}
   m_Father: {fileID: 740972617}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9830,8 +9831,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 838704861}
+  m_Children: []
   m_Father: {fileID: 740972617}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2064718609
@@ -9851,15 +9851,15 @@ MonoBehaviour:
   - {fileID: 323482681148563245, guid: 80a9f6ea486d9f344941dee3f64a2d0e, type: 3}
   - {fileID: 2352859739859584802, guid: efc4c13d80b5bcb42a049e257d08e23a, type: 3}
   - {fileID: 3438096284777932175, guid: 78a5efaf4ed2c0447b088fad0f68b123, type: 3}
+  spawnInterval: 0.5
+  gameDuration: 10
   ammoPos:
   - {fileID: 987155412}
   - {fileID: 1365054382}
   - {fileID: 970491624}
   - {fileID: 1143018761}
+  verticalPos: 5
   noteParent: {fileID: 838704861}
-  numberOfNotes: 30
-  spacingBetweenNotes: 1
-  keyOptions: 7a000000780000002e0000002f000000
 --- !u!1 &2142289977
 GameObject:
   m_ObjectHideFlags: 0

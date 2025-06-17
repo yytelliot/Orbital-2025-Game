@@ -7,6 +7,7 @@ public class AmmoNoteObject : MonoBehaviour
     private bool canBePressed;
     public KeyCode keyToPress;
 
+
     void Start()
     {
         if (AmmoScroller.Instance == null)
@@ -20,7 +21,9 @@ public class AmmoNoteObject : MonoBehaviour
     {
         if (Input.GetKeyDown(keyToPress) && canBePressed)
         {
-            gameObject.SetActive(false); 
+  
+            AmmoScroller.Instance.AddScore();
+            Destroy(gameObject); 
         }
     }
 
