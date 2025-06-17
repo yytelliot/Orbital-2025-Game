@@ -10,13 +10,13 @@ public class EventManager : MonoBehaviour
         if (data is int)
         {
             int amount = (int)data;
-           // string caller = sender.ToString();
+            string caller = sender.ToString();
             Debug.Log($"Recieved {amount} from {caller}");
             
             if (PhotonNetwork.LocalPlayer.CustomProperties["PlayerRole"].ToString() == "Technician")
             {
                 Debug.Log("hit");
-                CrossSceneNetworkManager.Instance.SendTechnicianInteraction(sender, data);
+                //CrossSceneNetworkManager.Instance.SendNetworkEvent(sender, data);
                 
                 // Local technician effects
                 //PlayLocalEffects();
