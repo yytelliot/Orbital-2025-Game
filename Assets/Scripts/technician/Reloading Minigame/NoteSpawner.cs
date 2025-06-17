@@ -9,10 +9,11 @@ public class NoteSpawner : MonoBehaviour
 
     [Header("Spawning Settings")]
     public Transform[] ammoPos = new Transform[4];        // Where notes start spawning (e.g. top of the screen)
+    public Transform noteParent;
 
     public int numberOfNotes = 10;              // How many notes to spawn
     public float spacingBetweenNotes = 2f;      // Vertical spacing between notes
-    public float laneSpacing = 2f;              // Horizontal spacing between lanes
+    
 
     [Header("Note Keys")]
     public KeyCode[] keyOptions = new KeyCode[4]; 
@@ -32,7 +33,10 @@ public class NoteSpawner : MonoBehaviour
             // Calculate position (x for lane, y for spacing)
             Vector3 spawnPos = new Vector3(ammoPos[laneIndex].position.x, i * spacingBetweenNotes, 0f);
             
-            GameObject note = Instantiate(notePrefabs[laneIndex], spawnPos, Quaternion.identity);
+            GameObject note = Instantiate(notePrefabs[laneIndex], spawnPos, Quaternion.identity, noteParent);
+
+            // Fix any inherited distortion
+            //note.transform.localScale = Vector3.one;
 
             // Instantiate the note prefab for that lane
             if (laneIndex == 0 || laneIndex == 1)
@@ -45,11 +49,11 @@ public class NoteSpawner : MonoBehaviour
             }
 
             // Assign the key to the note script
-            AmmoNoteObject noteScript = note.GetComponent<AmmoNoteObject>();
+            /*AmmoNoteObject noteScript = note.GetComponent<AmmoNoteObject>();
             if (noteScript != null && keyOptions.Length > laneIndex)
             {
                 noteScript.keyToPress = keyOptions[laneIndex];
-            }
+            }*/
         }
     }
 }

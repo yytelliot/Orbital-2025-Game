@@ -6,20 +6,21 @@ public class AmmoNoteObject : MonoBehaviour
 {
     private bool canBePressed;
     public KeyCode keyToPress;
+
     void Start()
     {
-
+        if (AmmoScroller.Instance == null)
+        {
+            AmmoScroller.Instance = FindObjectOfType<AmmoScroller>();
+        }
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        if (Input.GetKeyDown(keyToPress))
+        if (Input.GetKeyDown(keyToPress) && canBePressed)
         {
-            if (canBePressed)
-            {
-                gameObject.SetActive(false);
-            }
+            gameObject.SetActive(false); 
         }
     }
 
@@ -33,7 +34,7 @@ public class AmmoNoteObject : MonoBehaviour
         }
         else if (other.tag == "Stopper")
         {
-            AmmoScroller.Instance?.SetScrolling(false);
+            AmmoScroller.Instance.SetScrolling(false);
         }
     }
 
@@ -48,7 +49,7 @@ public class AmmoNoteObject : MonoBehaviour
 
         else if (other.tag == "Stopper")
         {
-            AmmoScroller.Instance?.SetScrolling(true);
+            AmmoScroller.Instance.SetScrolling(true);
         }
     }
 }
