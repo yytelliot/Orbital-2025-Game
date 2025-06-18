@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [Header("Interaction")]
     public LayerMask interactablesLayer;
     [SerializeField] private float interactRange = 0.2f;
+    private bool canMove = true;
 
     private void Awake()
     {
@@ -25,6 +26,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!canMove)
+        {
+            input = Vector2.zero;
+            animator.SetBool("isMoving", false);
+            return;
+        }
+
         // Read input
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
@@ -51,10 +59,16 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isInteracting", false);
         }
+
     }
 
     private void FixedUpdate()
     {
+        if (!canMove)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
         Vector2 v = input.normalized * moveSpeed;
         rb.velocity = v;
     }
@@ -88,4 +102,12 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(interactPos, 0.1f);
     }
+
+    public void SetCanMove(bool value)
+    {
+        canMove = value;
+        rb.velocity = Vector2.zero; // Stop movement immediately
+        animator.SetBool("isMoving", false);
+    }
+
 }

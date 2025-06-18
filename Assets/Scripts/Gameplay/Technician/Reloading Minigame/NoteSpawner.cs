@@ -29,12 +29,26 @@ public class NoteSpawner : MonoBehaviour
     private float startTime;
     private bool isRunning = false;
 
-    void Start()
+    public void StartMinigame()
     {
         //SpawnNotePattern();
         StartCoroutine(GameLoop());
         
         
+    }
+
+    public void ResetMinigame()
+    {
+        StopAllCoroutines(); // Stop previous coroutine if needed
+
+        // Destroy leftover notes
+        foreach (Transform child in noteParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        AmmoScroller.Instance?.SetScrolling(true); // Ready to scroll again
+        StartCoroutine(GameLoop());
     }
 
     IEnumerator GameLoop()
@@ -44,11 +58,11 @@ public class NoteSpawner : MonoBehaviour
 
         while (Time.time - startTime < gameDuration)
         {
-            while (!AmmoScroller.Instance.IsScrolling())
+            while (AmmoScroller.Instance == null || !AmmoScroller.Instance.IsScrolling())
             {
                 yield return null;
             }
-            
+
             SpawnNote();
             yield return new WaitForSeconds(spawnInterval);
         }
@@ -60,6 +74,11 @@ public class NoteSpawner : MonoBehaviour
         AmmoScroller.Instance?.SetScrolling(false);
         Debug.Log("Times up");
         miniGame.SetActive(false);
+        
+        foreach (Transform child in noteParent)
+        {
+            Destroy(child.gameObject);
+        }
 
 
         
