@@ -1088,6 +1088,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2949514467627174162, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
+      propertyPath: gameEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 2adefaed1fc83024cb83ecc0b5a7cce2, type: 2}
     - target: {fileID: 6480909117204783110, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
       propertyPath: m_Name
       value: TestController
