@@ -27,7 +27,7 @@ public class NoteSpawner : MonoBehaviour
     //public KeyCode[] keyOptions = new KeyCode[4]; 
 
     private float startTime;
-    private bool isRunning = false;
+    //private bool isRunning = false;
 
     public void StartMinigame()
     {
@@ -54,7 +54,7 @@ public class NoteSpawner : MonoBehaviour
     IEnumerator GameLoop()
     {
         startTime = Time.time;
-        isRunning = true;
+        //isRunning = true;
 
         while (Time.time - startTime < gameDuration)
         {
@@ -70,8 +70,9 @@ public class NoteSpawner : MonoBehaviour
         //Game ends here
         int score = AmmoScroller.Instance.GetScore();
         ReloadStationController.Instance.SendResult(score);
-        isRunning = false;
+        //isRunning = false;
         AmmoScroller.Instance?.SetScrolling(false);
+        AmmoScroller.Instance?.ResetScore();
         Debug.Log("Times up");
         miniGame.SetActive(false);
         

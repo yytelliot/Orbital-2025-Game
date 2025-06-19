@@ -55,4 +55,9 @@ public class AmmoScroller : MonoBehaviour
     {
         return ammoReloaded;
     }
+
+    public void ResetScore()
+    {
+        ammoReloaded = 0;
+    }
 }

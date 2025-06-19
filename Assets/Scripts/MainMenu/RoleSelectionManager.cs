@@ -127,9 +127,15 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
 
         UpdateStatus($"Waiting for other player...\nYou are: {selectedRole}");
 
+         if (PhotonNetwork.IsMasterClient)
+    {
+        // Wait a bit to allow OnPlayerPropertiesUpdate to fire
+        Invoke(nameof(CheckAllPlayersReady), 1f);
+    }
 
 
-        CheckAllPlayersReady();
+
+        //CheckAllPlayersReady();
     }
 
     private void CheckAllPlayersReady()
