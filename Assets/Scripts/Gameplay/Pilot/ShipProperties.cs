@@ -5,30 +5,43 @@ using UnityEngine;
 public class ShipProperties : MonoBehaviour
 {
     public int health;
-    public int ammoCount;
+    public int maxAmmoCount = 100;
+    public int currentAmmoCount;
+
 
     [Header("Events")]
     public GameEvent onAmmoCountChange;
+    public GameEvent onOutOfAmmo;
+    public GameEvent onAmmoFull;
+    public GameEvent updateUI;
 
+    public int getCurrentAmmo()
+    {
+        return currentAmmoCount;
+    }
     public bool DeductAmmo()
     {
-        if (ammoCount > 0)
+        if (currentAmmoCount > 0)
         {
-            ammoCount--;
             onAmmoCountChange.RaiseNetworked(this, -1);
             return true;
         }
         else
             return false;
     }
-    
+
     public bool DeductAmmo(int amount)
     {
-        if (ammoCount >= amount)
+        
+        if (currentAmmoCount >= amount)
         {
-            ammoCount -= amount;
             onAmmoCountChange.RaiseNetworked(this, -amount);
             return true;
+        }
+        else if (currentAmmoCount <= 0)
+        {
+            onOutOfAmmo.RaiseNetworked(this, null);
+            return false;
         }
         else
             return false;
@@ -44,6 +57,28 @@ public class ShipProperties : MonoBehaviour
         }
         else
             return false;
+    }
+
+    public void UpdateAmmo(Component sender, object data)
+    {
+        int amount = (int)data;
+        if (currentAmmoCount + amount <= 0)
+        {
+            currentAmmoCount = 0;
+            onOutOfAmmo.RaiseNetworked(this, null);
+
+        }
+        else if (currentAmmoCount + amount >= maxAmmoCount)
+        {
+            currentAmmoCount = maxAmmoCount;
+            onAmmoFull.RaiseNetworked(this, null);
+        }
+        else
+        {
+            currentAmmoCount += amount;
+        }
+
+        updateUI.Raise();
     }
 
 }

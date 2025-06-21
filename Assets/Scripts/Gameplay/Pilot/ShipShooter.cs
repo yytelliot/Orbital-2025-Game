@@ -16,7 +16,6 @@ public class ShipShooter : MonoBehaviour
 
     [Header("Events")]
     public GameEvent shotFired;
-    public GameEvent outOfAmmo;
     public GameEvent ammoCountChange;
     Coroutine firingRoutine;
 
@@ -74,7 +73,7 @@ public class ShipShooter : MonoBehaviour
         }
         else
         {
-            outOfAmmo.RaiseNetworked(this, null);
+            
         }
        
     }

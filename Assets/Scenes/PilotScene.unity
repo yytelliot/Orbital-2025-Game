@@ -663,7 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
+  gameEvent: {fileID: 11400000, guid: 2f5ce04b7db80744a98927c82a980759, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -844,6 +844,7 @@ GameObject:
   - component: {fileID: 1505957781}
   - component: {fileID: 1505957782}
   - component: {fileID: 1505957783}
+  - component: {fileID: 1505957785}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Untagged
@@ -1063,7 +1064,6 @@ MonoBehaviour:
   bulletSpeed: 1
   fireRate: 0.2
   shotFired: {fileID: 11400000, guid: df2ed1ec8c737fd41a3747c78a0d2187, type: 2}
-  outOfAmmo: {fileID: 11400000, guid: 2adefaed1fc83024cb83ecc0b5a7cce2, type: 2}
   ammoCountChange: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
 --- !u!114 &1505957784
 MonoBehaviour:
@@ -1078,8 +1078,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
-  ammoCount: 100
+  maxAmmoCount: 100
+  currentAmmoCount: 20
   onAmmoCountChange: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
+  onOutOfAmmo: {fileID: 11400000, guid: 2adefaed1fc83024cb83ecc0b5a7cce2, type: 2}
+  onAmmoFull: {fileID: 11400000, guid: 124b264f7dc897045b50c3993cca2d58, type: 2}
+  updateUI: {fileID: 11400000, guid: 2f5ce04b7db80744a98927c82a980759, type: 2}
+--- !u!114 &1505957785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505957775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1505957784}
+        m_TargetAssemblyTypeName: ShipProperties, Assembly-CSharp
+        m_MethodName: UpdateAmmo
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &3660977680258322164
 PrefabInstance:
   m_ObjectHideFlags: 0
