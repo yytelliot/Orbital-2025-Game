@@ -8,10 +8,12 @@ public class ShipProperties : MonoBehaviour
     public int maxAmmoCount = 100;
     public int currentAmmoCount;
 
+
     [Header("Events")]
     public GameEvent onAmmoCountChange;
     public GameEvent onOutOfAmmo;
     public GameEvent onAmmoFull;
+    public GameEvent updateUI;
 
     public int getCurrentAmmo()
     {
@@ -75,6 +77,8 @@ public class ShipProperties : MonoBehaviour
         {
             currentAmmoCount += amount;
         }
+
+        updateUI.Raise();
     }
 
 }

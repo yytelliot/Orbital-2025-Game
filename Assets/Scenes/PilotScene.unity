@@ -663,7 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
+  gameEvent: {fileID: 11400000, guid: 2f5ce04b7db80744a98927c82a980759, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -1083,6 +1083,7 @@ MonoBehaviour:
   onAmmoCountChange: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
   onOutOfAmmo: {fileID: 11400000, guid: 2adefaed1fc83024cb83ecc0b5a7cce2, type: 2}
   onAmmoFull: {fileID: 11400000, guid: 124b264f7dc897045b50c3993cca2d58, type: 2}
+  updateUI: {fileID: 11400000, guid: 2f5ce04b7db80744a98927c82a980759, type: 2}
 --- !u!114 &1505957785
 MonoBehaviour:
   m_ObjectHideFlags: 0
