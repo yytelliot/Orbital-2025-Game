@@ -11,11 +11,23 @@ public class AmmoCountScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ammoText.text = shipProperties.getCurrentAmmo().ToString();
+        ammoText.text = shipProperties.GetCurrentAmmo().ToString();
     }
 
     public void UpdateUIAmmoCount()
     {
-        ammoText.text = shipProperties.getCurrentAmmo().ToString();
+        ammoText.text = shipProperties.GetCurrentAmmo().ToString();
+        if (shipProperties.AmmoIsEmpty())
+        {
+            ammoText.color = Color.red;
+        }
+        else if (shipProperties.AmmoIsFull())
+        {
+            ammoText.color = Color.yellow;
+        }
+        else
+        {
+            ammoText.color = Color.white;
+        }
     }
 }

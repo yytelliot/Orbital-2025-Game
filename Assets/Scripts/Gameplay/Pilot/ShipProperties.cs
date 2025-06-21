@@ -15,9 +15,19 @@ public class ShipProperties : MonoBehaviour
     public GameEvent onAmmoFull;
     public GameEvent updateUI;
 
-    public int getCurrentAmmo()
+    public int GetCurrentAmmo()
     {
         return currentAmmoCount;
+    }
+
+    public bool AmmoIsFull()
+    {
+        return currentAmmoCount == maxAmmoCount;
+    }
+
+    public bool AmmoIsEmpty()
+    {
+        return currentAmmoCount <= 0;
     }
     public bool DeductAmmo()
     {
