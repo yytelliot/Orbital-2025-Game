@@ -68,7 +68,7 @@ public class ReloadStationController : MonoBehaviour, Interactable
     { 
         player.SetCanMove(true);
         Debug.Log(score + "end");
-        //onAmmoMinigameComplete.RaiseNetworked(this, score);
+        onAmmoMinigameComplete.RaiseNetworked(this, score);
     }
     
 
