@@ -55,4 +55,4 @@ public class AmmoNoteObject : MonoBehaviour
             AmmoScroller.Instance.SetScrolling(true);
         }
     }
-}
+} 
