@@ -32,12 +32,6 @@ public class ReloadStationController : MonoBehaviour, Interactable
     }
 
 
-
-    private void OnEnable()
-    {
-        //highlight = transform.GetChild(0).gameObject;
-    }
-
     private void OnTriggerEnter2D(UnityEngine.Collider2D other)
     {
         if (other.tag == "Player")
