@@ -17,9 +17,32 @@ public class LetterSpawner : MonoBehaviour
     [SerializeField] private Transform SpawnPos;
     [SerializeField] private float marginx;
     [SerializeField] private float marginy;
+    [SerializeField] private float lifeTime = 5f;
     
     private List<LetterController> activeBoxes = new();
+    void Update()
+    {
+        string input = Input.inputString.ToUpper();
+        if (!string.IsNullOrEmpty(input))
+        {
+            foreach (var box in activeBoxes.ToList())
+            {
+                if (box == null || box.gameObject == null)
+                {
+                    activeBoxes.Remove(box); // Cleanup destroyed box
+                    continue;
+                }
+                
+                if (box.TryType(input))
+                {
+                    activeBoxes.Remove(box);
+                    Destroy(box.gameObject);
+                    break;
+                }
 
+            }
+        }
+    }
     public void StartMinigame()
     {
         StartCoroutine(StartGame());
@@ -41,32 +64,14 @@ public class LetterSpawner : MonoBehaviour
         LetterController box = newBox.GetComponent<LetterController>();
 
         string letters = GetRandomLetters();
-        box.Initialize(letters, RandomPositionWithin(panel));
+        box.Initialize(letters, RandomPositionWithin(panel), lifeTime);
         activeBoxes.Add(box);
     }
 
-    private Vector2 RandomPositionWithin(RectTransform panel)
+    private Vector2 RandomPositionWithin(RectTransform panel) //currently unable to find a way to convert panel coord accurately, so using hard code.
     {
-        /*float x = Random.Range(-1035, -40);
-        float y = Random.Range(-696, -40);*/
-
-        
-        Vector3[] v = new Vector3[4];
-        panel.GetWorldCorners(v);
-
-        float bottomLeftXPos = v[0].x;
-        float TopRightXPos = v[2].x;
-
-        float bottomLeftYPos = v[0].y;
-        float TopRightYPos = v[2].y;
-
-        Debug.Log("Local size: " + panel.rect.size);
-        Debug.Log("Lossy scale: " + panel.lossyScale);
-
-
-
-        float x = Random.Range(bottomLeftXPos, TopRightXPos);
-        float y = Random.Range(bottomLeftYPos, TopRightYPos);
+        float x = Random.Range(-1000, -50);
+        float y = Random.Range(-650, -50);
 
 
 
@@ -101,18 +106,7 @@ public class LetterSpawner : MonoBehaviour
         };
     }
 
-    void Update()
-    {
-        string input = Input.inputString.ToUpper();
-        if (!string.IsNullOrEmpty(input))
-        {
-            foreach (var box in activeBoxes.ToList())
-            {
-                activeBoxes.Remove(box);
-                break;
-            }
-        }
-    }
+
 
     public void EndMinigame()
     {
