@@ -12,8 +12,6 @@ public class LetterController : MonoBehaviour
     private string currentTyped = "";
     private float lifeTime;
 
-    private bool isFadingOut = false;
-
     [SerializeField] private float fadeElapsed = 0f;
 
     private Coroutine feedbackRoutine;
@@ -57,7 +55,6 @@ public class LetterController : MonoBehaviour
 
     private IEnumerator FadeOutAndDestroy()
     {
-        isFadingOut = true;
         while (fadeElapsed < lifeTime)
         {
             fadeElapsed += Time.deltaTime;
