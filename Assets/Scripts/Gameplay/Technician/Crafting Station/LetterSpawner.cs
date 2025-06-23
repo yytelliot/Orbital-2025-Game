@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using TMPro;
 public enum Difficulty {Easy, Medium, Hard}
 public class LetterSpawner : MonoBehaviour
 {
+    [SerializeField] public GameObject miniGame;
 
     [Header("Letter Prefab")]
     [SerializeField] private GameObject LetterBoxPrefab;
@@ -20,6 +22,8 @@ public class LetterSpawner : MonoBehaviour
     [SerializeField] private float lifeTime = 5f;
     
     private List<LetterController> activeBoxes = new();
+    [SerializeField] private TMP_Text statusText;
+    private int ciphersSolved = 0;
     void Update()
     {
         string input = Input.inputString.ToUpper();
@@ -36,6 +40,7 @@ public class LetterSpawner : MonoBehaviour
                 if (box.TryType(input))
                 {
                     activeBoxes.Remove(box);
+                    AddScore();
                     Destroy(box.gameObject);
                     break;
                 }
@@ -55,7 +60,10 @@ public class LetterSpawner : MonoBehaviour
             SpawnBox();
             yield return new WaitForSeconds(spawnInterval);
         }
+
+        StartCoroutine(WaitUntilMinigameEnds());
     }
+
 
     private void SpawnBox()
     {
@@ -79,7 +87,33 @@ public class LetterSpawner : MonoBehaviour
         
 
     }
+    public void EndMinigame()
+    {
+        foreach (var box in activeBoxes)
+        {
+            if (box != null)
+                Destroy(box.gameObject);
+        }
+        activeBoxes.Clear();
+        miniGame.SetActive(false);
+        ciphersSolved = 0;
+    }   
 
+    IEnumerator WaitUntilMinigameEnds()
+    {
+        while (activeBoxes.Count > 0)
+        {
+            // Remove any destroyed boxes from the list
+            activeBoxes.RemoveAll(box => box == null || box.gameObject == null);
+            yield return null;
+        }
+
+        // Minigame has ended
+        CraftingStationController.Instance.SendResult(ciphersSolved >= GetTargetAmount()); 
+        EndMinigame();
+    } 
+
+    #region Difficulty Settings
     private string GetRandomLetters()
     {
         int length = currentDifficulty switch
@@ -106,15 +140,23 @@ public class LetterSpawner : MonoBehaviour
         };
     }
 
-
-
-    public void EndMinigame()
+        public int GetTargetAmount()
     {
-        foreach (var box in activeBoxes)
+        return currentDifficulty switch
         {
-            if (box != null)
-                Destroy(box.gameObject);
-        }
-        activeBoxes.Clear();
+            Difficulty.Easy => 6,
+            Difficulty.Medium => 15,
+            Difficulty.Hard => 25,
+            _ => 10
+        };
     }
+    #endregion
+    
+        public void AddScore()
+    {
+        ciphersSolved++;
+        statusText.text = "Ammo: " + ciphersSolved + " / " + GetTargetAmount();
+    }
+
+
 }

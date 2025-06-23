@@ -13,7 +13,7 @@ public class CraftingStationController : MonoBehaviour, Interactable
     //public GameEvent onCraftingMinigameComplete;
     public GameEvent onCraftingMinigameStart;
 
-        void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -48,6 +48,13 @@ public class CraftingStationController : MonoBehaviour, Interactable
         Debug.Log("Crafting minigame start!");
         miniGame.SetActive(true);
         onCraftingMinigameStart.Raise(this, null);
+
+    }
+    
+    public void SendResult(bool result)
+    { 
+        player.SetCanMove(true);
+        Debug.Log("You " + (result ? "Pass" : "Fail"));
 
     }
 
