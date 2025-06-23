@@ -1,18 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LetterController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public TMP_Text textDisplay;
+    private string expected;
+    private string currentTyped = "";
+    private float lifeTime = 5f;
+
+    public void Initialize(string letters, Vector2 anchoredPos)
     {
-        
+        expected = letters;
+        textDisplay.text = letters;
+        GetComponent<RectTransform>().anchoredPosition = anchoredPos;
+        Destroy(gameObject, lifeTime);
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool TryType(string input)
     {
-        
+        if (expected.StartsWith(currentTyped + input))
+        {
+            currentTyped += input;
+            textDisplay.text = expected.Substring(currentTyped.Length);
+
+            if (currentTyped == expected)
+            {
+                Destroy(gameObject);
+                return true;
+            }
+        }
+        return false;
     }
 }
