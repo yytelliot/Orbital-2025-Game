@@ -9693,7 +9693,7 @@ MonoBehaviour:
   miniGame: {fileID: 39756662}
   LetterBoxPrefab: {fileID: 2082232244887562452, guid: f249d018fb566454287b63926b662af9, type: 3}
   panel: {fileID: 280604829}
-  currentDifficulty: 2
+  currentDifficulty: 1
   spawnInterval: 1
   SpawnPos: {fileID: 327591155}
   marginx: 100

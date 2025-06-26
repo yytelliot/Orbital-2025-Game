@@ -155,7 +155,7 @@ public class LetterSpawner : MonoBehaviour
         public void AddScore()
     {
         ciphersSolved++;
-        statusText.text = "Ammo: " + ciphersSolved + " / " + GetTargetAmount();
+        statusText.text = "Ciphers Solved: " + ciphersSolved + " / " + GetTargetAmount();
     }
 
 
