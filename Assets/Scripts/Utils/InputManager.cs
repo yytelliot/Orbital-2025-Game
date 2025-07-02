@@ -20,6 +20,9 @@ public class InputManager : MonoBehaviour
         { "Ammo4", KeyCode.L },
         { "StartGame", KeyCode.Space },
 
+        //UI
+        { "settings", KeyCode.Escape },
+
 
     };
 
