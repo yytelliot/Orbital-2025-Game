@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class SeekerBehavior : MonoBehaviour
+public class SeekerBehavior : MonoBehaviour, IStunnable
 {
 
     [Header("Sprite Info")]
@@ -12,9 +12,17 @@ public class SeekerBehavior : MonoBehaviour
 
     public float moveSpeed = 3f;
 
+    [Tooltip("When stunned, can only move once the velocity is lower than stopThreshold")]
+    public float stopThreshold = 0.2f;
+
     private GameObject player;
     private Transform playerTransform;
     private Rigidbody2D rb;
+    private bool isStunned = false;
+
+
+    public void Stun(float time) => StartCoroutine(StunCoroutine(time));
+    public void StunUntilStop() => StartCoroutine(StunUntilStopCoroutine());
 
     void Awake()
     {
@@ -32,16 +40,37 @@ public class SeekerBehavior : MonoBehaviour
         
     }
 
+    public IEnumerator StunUntilStopCoroutine()
+    {
+        isStunned = true;
+
+        while (rb.velocity.sqrMagnitude > stopThreshold * stopThreshold)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+        rb.velocity = Vector2.zero;
+
+        isStunned = false;
+    }
+    IEnumerator StunCoroutine(float stunTime) {
+        isStunned = true;
+        yield return new WaitForSeconds(stunTime);
+        isStunned = false;
+    }
+
     void FixedUpdate()
     {
         if (playerTransform == null) return;
+        if (isStunned == true) return;
 
         Vector2 currentPos = rb.position;
         Vector2 targetPos = (Vector2)playerTransform.position;
         Vector2 direction = (targetPos - currentPos).normalized;
 
-        Vector2 newPos = currentPos + direction * moveSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(newPos);
+        rb.velocity = direction * moveSpeed;
+        // Vector2 newPos = currentPos + direction * moveSpeed * Time.fixedDeltaTime;
+        // rb.MovePosition(newPos);
 
     }
 

@@ -6,16 +6,38 @@ using UnityEngine;
 public class AlienCollision : MonoBehaviour
 {
 
+    [Tooltip("Knockback applied to player")]
+    public float playerKbForce = 5f;
 
-    // Start is called before the first frame update
-    void Start()
+    [Tooltip("Knockback applied to Enemy")]
+    public float selfKbForce = 2f;
+
+    private Rigidbody2D rb;
+
+    void Awake()
     {
-
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.collider.CompareTag("Player"))
+        {
+            Rigidbody2D playerRb = collision.collider.attachedRigidbody;
 
+            //Get force vectors
+            Vector2 enemyToShip = (playerRb.position - rb.position).normalized;
+            Vector2 shipToEnemy = (rb.position - playerRb.position).normalized;
+
+            // Apply force
+            playerRb.AddForce(enemyToShip * playerKbForce, ForceMode2D.Impulse);
+            rb.AddForce(shipToEnemy * selfKbForce, ForceMode2D.Impulse);
+
+            var stunnable = GetComponent<IStunnable>();
+            if (stunnable != null)
+            {
+                stunnable.StunUntilStop();
+            }
+        }
     }
 }
