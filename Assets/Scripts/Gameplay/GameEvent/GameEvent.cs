@@ -22,6 +22,11 @@ public class GameEvent : ScriptableObject
         }
     }
 
+    public void Raise()
+    {
+        Raise(null, null);
+    }
+
     // Add/remove a new event listener
     public void RegisterListener(GameEventListener listener)
     {
