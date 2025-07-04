@@ -21,13 +21,17 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
     private string OtherPlayerSelected = "";
     private PhotonView myPhotonView;
 
+    public static RoleSelectionManager Instance; 
+
     private void Awake()
     {
-        if (FindObjectsOfType<RoleSelectionManager>().Length > 1) //singleton class, only one exist
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
+
+    Instance = this;
 
         // Get or add PhotonView component with new name
         myPhotonView = GetComponent<PhotonView>();
@@ -36,6 +40,7 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
             myPhotonView = gameObject.AddComponent<PhotonView>();
             myPhotonView.OwnershipTransfer = OwnershipOption.Takeover;
         }
+
 
         DontDestroyOnLoad(gameObject);
     }
@@ -195,7 +200,7 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
     }
     void OnDestroy()
     {
-        if (PhotonNetwork.IsConnected && myPhotonView != null)
+        if (PhotonNetwork.IsConnected && myPhotonView != null && myPhotonView.IsMine)
         {
             PhotonNetwork.RemoveRPCs(myPhotonView);
         }
