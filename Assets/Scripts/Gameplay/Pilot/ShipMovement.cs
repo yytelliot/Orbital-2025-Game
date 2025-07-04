@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
 {
+    public ShipProperties shipProperties;
+
     public Rigidbody2D rb;
     public Vector2 movement;
     public float thrust;
@@ -36,6 +38,20 @@ public class ShipMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!shipProperties.IsStunned())
+        {
+            // Apply a continuous force in the input direction
+            rb.AddForce(movement * thrust);
+
+            // Enforce a hard speed cap
+            if (rb.velocity.sqrMagnitude > maxSpeed * maxSpeed)
+            {
+                rb.velocity = rb.velocity.normalized * maxSpeed;
+            }
+        }
+
+
+
         // // Target velocity to reach
         // Vector2 targetVelocity = movement * maxSpeed;
 
@@ -48,15 +64,5 @@ public class ShipMovement : MonoBehaviour
         //     targetVelocity,
         //     rate * Time.fixedDeltaTime
         // );
-
-        // Apply a continuous force in the input direction
-        rb.AddForce(movement * thrust);
-
-        // Enforce a hard speed cap
-        if (rb.velocity.sqrMagnitude > maxSpeed * maxSpeed)
-        {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
-        }
-
     }
 }

@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipProperties : MonoBehaviour
+
+public class ShipProperties : MonoBehaviour, IStunnable
 {
-    public int health;
+    public int maxHp;
+    public int currentHp;
     public int maxAmmoCount = 100;
     public int currentAmmoCount;
+    public float defaultStunedTime = 0.5f;
+    private bool isStunned = false;
+
+    [SerializeField]
+    [Tooltip("Minimum speed after being stunned for the pilot to regain control")]
+    private float speedToRegainControl = 1;
 
 
     [Header("Events")]
@@ -14,7 +22,58 @@ public class ShipProperties : MonoBehaviour
     public GameEvent onOutOfAmmo;
     public GameEvent onAmmoFull;
     public GameEvent updateUI;
+    public GameEvent onShipHpChange;
+    public GameEvent onShipHpReachZero;
 
+    private Rigidbody2D rb;
+
+    public bool IsStunned()
+    {
+        return isStunned;
+    }
+
+    public void Stun()
+    {
+        StartCoroutine(StunCoroutine(defaultStunedTime));
+    }
+    public void Stun(float time)
+    {
+        StartCoroutine(StunCoroutine(time));
+    }
+
+    public void Stun(Component sender, object data)
+    {
+        float stunnedTime = (float)data;
+        StartCoroutine(StunCoroutine(stunnedTime));
+    }
+
+    public void StunUntilStop()
+    {
+        StartCoroutine(StunUntilStopCoroutine());
+    }
+
+    private IEnumerator StunCoroutine(float time)
+    {
+        isStunned = true;
+        yield return new WaitForSeconds(time);
+        isStunned = false;
+    }
+    private IEnumerator StunUntilStopCoroutine()
+    {
+        isStunned = true;
+
+        while (rb.velocity.sqrMagnitude > speedToRegainControl * speedToRegainControl)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+        isStunned = false;
+
+    }
+
+
+
+    // AMMO FUNCTIONS
     public int GetCurrentAmmo()
     {
         return currentAmmoCount;
@@ -29,6 +88,7 @@ public class ShipProperties : MonoBehaviour
     {
         return currentAmmoCount <= 0;
     }
+
     public bool DeductAmmo()
     {
         if (currentAmmoCount > 0)
@@ -42,7 +102,7 @@ public class ShipProperties : MonoBehaviour
 
     public bool DeductAmmo(int amount)
     {
-        
+
         if (currentAmmoCount >= amount)
         {
             onAmmoCountChange.RaiseNetworked(this, -amount);
@@ -56,17 +116,6 @@ public class ShipProperties : MonoBehaviour
         else
             return false;
 
-    }
-
-    public bool DeductHealth(int amount)
-    {
-        if (health >= amount)
-        {
-            health -= amount;
-            return true;
-        }
-        else
-            return false;
     }
 
     public void UpdateAmmo(Component sender, object data)
@@ -89,6 +138,53 @@ public class ShipProperties : MonoBehaviour
         }
 
         updateUI.Raise();
+    }
+
+
+
+
+
+    public bool DeductHp(int amount)
+    {
+        if (currentHp >= amount)
+        {
+            onShipHpChange.RaiseNetworked(this, -amount);
+            return true;
+        }
+        else
+        {
+            currentHp = 0;
+            onShipHpReachZero.RaiseNetworked();
+            return false;
+        }
+    }
+    public void UpdateHp(Component sender, object data)
+    {
+        int amount = (int)data;
+        if (currentHp + amount <= 0)
+        {
+            currentHp = 0;
+            Debug.Log("Lmao ded");
+            onShipHpReachZero.RaiseNetworked(this, null);
+
+        }
+        else if (currentHp + amount >= maxHp)
+        {
+            currentHp = maxHp;
+            // onHpFull.RaiseNetworked(this, null);
+        }
+        else
+        {
+            currentHp += amount;
+        }
+
+        updateUI.Raise();
+    }
+
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
     }
 
 }

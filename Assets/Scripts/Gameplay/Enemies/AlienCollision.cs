@@ -6,17 +6,31 @@ using UnityEngine;
 public class AlienCollision : MonoBehaviour
 {
 
+
     [Tooltip("Knockback applied to player")]
     public float playerKbForce = 5f;
 
     [Tooltip("Knockback applied to Enemy")]
     public float selfKbForce = 2f;
 
+    [Tooltip("Player Hitstun Time")]
+    public float playerHitstun = 0.5f;
+
+    [Tooltip("Damage Dealt on Collision")]
+    public int damage = 10;
+
+    [Header("Events")]
+    public GameEvent onPilotHitStun;
+
     private Rigidbody2D rb;
+    private GameObject player;
+    private ShipProperties shipProperties;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        shipProperties = player.GetComponent<ShipProperties>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -38,6 +52,9 @@ public class AlienCollision : MonoBehaviour
             {
                 stunnable.StunUntilStop();
             }
+            shipProperties.DeductHp(damage);
+
+            onPilotHitStun.RaiseNetworked(playerHitstun);
         }
     }
 }

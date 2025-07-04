@@ -954,60 +954,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.41
---- !u!1 &1343157775 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9009030871701775605, guid: 7749cae132627ca46820757ae25444fa, type: 3}
-  m_PrefabInstance: {fileID: 4017580811530834588}
-  m_PrefabAsset: {fileID: 0}
---- !u!58 &1343157780
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1343157775}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.01}
-  serializedVersion: 2
-  m_Radius: 0.1
---- !u!114 &1343157781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1343157775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0774876b0315584ab1e99910b8c66a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerKbForce: 50
-  selfKbForce: 10
 --- !u!1 &1505957775
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,7 +971,9 @@ GameObject:
   - component: {fileID: 1505957781}
   - component: {fileID: 1505957782}
   - component: {fileID: 1505957783}
+  - component: {fileID: 1505957786}
   - component: {fileID: 1505957785}
+  - component: {fileID: 1505957787}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Player
@@ -1196,7 +1144,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.35, y: 4.8}
+  m_Size: {x: 0.2, y: 4.41}
   m_Direction: 0
 --- !u!114 &1505957781
 MonoBehaviour:
@@ -1210,6 +1158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5678e661edbd0a743b0c18742e64c14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipProperties: {fileID: 1505957784}
   rb: {fileID: 0}
   movement: {x: 0, y: 0}
   thrust: 500
@@ -1258,13 +1207,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c2c0522dd811c44af0d039fed6f535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
+  maxHp: 100
+  currentHp: 20
   maxAmmoCount: 100
   currentAmmoCount: 20
+  defaultStunedTime: 0.5
+  speedToRegainControl: 1
   onAmmoCountChange: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
   onOutOfAmmo: {fileID: 11400000, guid: 2adefaed1fc83024cb83ecc0b5a7cce2, type: 2}
   onAmmoFull: {fileID: 11400000, guid: 124b264f7dc897045b50c3993cca2d58, type: 2}
   updateUI: {fileID: 11400000, guid: 2f5ce04b7db80744a98927c82a980759, type: 2}
+  onShipHpChange: {fileID: 11400000, guid: f8732d738338d7e4ea2ef878ddedb8d1, type: 2}
+  onShipHpReachZero: {fileID: 11400000, guid: 7edda2dd692f3114483a637ef2926990, type: 2}
 --- !u!114 &1505957785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,6 +1238,62 @@ MonoBehaviour:
       - m_Target: {fileID: 1505957784}
         m_TargetAssemblyTypeName: ShipProperties, Assembly-CSharp
         m_MethodName: UpdateAmmo
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1505957786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505957775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: ad4b903cd74b2ac4fbca9aa20c600fc7, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1505957784}
+        m_TargetAssemblyTypeName: ShipProperties, Assembly-CSharp
+        m_MethodName: Stun
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1505957787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505957775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: f8732d738338d7e4ea2ef878ddedb8d1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1505957784}
+        m_TargetAssemblyTypeName: ShipProperties, Assembly-CSharp
+        m_MethodName: UpdateHp
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1461,7 +1471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79314c245e521af4ea2da352da6d0f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &4017580811530834588
+--- !u!1001 &4416995038636362849
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1469,68 +1479,58 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3724573282446282546, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+    - target: {fileID: 4558562614430649065, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+      propertyPath: playerKbForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5920690414757231856, guid: 7749cae132627ca46820757ae25444fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.3
       objectReference: {fileID: 0}
-    - target: {fileID: 3724573282446282546, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+    - target: {fileID: 5920690414757231856, guid: 7749cae132627ca46820757ae25444fa, type: 3}
       propertyPath: m_LocalPosition.y
       value: -5.09
       objectReference: {fileID: 0}
-    - target: {fileID: 3724573282446282546, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+    - target: {fileID: 5920690414757231856, guid: 7749cae132627ca46820757ae25444fa, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.998588
       objectReference: {fileID: 0}
-    - target: {fileID: 3724573282446282546, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+    - target: {fileID: 5920690414757231856, guid: 7749cae132627ca46820757ae25444fa, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3724573282446282546, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+    - target: {fileID: 5920690414757231856, guid: 7749cae132627ca46820757ae25444fa, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3724573282446282546, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+    - target: {fileID: 5920690414757231856, guid: 7749cae132627ca46820757ae25444fa, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3724573282446282546, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+    - target: {fileID: 5920690414757231856, guid: 7749cae132627ca46820757ae25444fa, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3724573282446282546, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+    - target: {fileID: 5920690414757231856, guid: 7749cae132627ca46820757ae25444fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3724573282446282546, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+    - target: {fileID: 5920690414757231856, guid: 7749cae132627ca46820757ae25444fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3724573282446282546, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+    - target: {fileID: 5920690414757231856, guid: 7749cae132627ca46820757ae25444fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4142010453642808845, guid: 7749cae132627ca46820757ae25444fa, type: 3}
-      propertyPath: m_LinearDrag
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9009030871701775605, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+    - target: {fileID: 8975781882733378634, guid: 7749cae132627ca46820757ae25444fa, type: 3}
       propertyPath: m_Name
       value: Seeker
-      objectReference: {fileID: 0}
-    - target: {fileID: 9009030871701775605, guid: 7749cae132627ca46820757ae25444fa, type: 3}
-      propertyPath: m_Layer
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9009030871701775605, guid: 7749cae132627ca46820757ae25444fa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1343157781}
-    - targetCorrespondingSourceObject: {fileID: 9009030871701775605, guid: 7749cae132627ca46820757ae25444fa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1343157780}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7749cae132627ca46820757ae25444fa, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -1544,4 +1544,4 @@ SceneRoots:
   - {fileID: 716818091}
   - {fileID: 1095535764}
   - {fileID: 261430844}
-  - {fileID: 4017580811530834588}
+  - {fileID: 4416995038636362849}

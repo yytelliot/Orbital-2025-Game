@@ -3,7 +3,11 @@ guid: 98c2c0522dd811c44af0d039fed6f535
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - onAmmoCountChange: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
+  - onOutOfAmmo: {fileID: 11400000, guid: 2adefaed1fc83024cb83ecc0b5a7cce2, type: 2}
+  - onAmmoFull: {fileID: 11400000, guid: 124b264f7dc897045b50c3993cca2d58, type: 2}
+  - updateUI: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
