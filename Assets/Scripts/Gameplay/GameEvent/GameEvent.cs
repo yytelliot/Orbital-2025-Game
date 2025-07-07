@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEngine;
+using System.Linq;
+#endif
+
 [CreateAssetMenu(menuName = "GameEvent")]
 public class GameEvent : ScriptableObject
 {
@@ -11,6 +17,33 @@ public class GameEvent : ScriptableObject
 
     // list of active event listeners
     public List<GameEventListener> listeners = new List<GameEventListener>();
+
+    private void OnValidate()
+    {
+#if UNITY_EDITOR
+        if (eventId == -1)
+        {
+            Debug.LogError(
+                $"WARNING: Unassigned event ID (-1) on “{name}””",
+                this
+            );
+            return;
+        }
+
+        // Find any other GameEvent asset with the same ID
+        var duplicate = AssetDatabase
+            .FindAssets("t:GameEvent")
+            .Select(AssetDatabase.GUIDToAssetPath)
+            .Select(path => AssetDatabase.LoadAssetAtPath<GameEvent>(path))
+            .FirstOrDefault(other => other != this && other.eventId == eventId);
+
+        if (duplicate != null)
+            Debug.LogError(
+                $"WARNING: Duplicate GameEvent ID {eventId} on “{name}” and “{duplicate.name}”",
+                this
+            );
+    #endif
+    }
 
     // calling Raise() signals that an the GameEvent is currently happening,
     // invoking all event listeners
