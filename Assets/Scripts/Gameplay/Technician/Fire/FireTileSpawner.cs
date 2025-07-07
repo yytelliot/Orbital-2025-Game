@@ -1,0 +1,65 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Tilemaps;
+
+public class FireTileSpawner : MonoBehaviour
+{
+    [Header("References")]
+    public Tilemap tilemap;
+    public TileBase[] allowedTiles; // Only tiles from this list can be fire targets
+
+    [Header("Spawn Settings")]
+    public GameObject firePrefab;
+
+    private List<Vector3> selectablePositions = new List<Vector3>();
+    private HashSet<Vector3> occupiedPositions = new HashSet<Vector3>();
+
+    void Start()
+    {
+
+    }
+
+    private void CacheSelectableTiles()
+    {
+        selectablePositions.Clear();
+        BoundsInt bounds = tilemap.cellBounds;
+
+        foreach (var pos in bounds.allPositionsWithin)
+        {
+            TileBase currentTile = tilemap.GetTile(pos);
+            if (IsSelectableTile(currentTile))
+            {
+                Vector3 worldPos = tilemap.GetCellCenterWorld(pos);
+                selectablePositions.Add(worldPos);
+            }
+        }
+    }
+
+    public bool IsSelectableTile(TileBase tile)
+    {
+        foreach (TileBase allowed in allowedTiles)
+        {
+            if (tile == allowed)
+                return true;
+        }
+        return false;
+    }
+
+    public void SpawnFireTiles()
+    {
+
+        List<Vector3> availablePositions = selectablePositions.FindAll(pos => !occupiedPositions.Contains(pos));
+        int randIndex = Random.Range(0, selectablePositions.Count);
+
+        Vector3 spawnPos = availablePositions[Random.Range(0, availablePositions.Count)];
+        GameObject fire = Instantiate(firePrefab, spawnPos, Quaternion.identity);
+        occupiedPositions.Add(spawnPos);
+
+                    // Track when the fire is destroyed so we can reuse the position
+        FireTracker tracker = fire.AddComponent<FireTracker>();
+        tracker.Init(spawnPos, () => occupiedPositions.Remove(spawnPos));
+    }
+    
+
+}
