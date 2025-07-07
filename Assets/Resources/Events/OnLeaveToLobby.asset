@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: OnLeaveToLobby
   m_EditorClassIdentifier: 
   eventId: 254
+
   listeners: []
