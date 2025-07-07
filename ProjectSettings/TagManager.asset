@@ -7,6 +7,7 @@ TagManager:
   - AmmoCountUI
   - Activator
   - Stopper
+  - Walkable
   layers:
   - Default
   - TransparentFX
