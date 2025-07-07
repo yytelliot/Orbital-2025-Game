@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class ShipProperties : MonoBehaviour, IStunnable
 {
     public int maxHp;
     public int currentHp;
+    public int maxHpThresholds = 4;
+    public int currentHpThrehsolds = 4;
     public int maxAmmoCount = 100;
     public int currentAmmoCount;
     public float defaultStunedTime = 0.5f;
@@ -24,6 +27,7 @@ public class ShipProperties : MonoBehaviour, IStunnable
     public GameEvent updateUI;
     public GameEvent onShipHpChange;
     public GameEvent onShipHpReachZero;
+    public GameEvent emergencyRepairsRequired;
 
     private Rigidbody2D rb;
 
@@ -142,8 +146,14 @@ public class ShipProperties : MonoBehaviour, IStunnable
 
 
 
-
-
+    public int GetMaxHp()
+    {
+        return maxHp;
+    }
+    public int GetCurrentHp()
+    {
+        return currentHp;
+    }
     public bool DeductHp(int amount)
     {
         if (currentHp >= amount)
@@ -158,24 +168,38 @@ public class ShipProperties : MonoBehaviour, IStunnable
             return false;
         }
     }
+
+    public void AddHp(int amount) {
+        onShipHpChange.RaiseNetworked(this, amount);
+    }
+    
+
     public void UpdateHp(Component sender, object data)
     {
+        int currentMaxHp = maxHp * currentHpThrehsolds / maxHpThresholds;
+        int nextHpThreshold = maxHp * (currentHpThrehsolds - 1) / maxHpThresholds;
         int amount = (int)data;
-        if (currentHp + amount <= 0)
+        if (currentHp + amount <= 0 || currentMaxHp <= 0)
         {
             currentHp = 0;
             Debug.Log("Lmao ded");
             onShipHpReachZero.RaiseNetworked(this, null);
 
         }
-        else if (currentHp + amount >= maxHp)
+        else if (currentHp + amount >= currentMaxHp)
         {
-            currentHp = maxHp;
-            // onHpFull.RaiseNetworked(this, null);
+            currentHp = currentMaxHp;
         }
         else
         {
             currentHp += amount;
+            if (currentHp <= nextHpThreshold)
+            {
+                currentHpThrehsolds -= 1;
+                Debug.Log(currentHpThrehsolds);
+                updateUI.Raise();
+                emergencyRepairsRequired.RaiseNetworked(this, null);
+            }
         }
 
         updateUI.Raise();

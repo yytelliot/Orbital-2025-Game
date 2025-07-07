@@ -19,7 +19,7 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
     private Transform playerTransform;
     private Rigidbody2D rb;
     private bool isStunned = false;
-
+    private ShipProperties shipProperties;
 
     public void Stun(float time) => StartCoroutine(StunCoroutine(time));
     public void StunUntilStop() => StartCoroutine(StunUntilStopCoroutine());
@@ -28,6 +28,7 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+        shipProperties = player.GetComponent<ShipProperties>();
 
         if (player != null)
         {

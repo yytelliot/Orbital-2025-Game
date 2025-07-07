@@ -30,4 +30,5 @@ public class AmmoCountScript : MonoBehaviour
             ammoText.color = Color.white;
         }
     }
+    
 }
