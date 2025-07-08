@@ -8,6 +8,7 @@ TagManager:
   - Activator
   - Stopper
   - Ship
+  - Walkable
   layers:
   - Default
   - TransparentFX

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5002692d3d200ca4ba086e90fc88bce5, type: 3}
   m_Name: OnShipHpChange_Int
   m_EditorClassIdentifier: 
-  eventId: -1
+  eventId: 12
   listeners: []
