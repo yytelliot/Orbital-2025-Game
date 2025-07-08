@@ -146,6 +146,7 @@ public class ShipProperties : MonoBehaviour, IStunnable
 
 
 
+    // HP Functions
     public bool HpAtCap()
     {
         return currentHp == maxHp * currentHpThrehsolds / maxHpThresholds || currentHp == 0;
@@ -169,6 +170,30 @@ public class ShipProperties : MonoBehaviour, IStunnable
         {
             return false;
         }
+    }
+
+    public void RestoreHpThreshold()
+    {
+        ChangeHpThresholdBy(1);
+    }
+
+    public void ChangeHpThresholdBy(int thresholds)
+    {
+        if (currentHpThrehsolds + thresholds <= maxHpThresholds && currentHpThrehsolds + thresholds >= 0)
+        {
+            currentHpThrehsolds += thresholds;
+        }
+        else if (currentHpThrehsolds + thresholds > maxHpThresholds)
+        {
+            currentHp = maxHpThresholds;
+        }
+        else
+        {
+            currentHpThrehsolds = 0;
+        }
+
+        updateUI.Raise();
+
     }
 
     public bool AddHp(int amount)
