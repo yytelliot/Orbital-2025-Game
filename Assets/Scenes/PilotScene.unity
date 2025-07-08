@@ -1797,6 +1797,7 @@ GameObject:
   - component: {fileID: 1505957786}
   - component: {fileID: 1505957785}
   - component: {fileID: 1505957787}
+  - component: {fileID: 1505957789}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Player
@@ -2143,6 +2144,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipProperties: {fileID: 1505957784}
   regenEnabled: 1
+--- !u!114 &1505957789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505957775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: eef2c101769fe8546acefa7978d89ba1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1505957784}
+        m_TargetAssemblyTypeName: ShipProperties, Assembly-CSharp
+        m_MethodName: RestoreHpThreshold
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1726498073
 GameObject:
   m_ObjectHideFlags: 0
