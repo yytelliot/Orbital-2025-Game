@@ -24,7 +24,7 @@ public class Healthbar : MonoBehaviour
 
     void Start()
     {
-        SetHealth(1);
+        UpdateUIHpBar();
     }
 
     public void UpdateUIHpBar()
@@ -32,6 +32,8 @@ public class Healthbar : MonoBehaviour
         float currentHp = shipProperties.GetCurrentHp();
         float maxHp = shipProperties.GetMaxHp();
         SetHealth(currentHp/maxHp);
+
+
     }
 
     public void UpdateUIHpBar(Component sender, object data)
