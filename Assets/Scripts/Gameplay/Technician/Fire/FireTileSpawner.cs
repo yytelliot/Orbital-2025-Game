@@ -14,13 +14,30 @@ public class FireTileSpawner : MonoBehaviour
     [SerializeField] private float xOffset;
     [SerializeField] private float yOffset;
 
+    [Header("Events")]
+    [SerializeField] private GameEvent EmergencyRepairComplete;
+
     private List<Vector3> selectablePositions = new List<Vector3>();
     private HashSet<Vector3> occupiedPositions = new HashSet<Vector3>();
+
+    public static FireTileSpawner Instance; //Singleton Pattern
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
         CacheSelectableTiles();
-        SpawnFireTiles();
+
     }
 
     private void CacheSelectableTiles()
@@ -51,7 +68,7 @@ public class FireTileSpawner : MonoBehaviour
 
     public void SpawnFireTiles()
     {
-
+        FireUIHandler.Instance.addFire();
         List<Vector3> availablePositions = selectablePositions.FindAll(pos => !occupiedPositions.Contains(pos));
         int randIndex = Random.Range(0, selectablePositions.Count);
 
@@ -61,8 +78,14 @@ public class FireTileSpawner : MonoBehaviour
         occupiedPositions.Add(spawnPos);
 
         // Track when the fire is destroyed so we can reuse the position
-        FireTracker tracker = fire.AddComponent<FireTracker>();
+        FireTracker tracker = fire.GetComponent<FireTracker>();
         tracker.Init(spawnPos, () => occupiedPositions.Remove(spawnPos));
+    }
+
+    public void FireExtinguished()
+    {
+        FireUIHandler.Instance.removeFire();
+        EmergencyRepairComplete.RaiseNetworked(this, null);
     }
     
 

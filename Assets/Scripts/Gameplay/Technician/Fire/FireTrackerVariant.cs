@@ -2,32 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireTracker : MonoBehaviour, Interactable
+public class FireTrackerVariant : MonoBehaviour
 {
     private Vector3 position;
     private System.Action onDestroyed;
 
     [SerializeField] private Animator animator;
 
-    public void Interact()
-    {
-        ExtinguishFire();
-    }
-
-    public void Init(Vector3 pos, System.Action onDestroyed)
-    {
-        this.position = pos;
-        this.onDestroyed = onDestroyed;
-    }
-
-    void OnDestroy()
-    {
-        onDestroyed?.Invoke();
-        FireTileSpawner.Instance.FireExtinguished();
-        
-    }
-
-    public void ExtinguishFire()
+    public void ExtinguishFireVariant()
     {
         animator.SetTrigger("Extinguish");
         StartCoroutine(DestroyAfterAnimation());

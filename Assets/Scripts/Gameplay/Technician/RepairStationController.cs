@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class RepairStationController : MonoBehaviour, Interactable
 {
-    public AmmoResourceBar ammoResourceBar;
+    public GameEvent g;
     public void Interact()
     {
+        g.Raise(this, null);
         Debug.Log("Repair minigame start!");
 
     }

@@ -11,15 +11,24 @@ public class FireUIHandler : MonoBehaviour
     [SerializeField] private Vector3[] firePos;
 
     private int fireIndex = 0;
-    private FireTracker[] fireList;
-    //private GameObject[] fire;
+    private FireTrackerVariant[] fireList;
+    public static FireUIHandler Instance; //Singleton pattern
 
-        private void Awake()
+    private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         // Ensure arrays are initialized with the right size
         int size = firePos.Length;
-        fireList = new FireTracker[size];
-        
+        fireList = new FireTrackerVariant[size];
+
     }
 
     public void addFire()
@@ -32,7 +41,7 @@ public class FireUIHandler : MonoBehaviour
         }
 
         GameObject fire = Instantiate(firePrefab, firePos[fireIndex], Quaternion.identity);
-        
+
          // Gradually increase redness from fire 1 to fire 6
         float intensity = Mathf.Clamp01((fireIndex + 1) / 6f);  // 1/6 to 6/6
         Color fireColor = Color.Lerp(new Color(1f, 0.6f, 0.6f), Color.red, intensity);  // Soft red to full red
@@ -42,7 +51,7 @@ public class FireUIHandler : MonoBehaviour
         if (sr != null)
             sr.color = fireColor;
 
-        fireList[fireIndex] = fire.AddComponent<FireTracker>();
+        fireList[fireIndex] = fire.GetComponent<FireTrackerVariant>();
         fireIndex++;
     }
 
@@ -55,7 +64,7 @@ public class FireUIHandler : MonoBehaviour
         }
 
         fireIndex--;
-        fireList[fireIndex].ExtinguishFire();
+        fireList[fireIndex].ExtinguishFireVariant();
         fireList[fireIndex] = null;
     }
 }
