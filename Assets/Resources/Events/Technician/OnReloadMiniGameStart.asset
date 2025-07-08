@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: OnReloadMiniGameStart
   m_EditorClassIdentifier: 
   eventId: 7
+
   listeners: []
