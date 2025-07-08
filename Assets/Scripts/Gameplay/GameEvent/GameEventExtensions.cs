@@ -17,4 +17,5 @@ public static class GameEventExtensions
     {
         NetworkedEvents.Broadcast(e, null, data);
     }
+    
 }
