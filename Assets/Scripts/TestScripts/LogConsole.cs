@@ -19,4 +19,9 @@ public class LogConsole : MonoBehaviour
             Debug.Log("test");
         }
     }
+
+    public void TestMessage()
+    {
+        Debug.Log("EVENT RECIEVED");
+    }
 }

@@ -146,6 +146,10 @@ public class ShipProperties : MonoBehaviour, IStunnable
 
 
 
+    public bool HpAtCap()
+    {
+        return currentHp == maxHp * currentHpThrehsolds / maxHpThresholds || currentHp == 0;
+    }
     public int GetMaxHp()
     {
         return maxHp;
@@ -156,21 +160,25 @@ public class ShipProperties : MonoBehaviour, IStunnable
     }
     public bool DeductHp(int amount)
     {
-        if (currentHp >= amount)
+        if (currentHp >= 0)
         {
             onShipHpChange.RaiseNetworked(this, -amount);
             return true;
         }
         else
         {
-            currentHp = 0;
-            onShipHpReachZero.RaiseNetworked();
             return false;
         }
     }
 
-    public void AddHp(int amount) {
+    public bool AddHp(int amount)
+    {
+        if (currentHp == maxHp * currentHpThrehsolds / maxHpThresholds || currentHp == 0)
+        {
+            return false;
+        }
         onShipHpChange.RaiseNetworked(this, amount);
+        return true;
     }
     
 
@@ -183,12 +191,14 @@ public class ShipProperties : MonoBehaviour, IStunnable
         {
             currentHp = 0;
             Debug.Log("Lmao ded");
+            updateUI.Raise();
             onShipHpReachZero.RaiseNetworked(this, null);
 
         }
         else if (currentHp + amount >= currentMaxHp)
         {
             currentHp = currentMaxHp;
+            updateUI.Raise();
         }
         else
         {
@@ -196,7 +206,7 @@ public class ShipProperties : MonoBehaviour, IStunnable
             if (currentHp <= nextHpThreshold)
             {
                 currentHpThrehsolds -= 1;
-                Debug.Log(currentHpThrehsolds);
+                // Debug.Log(currentHpThrehsolds);
                 updateUI.Raise();
                 emergencyRepairsRequired.RaiseNetworked(this, null);
             }

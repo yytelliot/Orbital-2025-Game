@@ -589,7 +589,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 27.7218
+  orthographic size: 40.91
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1793,9 +1793,11 @@ GameObject:
   - component: {fileID: 1505957781}
   - component: {fileID: 1505957782}
   - component: {fileID: 1505957783}
+  - component: {fileID: 1505957788}
   - component: {fileID: 1505957786}
   - component: {fileID: 1505957785}
   - component: {fileID: 1505957787}
+  - component: {fileID: 1505957789}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Player
@@ -2128,6 +2130,47 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1505957788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505957775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bfd28f27d838324fb779fcd407991c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipProperties: {fileID: 1505957784}
+--- !u!114 &1505957789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505957775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: f8732d738338d7e4ea2ef878ddedb8d1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1505957788}
+        m_TargetAssemblyTypeName: ShipRegen, Assembly-CSharp
+        m_MethodName: StartRegen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1726498073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2300,7 +2343,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1505957777}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 27.7218
+    OrthographicSize: 40.91
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -2341,6 +2384,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2949514467627174162, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
+      propertyPath: gameEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: f8732d738338d7e4ea2ef878ddedb8d1, type: 2}
     - target: {fileID: 2949514467627174162, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
       propertyPath: response.m_PersistentCalls.m_Calls.Array.size
       value: 1
