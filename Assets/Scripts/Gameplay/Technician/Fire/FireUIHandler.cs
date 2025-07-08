@@ -12,14 +12,16 @@ public class FireUIHandler : MonoBehaviour
 
     private int fireIndex = 0;
     private FireTracker[] fireList;
+    public static FireUIHandler fireUIHandler; //Singleton pattern
+    
     //private GameObject[] fire;
 
-        private void Awake()
+    private void Awake()
     {
         // Ensure arrays are initialized with the right size
         int size = firePos.Length;
         fireList = new FireTracker[size];
-        
+
     }
 
     public void addFire()
@@ -32,7 +34,7 @@ public class FireUIHandler : MonoBehaviour
         }
 
         GameObject fire = Instantiate(firePrefab, firePos[fireIndex], Quaternion.identity);
-        
+
          // Gradually increase redness from fire 1 to fire 6
         float intensity = Mathf.Clamp01((fireIndex + 1) / 6f);  // 1/6 to 6/6
         Color fireColor = Color.Lerp(new Color(1f, 0.6f, 0.6f), Color.red, intensity);  // Soft red to full red
