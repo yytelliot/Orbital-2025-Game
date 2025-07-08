@@ -6915,7 +6915,7 @@ MonoBehaviour:
   firePrefab: {fileID: 5901088484593374493, guid: cca6115371df7a742bba0082bf4e6059, type: 3}
   xOffset: 0
   yOffset: -0.465
-  EmergencyRepairComplete: {fileID: 0}
+  EmergencyRepairComplete: {fileID: 11400000, guid: eef2c101769fe8546acefa7978d89ba1, type: 2}
 --- !u!4 &869145200
 Transform:
   m_ObjectHideFlags: 0
