@@ -11,16 +11,23 @@ public class FireUIHandler : MonoBehaviour
     [SerializeField] private Vector3[] firePos;
 
     private int fireIndex = 0;
-    private FireTracker[] fireList;
-    public static FireUIHandler fireUIHandler; //Singleton pattern
-    
-    //private GameObject[] fire;
+    private FireTrackerVariant[] fireList;
+    public static FireUIHandler Instance; //Singleton pattern
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         // Ensure arrays are initialized with the right size
         int size = firePos.Length;
-        fireList = new FireTracker[size];
+        fireList = new FireTrackerVariant[size];
 
     }
 
@@ -44,7 +51,7 @@ public class FireUIHandler : MonoBehaviour
         if (sr != null)
             sr.color = fireColor;
 
-        fireList[fireIndex] = fire.AddComponent<FireTracker>();
+        fireList[fireIndex] = fire.GetComponent<FireTrackerVariant>();
         fireIndex++;
     }
 
@@ -57,7 +64,7 @@ public class FireUIHandler : MonoBehaviour
         }
 
         fireIndex--;
-        fireList[fireIndex].ExtinguishFire();
+        fireList[fireIndex].ExtinguishFireVariant();
         fireList[fireIndex] = null;
     }
 }
