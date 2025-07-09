@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Events;
 
 
-public class ShipProperties : MonoBehaviour, IStunnable
+public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
 {
     public int maxHp;
     public int currentHp;
@@ -159,6 +160,11 @@ public class ShipProperties : MonoBehaviour, IStunnable
     {
         return currentHp;
     }
+
+    public void TakeDamage(int amount)
+    {
+        DeductHp(amount);
+    }
     public bool DeductHp(int amount)
     {
         if (currentHp >= 0)
@@ -171,6 +177,17 @@ public class ShipProperties : MonoBehaviour, IStunnable
             return false;
         }
     }
+
+    public void HandleProjectileHit(Component sender, object data)
+    {
+        ProjectileHitPayload payload = (ProjectileHitPayload)data;
+
+        if (payload.target == gameObject)
+        {
+            TakeDamage(payload.damage);
+        }
+    }
+
 
     public void RestoreHpThreshold()
     {

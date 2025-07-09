@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4777532058338760645}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 59.8, y: -24.4, z: -0.09487311}
+  m_LocalPosition: {x: 59.8, y: -24.4, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -174,3 +174,5 @@ MonoBehaviour:
   offset: 90
   speed: 50
   lifetime: 2
+  damage: 10
+  onProjectileHit: {fileID: 11400000, guid: 4fb6585086528934e9ac0a82d7b1a415, type: 2}
