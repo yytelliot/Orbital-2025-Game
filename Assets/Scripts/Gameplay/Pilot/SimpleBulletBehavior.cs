@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.Events;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,6 +13,10 @@ public class SimpleBulletBehavior : MonoBehaviour
     [Header("Bullet Properties")]
     public float speed = 200f;
     public float lifetime = 2f;
+    public int damage = 10;
+
+    [Header("GameEvents")]
+    public GameEvent onProjectileHit;
 
     Rigidbody2D rb;
 
@@ -33,5 +38,16 @@ public class SimpleBulletBehavior : MonoBehaviour
 
         // schedule self destruct
         Destroy(gameObject, lifetime);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            Debug.Log("hit!");
+            onProjectileHit.Raise(this, new ProjectileHitPayload { target = collision.gameObject, damage = damage });
+            Destroy(gameObject);
+        }
+    
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
-public class AlienCollision : MonoBehaviour
+public class AlienCollisionHandler : MonoBehaviour
 {
 
 
@@ -54,7 +54,7 @@ public class AlienCollision : MonoBehaviour
             }
             shipProperties.DeductHp(damage);
 
-            onPilotHitStun.RaiseNetworked(playerHitstun);
+            onPilotHitStun.RaiseNetworked(this, playerHitstun);
         }
     }
 }
