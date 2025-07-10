@@ -254,7 +254,7 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
             if (currentHp <= nextHpThreshold)
             {
                 currentHpThrehsolds -= 1;
-                // Debug.Log(currentHpThrehsolds);
+                Debug.Log(currentHpThrehsolds);
                 updateUI.Raise();
                 emergencyRepairsRequired.RaiseNetworked(this, null);
             }
