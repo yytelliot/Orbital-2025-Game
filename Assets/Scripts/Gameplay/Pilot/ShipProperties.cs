@@ -7,12 +7,18 @@ using Game.Events;
 
 public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
 {
+
+    [Header("Ship Hp Attributes")]
     public int maxHp;
     public int currentHp;
     public int maxHpThresholds = 4;
     public int currentHpThrehsolds = 4;
+
+    [Header("Ship Ammo Attributes")]
     public int maxAmmoCount = 100;
     public int currentAmmoCount;
+
+    [Header("Ship Stun Attributes")]
     public float defaultStunedTime = 0.5f;
     private bool isStunned = false;
 
