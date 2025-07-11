@@ -10,6 +10,7 @@ TagManager:
   - Ship
   - Walkable
   - Enemy
+  - Ship Magnet Collider
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Pilot Hazard
   - Pilot Enemies
   - Pilot
-  - 
+  - Pickups
   - 
   - 
   - 

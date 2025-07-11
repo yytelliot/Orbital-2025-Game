@@ -5,7 +5,7 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Healthbar : MonoBehaviour
+public class HealthBar : MonoBehaviour
 {
     public Slider slider;
 
@@ -17,7 +17,7 @@ public class Healthbar : MonoBehaviour
         shipProperties = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipProperties>();
     }
 
-    public void SetHealth(float health)
+    public void SetHealthSlider(float health)
     {
         slider.value = health;
     }
@@ -31,7 +31,7 @@ public class Healthbar : MonoBehaviour
     {
         float currentHp = shipProperties.GetCurrentHp();
         float maxHp = shipProperties.GetMaxHp();
-        SetHealth(currentHp/maxHp);
+        SetHealthSlider(currentHp/maxHp);
 
 
     }
