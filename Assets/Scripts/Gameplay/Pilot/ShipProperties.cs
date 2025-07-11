@@ -256,7 +256,7 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
         // if hp restore will be abover cap, cap it at max hp        
         else
         {
-            int oldThresholds = currentHpThrehsolds;
+            int oldThresholds = Mathf.CeilToInt((float)currentHp / maxHp * maxHpThresholds);
 
             currentHp += amount;
 
@@ -266,7 +266,7 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
             // 4) if you actually crossed downward into a lower band, do the emergency
             if (newThresholds < oldThresholds)
             {
-                currentHpThrehsolds = newThresholds;
+                currentHpThrehsolds-- ;
                 emergencyRepairsRequired.RaiseNetworked(this, null);
             }
 
