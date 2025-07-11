@@ -9,6 +9,7 @@ TagManager:
   - Stopper
   - Ship
   - Walkable
+  - Enemy
   layers:
   - Default
   - TransparentFX

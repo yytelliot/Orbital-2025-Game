@@ -11,12 +11,14 @@ GameObject:
   - component: {fileID: 5920690414757231856}
   - component: {fileID: 6617286068115010114}
   - component: {fileID: 9019293547774478683}
+  - component: {fileID: 6027161139145181509}
   - component: {fileID: 8728797847190681313}
-  - component: {fileID: 4558562614430649065}
-  - component: {fileID: 5301973433515346642}
+  - component: {fileID: 5793977891324644681}
+  - component: {fileID: 899735675800980774}
+  - component: {fileID: 3539943816883856394}
   m_Layer: 10
   m_Name: Seeker
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,38 +117,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8728797847190681313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8975781882733378634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31087a2202f381478dd15fa22e01a22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: 90
-  moveSpeed: 3
-  stopThreshold: 0.2
---- !u!114 &4558562614430649065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8975781882733378634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0774876b0315584ab1e99910b8c66a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerKbForce: 50
-  selfKbForce: 10
-  playerHitstun: 0.5
-  onPilotHitStun: {fileID: 11400000, guid: ad4b903cd74b2ac4fbca9aa20c600fc7, type: 2}
---- !u!58 &5301973433515346642
+--- !u!58 &6027161139145181509
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,6 +149,80 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.01}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.12
+--- !u!114 &8728797847190681313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8975781882733378634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31087a2202f381478dd15fa22e01a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 90
+  moveSpeed: 3
+  stopThreshold: 0.2
+--- !u!114 &5793977891324644681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8975781882733378634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0be696f1751ed84b9b010038f1d3881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 10
+  currentHp: 0
+--- !u!114 &899735675800980774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8975781882733378634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0774876b0315584ab1e99910b8c66a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerKbForce: 20
+  selfKbForce: 10
+  playerHitstun: 0.5
+  damage: 10
+  onPilotHitStun: {fileID: 11400000, guid: ad4b903cd74b2ac4fbca9aa20c600fc7, type: 2}
+--- !u!114 &3539943816883856394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8975781882733378634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 4fb6585086528934e9ac0a82d7b1a415, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5793977891324644681}
+        m_TargetAssemblyTypeName: AlienHpHandler, Assembly-CSharp
+        m_MethodName: HandleProjectileHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

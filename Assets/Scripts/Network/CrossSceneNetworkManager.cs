@@ -41,12 +41,17 @@ public class CrossSceneNetworkManager : MonoBehaviourPunCallbacks
     public void SendNetworkEvent(GameEvent gameEvent, Component sender, object data = null)
     {
         int evtId = gameEvent.eventId;
-        PhotonView pv = sender.GetComponent<PhotonView>();
 
-        // if theres a photon view id send it, else default to 0 (null)
-        int senderViewId = pv != null
-            ? pv.ViewID
-            : 0;
+        // default to “no sender”
+        int senderViewId = 0;
+
+        if (sender != null)
+        {
+            var pv = sender.GetComponent<PhotonView>();
+            if (pv != null)
+                senderViewId = pv.ViewID;
+            // else: you passed a Component that isn’t networked
+        }
 
         photonView.RPC(nameof(
             RPC_RaiseEvent),
