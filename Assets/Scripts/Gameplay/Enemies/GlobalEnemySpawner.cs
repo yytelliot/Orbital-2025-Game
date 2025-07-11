@@ -18,6 +18,9 @@ public class GlobalEnemySpawner : MonoBehaviour
     private float minSpawnDistance = 40f;
     [SerializeField]
     private float maxSpawnDistance = 60f;
+    [SerializeField]
+    private int maxEnemies = 20;
+
 
 
 
@@ -41,23 +44,24 @@ public class GlobalEnemySpawner : MonoBehaviour
         while (spawnerEnabled)
         {
             yield return new WaitForSeconds(spawnInterval);
-            if (Random.value <= spawnChance)
+            if (Random.value <= spawnChance && GameObject.FindGameObjectsWithTag("Enemy").Length < maxEnemies)
             {
-            // pick a random angle
-            float angle    = Random.Range(0f, Mathf.PI * 2f);
-            // pick a random radius between min and max
-            float radius   = Random.Range(minSpawnDistance, maxSpawnDistance);
-            // convert to cartesian
-            Vector3 offset = new Vector3(
-                Mathf.Cos(angle) * radius,
-                Mathf.Sin(angle) * radius,
-                0f
-            );
+                // pick a random angle
+                float angle = Random.Range(0f, Mathf.PI * 2f);
+                // pick a random radius between min and max
+                float radius = Random.Range(minSpawnDistance, maxSpawnDistance);
+                // convert to cartesian
+                Vector3 offset = new Vector3(
+                    Mathf.Cos(angle) * radius,
+                    Mathf.Sin(angle) * radius,
+                    0f
+                );
 
-            Instantiate(enemyPrefab,
-                        playerPos.position + offset,
-                        Quaternion.identity);
-        }
+                Instantiate(enemyPrefab,
+                            playerPos.position + offset,
+                            Quaternion.identity);
+
+            }
         }
         
     }
