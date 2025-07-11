@@ -10,6 +10,7 @@ public class ShipRegen : MonoBehaviour
     public float timePerTick = 2f;
     private Coroutine regenCoroutine = null;
 
+
     // Start is called before the first frame update
     void Start()
     {
