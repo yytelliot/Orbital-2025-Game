@@ -17,6 +17,11 @@ public class FireExtinguishMinigame : MonoBehaviour
     public float timeToWin = 10f;
     private float timeInSafeZone = 0f;
 
+    [Header("Fire Visual")]
+    public Image fireImage;
+    public Vector3 fireStartScale = Vector3.one;
+    public Vector3 fireEndScale = Vector3.zero;
+
     private RectTransform safeZoneRect;
     private float safeZoneMin;
 
@@ -38,7 +43,7 @@ public class FireExtinguishMinigame : MonoBehaviour
         HandlePlayerInput();
         MoveSafeZone();
         CheckIfInSafeZone();
-
+        UpdateFireVisual();
     }
 
     private void HandlePlayerInput()
@@ -99,12 +104,17 @@ public class FireExtinguishMinigame : MonoBehaviour
         safeZoneRect.sizeDelta = new Vector2(pixelWidth, 0);
         safeZoneRect.anchoredPosition = new Vector2(pixelLeft, 0);
     }
+
+    private void UpdateFireVisual()
+    {
+        float progress = Mathf.Clamp01(timeInSafeZone / timeToWin);
+        fireImage.rectTransform.localScale = Vector3.Lerp(fireStartScale, fireEndScale, progress);
+    }
     
-        void CheckIfInSafeZone()
+    private void CheckIfInSafeZone()
     {
         if (playerSlider.value >= safeZoneMin && playerSlider.value <= safeZoneMin + safeZoneWidth)
         {
-            Debug.Log("In");
             timeInSafeZone += Time.deltaTime;
         }
 
