@@ -6,12 +6,15 @@ public class FireTracker : MonoBehaviour, Interactable
 {
     private Vector3 position;
     private System.Action onDestroyed;
+    private bool isExtinguished = false;
 
     [SerializeField] private Animator animator;
 
     public void Interact()
     {
-        ExtinguishFire();
+        if (isExtinguished) return;
+        FireExtinguishMinigame.Instance.StartExtinguishingMinigame(this);
+
     }
 
     public void Init(Vector3 pos, System.Action onDestroyed)
@@ -29,6 +32,7 @@ public class FireTracker : MonoBehaviour, Interactable
 
     public void ExtinguishFire()
     {
+        isExtinguished = true;
         animator.SetTrigger("Extinguish");
         StartCoroutine(DestroyAfterAnimation());
         
