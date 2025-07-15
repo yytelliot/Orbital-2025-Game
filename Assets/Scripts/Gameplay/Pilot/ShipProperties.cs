@@ -228,36 +228,59 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
         onShipHpChange.RaiseNetworked(this, amount);
         return true;
     }
-    
+
 
     public void UpdateHp(Component sender, object data)
     {
         int currentMaxHp = maxHp * currentHpThrehsolds / maxHpThresholds;
-        int nextHpThreshold = maxHp * (currentHpThrehsolds - 1) / maxHpThresholds;
         int amount = (int)data;
+
+        // if hp is zero, die
         if (currentHp + amount <= 0 || currentMaxHp <= 0)
         {
             currentHp = 0;
             Debug.Log("Lmao ded");
             updateUI.Raise();
             onShipHpReachZero.RaiseNetworked(this, null);
+            return;
+        }
 
-        }
-        else if (currentHp + amount >= currentMaxHp)
+        if (amount >= 0)
         {
-            currentHp = currentMaxHp;
+            if (currentHp + amount >= currentMaxHp)
+            {
+                currentHp = currentMaxHp;
+                updateUI.Raise();
+                return;
+            }
+            currentHp += amount;
             updateUI.Raise();
+            return;
         }
+
+
+        // if hp restore will be abover cap, cap it at max hp        
         else
         {
+            int oldThresholds = currentHpThrehsolds;
+
             currentHp += amount;
-            if (currentHp <= nextHpThreshold)
+
+            int newThresholds = Mathf.CeilToInt((float)currentHp / maxHp * maxHpThresholds);
+            newThresholds = Mathf.Clamp(newThresholds, 0, maxHpThresholds);
+
+            // 4) if you actually crossed downward into a lower band, do the emergency
+            if (newThresholds < oldThresholds)
             {
+
                 currentHpThrehsolds -= 1;
                 Debug.Log(currentHpThrehsolds);
                 updateUI.Raise();
+
                 emergencyRepairsRequired.RaiseNetworked(this, null);
             }
+
+            updateUI.Raise();
         }
 
         updateUI.Raise();
