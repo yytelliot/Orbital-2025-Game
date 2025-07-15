@@ -35,26 +35,28 @@ public class AlienCollisionHandler : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        var intangible = GetComponent<IIntangible>();
+        if (!collision.collider.CompareTag("Player")) return;
+        if (intangible != null && intangible.isIntangible) return;
+        
+        Rigidbody2D playerRb = collision.collider.attachedRigidbody;
+
+        //Get force vectors
+        Vector2 enemyToShip = (playerRb.position - rb.position).normalized;
+        Vector2 shipToEnemy = (rb.position - playerRb.position).normalized;
+
+        // Apply force
+        playerRb.AddForce(enemyToShip * playerKbForce, ForceMode2D.Impulse);
+        rb.AddForce(shipToEnemy * selfKbForce, ForceMode2D.Impulse);
+
+        var stunnable = GetComponent<IStunnable>();
+        if (stunnable != null)
         {
-            Rigidbody2D playerRb = collision.collider.attachedRigidbody;
-
-            //Get force vectors
-            Vector2 enemyToShip = (playerRb.position - rb.position).normalized;
-            Vector2 shipToEnemy = (rb.position - playerRb.position).normalized;
-
-            // Apply force
-            playerRb.AddForce(enemyToShip * playerKbForce, ForceMode2D.Impulse);
-            rb.AddForce(shipToEnemy * selfKbForce, ForceMode2D.Impulse);
-
-            var stunnable = GetComponent<IStunnable>();
-            if (stunnable != null)
-            {
-                stunnable.StunUntilStop();
-            }
-            shipProperties.DeductHp(damage);
-
-            onPilotHitStun.RaiseNetworked(this, playerHitstun);
+            stunnable.StunUntilStop();
         }
+        shipProperties.DeductHp(damage);
+
+        onPilotHitStun.RaiseNetworked(this, playerHitstun);
+        
     }
 }

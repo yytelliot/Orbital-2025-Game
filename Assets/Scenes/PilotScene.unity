@@ -359,6 +359,9 @@ GameObject:
   - component: {fileID: 119458899}
   - component: {fileID: 119458898}
   - component: {fileID: 119458897}
+  - component: {fileID: 119458902}
+  - component: {fileID: 119458901}
+  - component: {fileID: 119458900}
   m_Layer: 0
   m_Name: Lurker
   m_TagString: Untagged
@@ -434,7 +437,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 445bfe51106c6964e8bce26a393ca6d7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 825c50cb3a14a5b4481d84c9c9629bf9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -460,6 +463,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &119458900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119458896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0be696f1751ed84b9b010038f1d3881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 50
+  currentHp: 0
+  pickupPrefab: {fileID: 0}
+  dropChance: 1
+--- !u!114 &119458901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119458896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0774876b0315584ab1e99910b8c66a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerKbForce: 5
+  selfKbForce: 2
+  playerHitstun: 0.5
+  damage: 10
+  onPilotHitStun: {fileID: 11400000, guid: ad4b903cd74b2ac4fbca9aa20c600fc7, type: 2}
+--- !u!58 &119458902
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119458896}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.13
 --- !u!1 &145905586
 GameObject:
   m_ObjectHideFlags: 0

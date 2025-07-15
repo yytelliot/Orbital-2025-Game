@@ -7,7 +7,7 @@ public class AlienHpHandler : MonoBehaviour, ITakeDamage
 {
     [Header("Stats")]
     public int maxHp;
-    public int currentHp;
+    private int currentHp;
 
     [Header("Drops")]
     [Tooltip("Prefab of the pickup to spawn upon death. Leave empty if no drops")]
@@ -25,7 +25,14 @@ public class AlienHpHandler : MonoBehaviour, ITakeDamage
         ProjectileHitPayload payload = (ProjectileHitPayload)data;
         if (payload.target == gameObject)
         {
+            var intangible = GetComponent<IIntangible>();
+            
+            if (intangible != null && intangible.isIntangible) return;
+            
             TakeDamage(payload.damage);
+            
+
+            
         }
     }
 
