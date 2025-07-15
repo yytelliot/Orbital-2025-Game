@@ -13921,6 +13921,7 @@ MonoBehaviour:
   playerSlider: {fileID: 1397644225}
   safeZoneImage: {fileID: 1143636440}
   minigame: {fileID: 242327646}
+  player: {fileID: 678021970}
   safeZoneWidth: 0.2
   timeToWin: 5
   maxTime: 12

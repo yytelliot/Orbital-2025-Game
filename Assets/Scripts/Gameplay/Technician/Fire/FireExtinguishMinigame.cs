@@ -9,6 +9,7 @@ public class FireExtinguishMinigame : MonoBehaviour
     public Slider playerSlider;
     public Image safeZoneImage;
     public GameObject minigame;
+    public PlayerController player;
 
     [Header("Safe Zone Settings")]
     [Range(0f, 1f)] public float safeZoneWidth = 0.2f;
@@ -61,6 +62,7 @@ public class FireExtinguishMinigame : MonoBehaviour
     public void StartExtinguishingMinigame(FireTracker fire)
     {
         minigame.SetActive(true);
+        player.SetCanMove(false);
 
         //Game Setup
         timeInSafeZone = 0f;
@@ -100,6 +102,7 @@ public class FireExtinguishMinigame : MonoBehaviour
         }
 
         minigame.SetActive(false);
+        player.SetCanMove(true);
         currentFire = null;
 
         
