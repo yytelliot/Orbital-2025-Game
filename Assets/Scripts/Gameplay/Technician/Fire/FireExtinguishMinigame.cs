@@ -104,6 +104,7 @@ public class FireExtinguishMinigame : MonoBehaviour
     {
         if (playerSlider.value >= safeZoneMin && playerSlider.value <= safeZoneMin + safeZoneWidth)
         {
+            Debug.Log("In");
             timeInSafeZone += Time.deltaTime;
         }
 
