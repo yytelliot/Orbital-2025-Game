@@ -9,6 +9,7 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
 
     [Header("Sprite Info")]
     public float offset = 90;
+    private SpriteRenderer sr;
 
     [Header("Enemy Info")]
     public float moveSpeed;
@@ -31,6 +32,7 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
         shipProperties = player.GetComponent<ShipProperties>();
 
@@ -47,16 +49,64 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
         
     }
 
+    void Start()
+    {
+        StartCoroutine(FadeIn(2));
+    }
+
     public IEnumerator LifetimeCoroutine(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         Despawn();
     }
 
+    IEnumerator FadeIn(float duration, System.Action onComplete = null)
+    {
+        float elapsed = 0f;
+        Color c = sr.color;
+        float startAlpha = c.a == 1
+            ? 0
+            : c.a;
+        float endAlpha = 1f; // Fully visible
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            c.a = Mathf.Lerp(startAlpha, endAlpha, t);
+            sr.color = c;
+            yield return null;
+        }
+
+        c.a = endAlpha;
+        sr.color = c;
+        onComplete?.Invoke();
+    }
+
+    public IEnumerator FadeOut(float duration, System.Action onComplete = null)
+    {
+        float elapsed = 0f;
+        Color c = sr.color;
+        float startAlpha = c.a;
+        float endAlpha = 0.2f; // Or 0f for fully invisible
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            c.a = Mathf.Lerp(startAlpha, endAlpha, t);
+            sr.color = c;
+            yield return null;
+        }
+
+        c.a = endAlpha;
+        sr.color = c;
+        onComplete?.Invoke();
+    }
     private void Despawn()
     {
         // despawn animation
-        Destroy(gameObject);
+        StartCoroutine(FadeOut(1, () =>  Destroy(gameObject) ) );
     }
 
     public IEnumerator StunUntilStopCoroutine()
