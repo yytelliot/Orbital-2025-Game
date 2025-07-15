@@ -4,6 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - readyToJump: {fileID: 11400000, guid: ecfbc97fa25ff49479b88a003d5ef5e0, type: 2}
   - updateUI: {fileID: 11400000, guid: 2f5ce04b7db80744a98927c82a980759, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

@@ -165,8 +165,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 90
-  moveSpeed: 3
+  moveSpeed: 20
   stopThreshold: 0.2
+  lifetime: 10
 --- !u!114 &5793977891324644681
 MonoBehaviour:
   m_ObjectHideFlags: 0

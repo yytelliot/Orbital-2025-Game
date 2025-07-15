@@ -10,10 +10,14 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
     [Header("Sprite Info")]
     public float offset = 90;
 
-    public float moveSpeed = 3f;
+    [Header("Enemy Info")]
+    public float moveSpeed;
 
     [Tooltip("When stunned, can only move once the velocity is lower than stopThreshold")]
     public float stopThreshold = 0.2f;
+
+    [Tooltip("How long before despawn")]
+    public float lifetime = 20;
 
     private GameObject player;
     private Transform playerTransform;
@@ -38,7 +42,21 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
         {
             Debug.LogError("SeekerBehavior: Player Not Found in scene");
         }
+
+        StartCoroutine(LifetimeCoroutine(lifetime));
         
+    }
+
+    public IEnumerator LifetimeCoroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Despawn();
+    }
+
+    private void Despawn()
+    {
+        // despawn animation
+        Destroy(gameObject);
     }
 
     public IEnumerator StunUntilStopCoroutine()
