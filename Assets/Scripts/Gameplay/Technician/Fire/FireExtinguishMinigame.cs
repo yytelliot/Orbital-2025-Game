@@ -8,19 +8,23 @@ public class FireExtinguishMinigame : MonoBehaviour
     [Header("References")]
     public Slider playerSlider;
     public Image safeZoneImage;
+    public GameObject minigame;
 
     [Header("Safe Zone Settings")]
     [Range(0f, 1f)] public float safeZoneWidth = 0.2f;
     //public float safeZoneMoveSpeed = 0.3f; // units per second
 
     [Header("Completion")]
-    public float timeToWin = 10f;
+    public float timeToWin = 5f;
+    public float maxTime = 12f;
     private float timeInSafeZone = 0f;
 
     [Header("Fire Visual")]
     public Image fireImage;
     public Vector3 fireStartScale = Vector3.one;
     public Vector3 fireEndScale = Vector3.zero;
+
+    public static FireExtinguishMinigame Instance; //Singleton pattern
 
     private RectTransform safeZoneRect;
     private float safeZoneMin;
@@ -31,20 +35,77 @@ public class FireExtinguishMinigame : MonoBehaviour
     private float safeZonePauseTimer;
     private float currentSafeZonePos;
     private float startSafeZonePos;
+
+    private bool completed;
+    private FireTracker currentFire;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         safeZoneRect = safeZoneImage.GetComponent<RectTransform>();
-        MoveSafeZone(); // initialize       
+        //MoveSafeZone(); // initialize       
     }
 
 
-    void Update()
+    public void StartExtinguishingMinigame(FireTracker fire)
     {
-        HandlePlayerInput();
-        MoveSafeZone();
-        CheckIfInSafeZone();
-        UpdateFireVisual();
+        minigame.SetActive(true);
+
+        //Game Setup
+        timeInSafeZone = 0f;
+        currentFire = fire;
+        currentSafeZonePos = Random.Range(0f, 1f - safeZoneWidth);
+        safeZoneMoveTimer = 0;
+        safeZonePauseTimer = 0;
+        completed = false;
+
+        StartCoroutine(GameLoop());
     }
+
+    IEnumerator GameLoop()
+    {
+        float totalElapsedTime = 0f;
+
+        while (!completed)
+        {
+            HandlePlayerInput();
+            MoveSafeZone();
+            CheckIfInSafeZone();
+            UpdateFireVisual();
+
+            totalElapsedTime += Time.deltaTime;
+
+            if (totalElapsedTime >= maxTime)
+            {
+                break;
+            }
+
+            yield return null;
+        }
+
+        if (currentFire != null && timeInSafeZone >= timeToWin)
+        {
+            currentFire.ExtinguishFire();
+        }
+
+        minigame.SetActive(false);
+        currentFire = null;
+
+        
+    }
+
+
 
     private void HandlePlayerInput()
     {
@@ -73,7 +134,7 @@ public class FireExtinguishMinigame : MonoBehaviour
             //float elapsed = safeZoneMoveDuration - safeZoneMoveTimer; 
             float t = 1 - safeZoneMoveTimer / safeZoneMoveDuration; //represents movement from 0 to 1, intially 0, ending at 1 when timer is at 0.
             t = Mathf.SmoothStep(0f, 1f, t); // smoother acceleration and deceleration
-            currentSafeZonePos = Mathf.Lerp(startSafeZonePos , safeZoneTargetMin, t); //interpolation, initial at currentSafeZonePos (0), final at safeZoneTargetMin(1)
+            currentSafeZonePos = Mathf.Lerp(startSafeZonePos, safeZoneTargetMin, t); //interpolation, initial at currentSafeZonePos (0), final at safeZoneTargetMin(1)
 
             safeZoneMoveTimer -= Time.deltaTime;
 
@@ -90,9 +151,12 @@ public class FireExtinguishMinigame : MonoBehaviour
         }
 
         safeZoneMin = currentSafeZonePos;
+        UpdateSafeZoneUI(); // Update visual safe zone
 
-        
-        // Update visual safe zone
+    }
+
+    private void UpdateSafeZoneUI()         
+    {
         float totalWidth = ((RectTransform)playerSlider.fillRect.parent).rect.width;
         float pixelWidth = totalWidth * safeZoneWidth;
         float pixelLeft = totalWidth * safeZoneMin;
@@ -102,7 +166,7 @@ public class FireExtinguishMinigame : MonoBehaviour
         safeZoneRect.anchorMax = new Vector2(0, 1);
         safeZoneRect.pivot = new Vector2(0, 0.5f);
         safeZoneRect.sizeDelta = new Vector2(pixelWidth, 0);
-        safeZoneRect.anchoredPosition = new Vector2(pixelLeft, 0);
+        safeZoneRect.anchoredPosition = new Vector2(pixelLeft, 0);        
     }
 
     private void UpdateFireVisual()
@@ -121,7 +185,8 @@ public class FireExtinguishMinigame : MonoBehaviour
         if (timeInSafeZone >= timeToWin)
         {
             Debug.Log("Minigame Complete!");
-            // Trigger success event, close UI, etc.
+            completed = true;
+            return;
         }
     }
 }
