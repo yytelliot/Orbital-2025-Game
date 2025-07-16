@@ -6,19 +6,26 @@ using Unity.Mathematics;
 
 #if UNITY_EDITOR
 using UnityEditor;
+using UnityEditor.EditorTools;
+
 #endif
 using UnityEngine;
 
 public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
 {
     public float revealRadius = 5f;
+    public float aggroRadius = 100f;
     public float tangibleDuration = 3f;
-    public float shootInterval = 3f;
     public bool isIntangible { get; private set; } = true;
     public bool isStunned { get; private set; } = false;
+    public float despawnDistance = 200f;
     public GameObject projectilePrefab;
 
     [Header("Projectile Pattern")]
+    [Tooltip("Time between each shot in seconds")]
+    public float shootInterval = 3f;
+    [Tooltip("Bullet lifetime in seconds")]
+    public float bulletLifetime = 5f;
     [Tooltip("Number of bullets per spread")]
     public int numBullets = 3;
     [Tooltip("Spread of bullets in degrees")]
@@ -51,6 +58,11 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
     {
         float dist = Vector2.Distance(player.position, transform.position);
 
+        if (player != null && dist >= despawnDistance)
+        {
+            Destroy(gameObject);
+        }
+
         if (isIntangible && dist < revealRadius)
         {
             // Start/restart the coroutine
@@ -62,7 +74,7 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
 
         // Shooting logic
         shootTimer -= Time.deltaTime;
-        if (shootTimer <= 0f && !isStunned)
+        if (shootTimer <= 0f && !isStunned && dist < aggroRadius)
         {
             ShootSpreadAtPlayer();
             shootTimer = shootInterval;
@@ -123,7 +135,7 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
         var bullet = Instantiate(projectilePrefab, transform.position, Quaternion.LookRotation(Vector3.forward, dir));
 
         var bb = bullet.GetComponent<SimpleEnemyBulletBehavior>();
-        bb.Initialize(dir, angle);
+        bb.Initialize(dir, angle, bulletLifetime);
     }
 
     void ShootSpreadAtPlayer()
@@ -147,7 +159,7 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
             var bullet = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
             var bb = bullet.GetComponent<SimpleEnemyBulletBehavior>();
-            bb.Initialize(shootDir, shootAngle); // Pass the new direction and angle
+            bb.Initialize(shootDir, shootAngle, bulletLifetime); // Pass the new direction and angle
         }
     }
 

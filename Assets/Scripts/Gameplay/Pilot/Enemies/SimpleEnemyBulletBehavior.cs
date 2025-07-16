@@ -28,7 +28,7 @@ public class SimpleEnemyBulletBehavior : MonoBehaviour
     }
 
     // Initialize initializes the bullet with the given parameters (direction, angle, speed multiplier)
-    public void Initialize(Vector2 direction, float angle, float speedMult = 1f)
+    public void Initialize(Vector2 direction, float angle, float lifetime, float speedMult = 1f)
     {
         // set initial rotation
         transform.rotation = Quaternion.Euler(0, 0, angle - offset);

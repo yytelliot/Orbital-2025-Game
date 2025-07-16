@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5793977891324644681}
   - component: {fileID: 899735675800980774}
   - component: {fileID: 3539943816883856394}
+  - component: {fileID: 490404838197425546}
   m_Layer: 10
   m_Name: Seeker
   m_TagString: Enemy
@@ -181,7 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 10
-  currentHp: 0
   pickupPrefab: {fileID: 5882496880087046223, guid: fc8c3b68ab0586c44b59da419c033169, type: 3}
   dropChance: 1
 --- !u!114 &899735675800980774
@@ -200,6 +200,7 @@ MonoBehaviour:
   selfKbForce: 10
   playerHitstun: 0.5
   damage: 10
+  freezeRotation: 0
   onPilotHitStun: {fileID: 11400000, guid: ad4b903cd74b2ac4fbca9aa20c600fc7, type: 2}
 --- !u!114 &3539943816883856394
 MonoBehaviour:
@@ -229,3 +230,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &490404838197425546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8975781882733378634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e50dbcbab25774f824cfb74e7dff8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
