@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShipEnergyHandler : MonoBehaviour
 {
+    public GameEvent readyToJump;
 
     public int energyToNextLevel = 25;
     public int currentEnergy = 0;
@@ -18,6 +19,8 @@ public class ShipEnergyHandler : MonoBehaviour
         if (currentEnergy >= energyToNextLevel)
         {
             currentEnergy = energyToNextLevel;
+            readyToJump.RaiseNetworked(this, null);
+
             // raise activatie galaxy jump event to technician side
         }
         updateUI.Raise();
