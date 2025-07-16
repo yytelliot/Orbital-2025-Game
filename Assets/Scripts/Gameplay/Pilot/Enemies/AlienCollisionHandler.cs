@@ -18,6 +18,8 @@ public class AlienCollisionHandler : MonoBehaviour
 
     [Tooltip("Damage Dealt on Collision")]
     public int damage = 10;
+    [Tooltip("Freeze Rotation")]
+    public bool freezeRotation = false;
 
     [Header("Events")]
     public GameEvent onPilotHitStun;
@@ -29,6 +31,10 @@ public class AlienCollisionHandler : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (freezeRotation)
+        {
+            rb.freezeRotation = true;
+        }
         player = GameObject.FindGameObjectWithTag("Player");
         shipProperties = player.GetComponent<ShipProperties>();
     }

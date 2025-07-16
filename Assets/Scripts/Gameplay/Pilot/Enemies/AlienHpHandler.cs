@@ -39,6 +39,7 @@ public class AlienHpHandler : MonoBehaviour, ITakeDamage
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
+        Debug.Log(currentHp);
         if (currentHp <= 0)
         {
             Die();

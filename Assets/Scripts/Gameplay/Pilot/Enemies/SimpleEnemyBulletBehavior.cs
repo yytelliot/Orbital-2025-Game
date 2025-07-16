@@ -5,14 +5,14 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class SimpleBulletBehavior : MonoBehaviour
+public class SimpleEnemyBulletBehavior : MonoBehaviour
 {
     [Header("Object Properties")]
     public float offset = 90f;
 
     [Header("Bullet Properties")]
-    public float speed = 200f;
-    public float lifetime = 2f;
+    public float speed = 100f;
+    public float lifetime = 3f;
     public int damage = 10;
 
     [Header("GameEvents")]
@@ -42,9 +42,9 @@ public class SimpleBulletBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (collision.CompareTag("Player"))
         {
-            Debug.Log("hit!");
+            Debug.Log("Player hit!");
             onProjectileHit.Raise(this, new ProjectileHitPayload { target = collision.gameObject, damage = damage });
             Destroy(gameObject);
         }

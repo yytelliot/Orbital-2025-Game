@@ -23,10 +23,10 @@ TagManager:
   - Interactable
   - Minigames
   - Hazard
-  - Enemies
+  - Enemy
   - Pilot
   - Pickups
-  - Intangible
+  - IntangibleEnemy
   - 
   - 
   - 
