@@ -1955,7 +1955,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -2209,7 +2209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 284b0e91905805c448f5ea577dd8d871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  readyToJump: {fileID: 0}
+  readyToJump: {fileID: 11400000, guid: ecfbc97fa25ff49479b88a003d5ef5e0, type: 2}
   energyToNextLevel: 25
   currentEnergy: 0
   updateUI: {fileID: 11400000, guid: 2f5ce04b7db80744a98927c82a980759, type: 2}
