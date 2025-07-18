@@ -17,8 +17,13 @@ public class EnergyPickup : MonoBehaviour
 
         var shipEnergyHandler = collider.GetComponent<ShipEnergyHandler>();
         if (shipEnergyHandler != null)
-             shipEnergyHandler.AddEnergy(amount);
-             
+            shipEnergyHandler.AddEnergy(amount);
+
         Destroy(gameObject);
+    }
+
+    public void Initialize(int n)
+    {
+        amount = n;
     }
 }

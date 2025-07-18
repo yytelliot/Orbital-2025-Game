@@ -493,7 +493,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 519420031}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1801,6 +1801,7 @@ GameObject:
   - component: {fileID: 1505957785}
   - component: {fileID: 1505957787}
   - component: {fileID: 1505957789}
+  - component: {fileID: 1505957792}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Player
@@ -1954,7 +1955,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -2040,8 +2041,9 @@ MonoBehaviour:
   maxHpThresholds: 4
   currentHpThrehsolds: 4
   maxAmmoCount: 100
-  currentAmmoCount: 20
+  currentAmmoCount: 100
   defaultStunedTime: 0.5
+  onHitInvulTime: 3
   speedToRegainControl: 1
   onAmmoCountChange: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
   onOutOfAmmo: {fileID: 11400000, guid: 2adefaed1fc83024cb83ecc0b5a7cce2, type: 2}
@@ -2191,7 +2193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magnetCollider: {fileID: 1810685453}
-  magnetForce: 20
+  magnetForce: 100
   pickupLayer:
     serializedVersion: 2
     m_Bits: 4096
@@ -2207,9 +2209,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 284b0e91905805c448f5ea577dd8d871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  readyToJump: {fileID: 11400000, guid: ecfbc97fa25ff49479b88a003d5ef5e0, type: 2}
   energyToNextLevel: 25
   currentEnergy: 0
   updateUI: {fileID: 11400000, guid: 2f5ce04b7db80744a98927c82a980759, type: 2}
+--- !u!114 &1505957792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505957775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 4fb6585086528934e9ac0a82d7b1a415, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1505957784}
+        m_TargetAssemblyTypeName: ShipProperties, Assembly-CSharp
+        m_MethodName: HandleProjectileHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1565148505
 GameObject:
   m_ObjectHideFlags: 0
@@ -2601,7 +2632,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 6
 --- !u!4 &1810685454
 Transform:
   m_ObjectHideFlags: 0
@@ -2689,6 +2720,67 @@ Transform:
   - {fileID: 883828463}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &91810134645637668
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 806573345378669415, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
+      propertyPath: m_Name
+      value: Lurker
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767867552066592699, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767867552066592699, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767867552066592699, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.887156
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767867552066592699, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767867552066592699, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767867552066592699, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767867552066592699, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767867552066592699, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767867552066592699, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767867552066592699, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751112372294236305, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
+      propertyPath: despawnDistance
+      value: 200
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
 --- !u!1001 &3660977680258322164
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2701,6 +2793,10 @@ PrefabInstance:
       propertyPath: gameEvent
       value: 
       objectReference: {fileID: 11400000, guid: f8732d738338d7e4ea2ef878ddedb8d1, type: 2}
+    - target: {fileID: 2949514467627174162, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2949514467627174162, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
       propertyPath: response.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -2813,6 +2909,10 @@ PrefabInstance:
       propertyPath: spawnInterval
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
+      propertyPath: spawnerEnabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3076174973914033308, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2877,3 +2977,4 @@ SceneRoots:
   - {fileID: 917552450}
   - {fileID: 261430844}
   - {fileID: 6025222452441283542}
+  - {fileID: 91810134645637668}

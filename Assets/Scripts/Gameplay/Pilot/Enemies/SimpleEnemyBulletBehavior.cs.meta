@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 284b0e91905805c448f5ea577dd8d871
+guid: 276c56382910e0f41a559e41ec3b4c48
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - updateUI: {fileID: 11400000, guid: 2f5ce04b7db80744a98927c82a980759, type: 2}
+  - onProjectileHit: {fileID: 11400000, guid: 4fb6585086528934e9ac0a82d7b1a415, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
