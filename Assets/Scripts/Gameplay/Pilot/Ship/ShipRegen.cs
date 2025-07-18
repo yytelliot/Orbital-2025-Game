@@ -6,15 +6,25 @@ public class ShipRegen : MonoBehaviour
 {
     public ShipProperties shipProperties;
     public bool regenEnabled = true;
-
+    public int hpPerTick = 1;
+    public float timePerTick = 2f;
+    private Coroutine regenCoroutine = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(RegenCoroutine(5, 2f));
+        regenCoroutine = StartCoroutine(RegenCoroutine());
     }
 
-    IEnumerator RegenCoroutine(int hpPerTick, float timePerTick)
+    void Update()
+    {
+        if (regenEnabled && regenCoroutine == null)
+        {
+            regenCoroutine = StartCoroutine(RegenCoroutine());
+        }
+    }
+
+    IEnumerator RegenCoroutine()
     {
         while (regenEnabled)
         {

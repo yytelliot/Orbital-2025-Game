@@ -7,14 +7,23 @@ using Game.Events;
 
 public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
 {
+
+    [Header("Ship Hp Attributes")]
     public int maxHp;
     public int currentHp;
     public int maxHpThresholds = 4;
     public int currentHpThrehsolds = 4;
+
+    [Header("Ship Ammo Attributes")]
     public int maxAmmoCount = 100;
     public int currentAmmoCount;
+
+    [Header("Ship Stun Attributes")]
     public float defaultStunedTime = 0.5f;
     private bool isStunned = false;
+    [Header("Damage Invul")]
+    public float onHitInvulTime = 3;
+    private bool isInvul = false;
 
     [SerializeField]
     [Tooltip("Minimum speed after being stunned for the pilot to regain control")]
@@ -163,7 +172,11 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
 
     public void TakeDamage(int amount)
     {
+        Debug.Log("Took damage:");
+        Debug.Log(amount);
+        if (isInvul) return;
         DeductHp(amount);
+        StartCoroutine(InvulCorutine(onHitInvulTime));
     }
     public bool DeductHp(int amount)
     {
@@ -176,6 +189,13 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
         {
             return false;
         }
+    }
+
+    public IEnumerator InvulCorutine(float time)
+    {
+        isInvul = true;
+        yield return new WaitForSeconds(time);
+        isInvul = false;
     }
 
     public void HandleProjectileHit(Component sender, object data)
@@ -256,7 +276,7 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
         // if hp restore will be abover cap, cap it at max hp        
         else
         {
-            int oldThresholds = currentHpThrehsolds;
+            int oldThresholds = Mathf.CeilToInt((float)currentHp / maxHp * maxHpThresholds);
 
             currentHp += amount;
 
@@ -266,7 +286,7 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
             // 4) if you actually crossed downward into a lower band, do the emergency
             if (newThresholds < oldThresholds)
             {
-                currentHpThrehsolds = newThresholds;
+                currentHpThrehsolds-- ;
                 emergencyRepairsRequired.RaiseNetworked(this, null);
             }
 

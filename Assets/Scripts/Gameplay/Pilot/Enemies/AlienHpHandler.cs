@@ -7,7 +7,13 @@ public class AlienHpHandler : MonoBehaviour, ITakeDamage
 {
     [Header("Stats")]
     public int maxHp;
-    public int currentHp;
+    private int currentHp;
+
+    [Header("Drops")]
+    [Tooltip("Prefab of the pickup to spawn upon death. Leave empty if no drops")]
+    public GameObject pickupPrefab;
+    [Range(0f, 1f)]
+    public float dropChance = 1f;
 
     void Awake()
     {
@@ -19,13 +25,21 @@ public class AlienHpHandler : MonoBehaviour, ITakeDamage
         ProjectileHitPayload payload = (ProjectileHitPayload)data;
         if (payload.target == gameObject)
         {
+            var intangible = GetComponent<IIntangible>();
+            
+            if (intangible != null && intangible.isIntangible) return;
+            
             TakeDamage(payload.damage);
+            
+
+            
         }
     }
 
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
+        Debug.Log(currentHp);
         if (currentHp <= 0)
         {
             Die();
@@ -34,7 +48,22 @@ public class AlienHpHandler : MonoBehaviour, ITakeDamage
 
     private void Die()
     {
+        TryDropPickup();
         // do deathrattle here
         Destroy(gameObject);
+    }
+
+    public void TryDropPickup()
+    {
+        if (pickupPrefab == null) return;
+
+        if (Random.value <= dropChance)
+        {
+            Instantiate(
+                pickupPrefab,
+                transform.position,
+                Quaternion.identity
+            );
+        }
     }
 }

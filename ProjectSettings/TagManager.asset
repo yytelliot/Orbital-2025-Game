@@ -10,6 +10,8 @@ TagManager:
   - Ship
   - Walkable
   - Enemy
+  - Ship Magnet Collider
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -20,11 +22,11 @@ TagManager:
   - SolidObjects
   - Interactable
   - Minigames
-  - Pilot Hazard
-  - Pilot Enemies
+  - Hazard
+  - Enemy
   - Pilot
-  - 
-  - 
+  - Pickups
+  - IntangibleEnemy
   - 
   - 
   - 

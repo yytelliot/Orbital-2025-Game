@@ -9,17 +9,23 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
 
     [Header("Sprite Info")]
     public float offset = 90;
+    private SpriteRenderer sr;
 
-    public float moveSpeed = 3f;
+    [Header("Enemy Info")]
+    public float moveSpeed;
 
     [Tooltip("When stunned, can only move once the velocity is lower than stopThreshold")]
     public float stopThreshold = 0.2f;
+
+    [Tooltip("How long before despawn")]
+    public float lifetime = 20;
 
     private GameObject player;
     private Transform playerTransform;
     private Rigidbody2D rb;
     private bool isStunned = false;
     private ShipProperties shipProperties;
+    private SpriteFader fader;
 
     public void Stun(float time) => StartCoroutine(StunCoroutine(time));
     public void StunUntilStop() => StartCoroutine(StunUntilStopCoroutine());
@@ -27,6 +33,8 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        fader = GetComponent<SpriteFader>();
         player = GameObject.FindGameObjectWithTag("Player");
         shipProperties = player.GetComponent<ShipProperties>();
 
@@ -38,7 +46,32 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
         {
             Debug.LogError("SeekerBehavior: Player Not Found in scene");
         }
+
+        StartCoroutine(LifetimeCoroutine(lifetime));
         
+    }
+
+    void Start()
+    {
+        fader.FadeToAlpha(1f, 2f);
+    }
+
+    IEnumerator LifetimeCoroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Despawn();
+    }
+
+    IEnumerator FadeAndDestroy(float duration)
+    {
+        fader.FadeToAlpha(0f, duration);
+        yield return new WaitForSeconds(duration);
+        Destroy(gameObject);
+    }
+    private void Despawn()
+    {
+        // despawn animation
+        StartCoroutine(FadeAndDestroy(1f));
     }
 
     public IEnumerator StunUntilStopCoroutine()
