@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof(CircleCollider2D))]
 public class PickupMagnet : MonoBehaviour
@@ -16,19 +17,28 @@ public class PickupMagnet : MonoBehaviour
         magnetCollider.isTrigger = true;
     }
 
-    void FixedUpdate()
-    {
-        // use the collider’s radius & position (in case it’s offset)
-        Vector2 center = magnetCollider.bounds.center;
-        float   radius = magnetCollider.radius * magnetCollider.transform.lossyScale.x;
+    private HashSet<Rigidbody2D> trackedPickups = new();
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(center, radius, pickupLayer);
-        foreach (var hit in hits)
-        {
-            Rigidbody2D rb = hit.attachedRigidbody;
-            if (rb == null) continue;
-            Vector2 dir = (center - rb.position).normalized;
+    void OnTriggerEnter2D(Collider2D other) {
+        if (((1 << other.gameObject.layer) & pickupLayer.value) != 0) {
+            var rb = other.attachedRigidbody;
+            if (rb != null) trackedPickups.Add(rb);
+        }
+    }
+
+    void FixedUpdate() {
+        foreach (var rb in trackedPickups.ToList()) { 
+            if (rb == null) { trackedPickups.Remove(rb); continue; }
+            Vector2 dir = ((Vector2)magnetCollider.bounds.center - rb.position).normalized;
             rb.AddForce(dir * magnetForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
+
+            // Optionally: Remove if > 2x radius away (failsafe)
+            float dist = Vector2.Distance(magnetCollider.bounds.center, rb.position);
+            if (dist > magnetCollider.radius * magnetCollider.transform.lossyScale.x * 2f)
+            {
+                trackedPickups.Remove(rb);
+            }
+               
         }
     }
 

@@ -20,7 +20,7 @@ public class ShipScanner : MonoBehaviour
         var payload = new ScannerRevealPayload
         {
             scannerPosition = player.position,
-            scannerRadius = defaultRadius + 0.5f * defaultRadius * strength,
+            scannerRadius = defaultRadius + 0.5f * defaultRadius * (strength-1),
             scannerStrength = strength
         };
         onScan.Raise(this, payload);
