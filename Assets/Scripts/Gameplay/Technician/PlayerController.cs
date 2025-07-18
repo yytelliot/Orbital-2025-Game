@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         if (InputManager.GetKeyDown("interact"))
         {
             animator.SetBool("isInteracting", true);
-            TryInteract();
+            StartCoroutine(TryInteractAnimation());
         }
         else
         {
@@ -108,6 +108,18 @@ public class PlayerController : MonoBehaviour
         canMove = value;
         rb.velocity = Vector2.zero; // Stop movement immediately
         animator.SetBool("isMoving", false);
+    }
+
+    private IEnumerator TryInteractAnimation()
+    {
+
+        // Wait for the animation duration
+        float duration = animator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(duration);
+
+        animator.SetBool("isInteracting", false);
+        TryInteract();
+        
     }
 
 }
