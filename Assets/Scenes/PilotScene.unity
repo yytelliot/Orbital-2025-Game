@@ -3025,7 +3025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7249566799271726904, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
       propertyPath: m_Name
-      value: GlobalEnemySpawner
+      value: SeekerSpawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
