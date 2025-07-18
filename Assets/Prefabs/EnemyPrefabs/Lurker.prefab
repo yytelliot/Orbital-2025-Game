@@ -12,11 +12,12 @@ GameObject:
   - component: {fileID: 961976129440356822}
   - component: {fileID: 4086478548614624700}
   - component: {fileID: 33176287811508313}
+  - component: {fileID: 1983144583194295653}
   - component: {fileID: 8751112372294236305}
   - component: {fileID: 8838797125298344571}
   - component: {fileID: 2859408953263805983}
   - component: {fileID: 4178153448731537442}
-  - component: {fileID: 1983144583194295653}
+  - component: {fileID: 7907236448210429977}
   m_Layer: 13
   m_Name: Lurker
   m_TagString: Untagged
@@ -153,6 +154,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.13
+--- !u!114 &1983144583194295653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806573345378669415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e50dbcbab25774f824cfb74e7dff8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8751112372294236305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,11 +179,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   revealRadius: 7
+  aggroRadius: 100
   tangibleDuration: 1
-  shootInterval: 2
+  despawnDistance: 200
   projectilePrefab: {fileID: 4777532058338760645, guid: 65e6528c93d43d2459462452bdeebed2, type: 3}
+  shootInterval: 2
+  bulletLifetime: 5
   numBullets: 3
   spread: 45
+  intangibleAlpha: 0.05
 --- !u!114 &8838797125298344571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +249,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1983144583194295653
+--- !u!114 &7907236448210429977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,6 +258,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 806573345378669415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97e50dbcbab25774f824cfb74e7dff8a, type: 3}
+  m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 14c9c16956ca80642922fa07d31bb852, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8751112372294236305}
+        m_TargetAssemblyTypeName: LurkerBehavior, Assembly-CSharp
+        m_MethodName: OnRevealLurkers
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
