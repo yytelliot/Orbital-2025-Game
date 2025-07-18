@@ -2210,6 +2210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   readyToJump: {fileID: 11400000, guid: ecfbc97fa25ff49479b88a003d5ef5e0, type: 2}
+  energyPercentageFilled: {fileID: 11400000, guid: 4817172ff453a0c4a9768e6f3e27d034, type: 2}
   energyToNextLevel: 25
   currentEnergy: 0
   updateUI: {fileID: 11400000, guid: 2f5ce04b7db80744a98927c82a980759, type: 2}
