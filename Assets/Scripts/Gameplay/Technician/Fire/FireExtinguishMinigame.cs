@@ -6,24 +6,24 @@ using UnityEngine.UI;
 public class FireExtinguishMinigame : MonoBehaviour
 {
     [Header("References")]
-    public Slider playerSlider;
-    public Image safeZoneImage;
-    public GameObject minigame;
-    public PlayerController player;
+    [SerializeField] private Slider playerSlider;
+    [SerializeField] private Image safeZoneImage;
+    [SerializeField] private GameObject minigame;
+    [SerializeField] private PlayerController player;
 
     [Header("Safe Zone Settings")]
     [Range(0f, 1f)] public float safeZoneWidth = 0.2f;
     //public float safeZoneMoveSpeed = 0.3f; // units per second
 
     [Header("Completion")]
-    public float timeToWin = 5f;
-    public float maxTime = 12f;
+    [SerializeField] private float timeToWin = 5f;
+    [SerializeField] private float maxTime = 12f;
     private float timeInSafeZone = 0f;
 
     [Header("Fire Visual")]
-    public Image fireImage;
-    public Vector3 fireStartScale = Vector3.one;
-    public Vector3 fireEndScale = Vector3.zero;
+    [SerializeField] private Image fireImage;
+    [SerializeField] private Vector3 fireStartScale = Vector3.one;
+    [SerializeField] private Vector3 fireEndScale = Vector3.zero;
 
     public static FireExtinguishMinigame Instance; //Singleton pattern
 
