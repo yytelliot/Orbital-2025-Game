@@ -14,6 +14,7 @@ using UnityEngine;
 public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
 {
     public float revealRadius = 5f;
+    public float proximityRevealTime = 2f;
     public float aggroRadius = 100f;
     public float tangibleDuration = 3f;
     public bool isIntangible { get; private set; } = true;
@@ -41,7 +42,8 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
     private Collider2D col;
     private float shootTimer = 0f;
     private float tangibleTimer = 0f;
-        private float stunTimer = 0f;
+    private float stunTimer = 0f;
+    private float revealTimer = 0f;
 
     void Awake()
     {
@@ -91,7 +93,18 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
         // Reveal if player is close
         if (isIntangible && dist < revealRadius)
         {
-            tangibleTimer = Mathf.Max(tangibleTimer, tangibleDuration);
+            if (revealTimer <= 0f)
+            {
+                tangibleTimer = Mathf.Max(tangibleTimer, tangibleDuration);
+            }
+            else
+            {
+                revealTimer -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            revealTimer = proximityRevealTime;
         }
 
         // Shooting
