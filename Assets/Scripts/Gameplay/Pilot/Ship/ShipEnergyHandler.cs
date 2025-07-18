@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShipEnergyHandler : MonoBehaviour
 {
     public GameEvent readyToJump;
+    public GameEvent energyPercentageFilled;
 
     public int energyToNextLevel = 25;
     public int currentEnergy = 0;
@@ -16,6 +17,7 @@ public class ShipEnergyHandler : MonoBehaviour
     public void AddEnergy(int amount)
     {
         currentEnergy += amount;
+        energyPercentageFilled.RaiseNetworked(this, (float)currentEnergy / energyToNextLevel);
         if (currentEnergy >= energyToNextLevel)
         {
             currentEnergy = energyToNextLevel;
@@ -29,6 +31,7 @@ public class ShipEnergyHandler : MonoBehaviour
     public void LoseEnergy(int amount)
     {
         currentEnergy -= amount;
+        energyPercentageFilled.RaiseNetworked(this, (float)currentEnergy / energyToNextLevel);
         if (currentEnergy <= 0)
         {
             currentEnergy = 0;
