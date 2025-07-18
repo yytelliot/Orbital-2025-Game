@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: OnCraftingMinigameStart
   m_EditorClassIdentifier: 
   eventId: 10
-
   listeners: []

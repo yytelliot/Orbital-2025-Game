@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: OnReloadMinigameComplete
   m_EditorClassIdentifier: 
   eventId: 9
-
   listeners: []
