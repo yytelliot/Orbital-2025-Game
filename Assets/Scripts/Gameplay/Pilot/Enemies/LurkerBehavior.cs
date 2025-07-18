@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+using Game.Events;
 using Unity.Mathematics;
 
 
@@ -18,6 +18,7 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
     public float tangibleDuration = 3f;
     public bool isIntangible { get; private set; } = true;
     public bool isStunned { get; private set; } = false;
+
     public float despawnDistance = 200f;
     public GameObject projectilePrefab;
 
@@ -39,7 +40,8 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
     private SpriteFader fader;
     private Collider2D col;
     private float shootTimer = 0f;
-    private Coroutine tangibleCoroutine;
+    private float tangibleTimer = 0f;
+        private float stunTimer = 0f;
 
     void Awake()
     {
@@ -47,10 +49,10 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
         sr = GetComponent<SpriteRenderer>();
         fader = GetComponent<SpriteFader>();
         col = GetComponent<Collider2D>();
-        fader.FadeToAlpha(intangibleAlpha, 0);
+        fader.SetAlpha(intangibleAlpha);
         if (isIntangible)
         {
-            BecomeIntangible();
+            SetIntangible();
         }
     }
 
@@ -58,57 +60,69 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
     {
         float dist = Vector2.Distance(player.position, transform.position);
 
+        // DESPAWNING
         if (player != null && dist >= despawnDistance)
         {
             Destroy(gameObject);
         }
 
-        if (isIntangible && dist < revealRadius)
-        {
-            // Start/restart the coroutine
-            if (tangibleCoroutine != null)
-                StopCoroutine(tangibleCoroutine);
+        // TIMER UPDATES
+        if (tangibleTimer > 0f)
+            tangibleTimer -= Time.deltaTime;
+        if (stunTimer > 0f)
+            stunTimer -= Time.deltaTime;
 
-            tangibleCoroutine = StartCoroutine(TangibleStateCoroutine());
+        // TANGIBLE/STUN HANDLER
+        bool shouldBeTangible = (tangibleTimer > 0f) || (stunTimer > 0f);
+
+        // Update isStunned flag
+        isStunned = (stunTimer > 0f);
+
+        // Update isIntangible flag & visuals
+        if (shouldBeTangible && isIntangible)
+        {
+            SetTangible();
+        }
+        else if (!shouldBeTangible && !isIntangible)
+        {
+            SetIntangible();
         }
 
-        // Shooting logic
+        // Reveal if player is close
+        if (isIntangible && dist < revealRadius)
+        {
+            tangibleTimer = Mathf.Max(tangibleTimer, tangibleDuration);
+        }
+
+        // Shooting
         shootTimer -= Time.deltaTime;
-        if (shootTimer <= 0f && !isStunned && dist < aggroRadius)
+        if (shootTimer <= 0f && stunTimer <= 0f && dist < aggroRadius)
         {
             ShootSpreadAtPlayer();
             shootTimer = shootInterval;
         }
     }
 
-    IEnumerator TangibleStateCoroutine()
+    public void Reveal(float time)
     {
-        BecomeTangible();
-
-        // Remain tangible as long as the player is inside the radius
-        float timer = tangibleDuration;
-        while (timer > 0f)
+        // Update timer to the longer of the 2
+        tangibleTimer = Mathf.Max(tangibleTimer, time);
+    }
+    public void OnScanLurker(Component sender, object data)
+    {
+        if (data is ScannerRevealPayload payload)
         {
-            float dist = Vector2.Distance(player.position, transform.position);
-
-            // If player moves out of radius, start countdown
-            if (dist >= revealRadius)
+            float dist = Vector2.Distance(transform.position, payload.scannerPosition);
+            if (dist <= payload.scannerRadius)
             {
-                timer -= Time.deltaTime;
+                Stun(payload.scannerStrength * 2);
+                Reveal(payload.scannerStrength * 3);
             }
-            else
-            {
-                // Player still in range, reset the timer
-                timer = tangibleDuration;
-            }
-            yield return null;
         }
-
-        BecomeIntangible();
-        tangibleCoroutine = null;
     }
 
-    void BecomeTangible()
+
+    void SetTangible()
     {
         isIntangible = false;
         fader.FadeToAlpha(1f, 0.5f);
@@ -117,15 +131,16 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
         // Play reveal VFX/SFX here
     }
 
-    void BecomeIntangible()
+
+    void SetIntangible()
     {
-        if (isStunned) return;
         isIntangible = true;
         fader.FadeToAlpha(intangibleAlpha, tangibleDuration);
         col.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("IntangibleEnemy");
         // Play fade VFX/SFX here
     }
+
 
     void ShootAtPlayer()
     {
@@ -167,23 +182,14 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
     // Stunnable fns
     public void StunUntilStop()
     {
-        StartCoroutine(StunCoroutine(tangibleDuration));
+        Stun(tangibleDuration);
     }
 
 
 
     public void Stun(float duration)
     {
-        StartCoroutine(StunCoroutine(duration));
-    }
-
-    private IEnumerator StunCoroutine(float duration)
-    {
-        isStunned = true;
-        BecomeIntangible();
-        yield return new WaitForSeconds(duration);
-        isStunned = false;
-        BecomeIntangible();
+        stunTimer = Mathf.Max(stunTimer, duration);
     }
 
 

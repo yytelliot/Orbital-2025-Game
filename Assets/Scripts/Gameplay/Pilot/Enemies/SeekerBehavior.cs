@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SeekerBehavior : MonoBehaviour, IStunnable
@@ -93,6 +94,18 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
         isStunned = false;
     }
 
+    public void onScanSeeker(Component sender, object data)
+    { 
+        if (data is ScannerRevealPayload payload)
+        {
+            float dist = Vector2.Distance(transform.position, payload.scannerPosition);
+            if (dist <= payload.scannerRadius)
+            {
+                Stun(payload.scannerStrength);
+            }
+        }
+    }
+
     void FixedUpdate()
     {
         if (playerTransform == null) return;
@@ -113,13 +126,15 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
     {
 
         // face toward player
-        Vector2 currentPos = transform.position;
-        Vector2 targetPos = (Vector2)playerTransform.position;
-        Vector2 direction = (targetPos - currentPos).normalized;
+        if (!isStunned)
+        { 
+            Vector2 currentPos = transform.position;
+            Vector2 targetPos = (Vector2)playerTransform.position;
+            Vector2 direction = (targetPos - currentPos).normalized;
 
-        float angleDeg = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, angleDeg - offset);
-
+            float angleDeg = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, 0f, angleDeg - offset);
+        }
 
 
     }

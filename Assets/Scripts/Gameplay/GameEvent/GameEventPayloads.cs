@@ -10,4 +10,12 @@ namespace Game.Events
         public GameObject target;
         public int damage;
     }
+
+    [System.Serializable]
+    public class ScannerRevealPayload
+    {
+        public Vector2 scannerPosition;
+        public float scannerRadius;
+        public int scannerStrength;
+    }
 }

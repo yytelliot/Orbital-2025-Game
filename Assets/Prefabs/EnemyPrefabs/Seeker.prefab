@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 899735675800980774}
   - component: {fileID: 3539943816883856394}
   - component: {fileID: 490404838197425546}
+  - component: {fileID: 8369498378287103674}
   m_Layer: 10
   m_Name: Seeker
   m_TagString: Enemy
@@ -242,3 +243,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97e50dbcbab25774f824cfb74e7dff8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8369498378287103674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8975781882733378634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 14c9c16956ca80642922fa07d31bb852, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8728797847190681313}
+        m_TargetAssemblyTypeName: SeekerBehavior, Assembly-CSharp
+        m_MethodName: onScanSeeker
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
