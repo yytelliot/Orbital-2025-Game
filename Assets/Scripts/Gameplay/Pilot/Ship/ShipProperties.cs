@@ -40,6 +40,7 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
     public GameEvent emergencyRepairsRequired;
 
     private Rigidbody2D rb;
+    private SpriteBlinker blinker;
 
     public bool IsStunned()
     {
@@ -172,13 +173,13 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
 
     public void TakeDamage(int amount)
     {
+        if (isInvul) return;
         Debug.Log("Took damage:");
         Debug.Log(amount);
-        if (isInvul) return;
         DeductHp(amount);
         StartCoroutine(InvulCorutine(onHitInvulTime));
     }
-    public bool DeductHp(int amount)
+    private bool DeductHp(int amount)
     {
         if (currentHp >= 0)
         {
@@ -194,8 +195,13 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
     public IEnumerator InvulCorutine(float time)
     {
         isInvul = true;
+        if (blinker != null)
+            blinker.StartBlink(time);
+
         yield return new WaitForSeconds(time);
         isInvul = false;
+        if (blinker != null)
+            blinker.StopBlink();
     }
 
     public void HandleProjectileHit(Component sender, object data)
@@ -300,6 +306,7 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        blinker = GetComponent<SpriteBlinker>();
     }
 
 }

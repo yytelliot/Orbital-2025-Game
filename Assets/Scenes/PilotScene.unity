@@ -1790,6 +1790,7 @@ GameObject:
   - component: {fileID: 1505957778}
   - component: {fileID: 1505957780}
   - component: {fileID: 1505957779}
+  - component: {fileID: 1505957795}
   - component: {fileID: 1505957784}
   - component: {fileID: 1505957781}
   - component: {fileID: 1505957782}
@@ -2045,7 +2046,7 @@ MonoBehaviour:
   maxAmmoCount: 100
   currentAmmoCount: 100
   defaultStunedTime: 0.5
-  onHitInvulTime: 3
+  onHitInvulTime: 2
   speedToRegainControl: 1
   onAmmoCountChange: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
   onOutOfAmmo: {fileID: 11400000, guid: 2adefaed1fc83024cb83ecc0b5a7cce2, type: 2}
@@ -2287,6 +2288,20 @@ MonoBehaviour:
   defaultRadius: 50
   onScan: {fileID: 11400000, guid: 14c9c16956ca80642922fa07d31bb852, type: 2}
   player: {fileID: 0}
+--- !u!114 &1505957795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505957775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bf5fac21f224ba42a13aa34d48c0a2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkInterval: 0.15
+  blinkAlpha: 0.3
 --- !u!1 &1565148505
 GameObject:
   m_ObjectHideFlags: 0
