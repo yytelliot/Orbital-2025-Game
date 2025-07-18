@@ -48,17 +48,14 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
             Debug.LogError("SeekerBehavior: Player Not Found in scene");
         }
 
+        fader.SetAlpha(0f);
         StartCoroutine(LifetimeCoroutine(lifetime));
         
     }
 
-    void Start()
-    {
-        fader.FadeToAlpha(1f, 2f);
-    }
-
     IEnumerator LifetimeCoroutine(float seconds)
     {
+        fader.FadeToAlpha(1f, 2f);
         yield return new WaitForSeconds(seconds);
         Despawn();
     }

@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 7907236448210429977}
   m_Layer: 13
   m_Name: Lurker
-  m_TagString: Untagged
+  m_TagString: Lurker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,10 +178,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511644a9b6c45354c9ac929a57930603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  revealRadius: 7
-  aggroRadius: 100
-  tangibleDuration: 1
-  despawnDistance: 200
+  revealRadius: 15
+  proximityRevealTime: 2
+  aggroRadius: 90
+  tangibleDuration: 3
+  despawnDistance: 90
   projectilePrefab: {fileID: 4777532058338760645, guid: 65e6528c93d43d2459462452bdeebed2, type: 3}
   shootInterval: 2
   bulletLifetime: 5

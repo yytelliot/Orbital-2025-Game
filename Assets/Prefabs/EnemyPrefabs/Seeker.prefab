@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 8369498378287103674}
   m_Layer: 10
   m_Name: Seeker
-  m_TagString: Enemy
+  m_TagString: Seeker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
   playerKbForce: 20
   selfKbForce: 10
   playerHitstun: 0.5
-  damage: 10
+  damage: 20
   freezeRotation: 0
   onPilotHitStun: {fileID: 11400000, guid: ad4b903cd74b2ac4fbca9aa20c600fc7, type: 2}
 --- !u!114 &3539943816883856394

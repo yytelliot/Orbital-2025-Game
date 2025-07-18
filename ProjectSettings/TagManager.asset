@@ -9,9 +9,10 @@ TagManager:
   - Stopper
   - Ship
   - Walkable
-  - Enemy
   - Ship Magnet Collider
   - Bullet
+  - Lurker
+  - Seeker
   layers:
   - Default
   - TransparentFX
