@@ -60,7 +60,7 @@ public class AlienCollisionHandler : MonoBehaviour
         {
             stunnable.StunUntilStop();
         }
-        shipProperties.DeductHp(damage);
+        shipProperties.TakeDamage(damage);
 
         onPilotHitStun.RaiseNetworked(this, playerHitstun);
         

@@ -34,7 +34,7 @@ public class PickupMagnet : MonoBehaviour
 
             // Optionally: Remove if > 2x radius away (failsafe)
             float dist = Vector2.Distance(magnetCollider.bounds.center, rb.position);
-            if (dist > magnetCollider.radius * magnetCollider.transform.lossyScale.x * 2f)
+            if (dist > magnetCollider.radius * magnetCollider.transform.lossyScale.x * 3f)
             {
                 trackedPickups.Remove(rb);
             }
