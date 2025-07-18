@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 5f;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private Collider2D hitbox;
 
     [Header("Interaction")]
-    public LayerMask interactablesLayer;
+    [SerializeField] private LayerMask interactablesLayer;
     [SerializeField] private float interactRange = 0.2f;
     private bool canMove = true;
 

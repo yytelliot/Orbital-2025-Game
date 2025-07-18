@@ -6,11 +6,11 @@ using UnityEngine.Tilemaps;
 public class FireTileSpawner : MonoBehaviour
 {
     [Header("References")]
-    public Tilemap tilemap;
-    public TileBase[] allowedTiles; // Only tiles from this list can be fire targets
+    [SerializeField] private Tilemap tilemap;
+    [SerializeField] private TileBase[] allowedTiles; // Only tiles from this list can be fire targets
 
     [Header("Spawn Settings")]
-    public GameObject firePrefab;
+    [SerializeField] private GameObject firePrefab;
     [SerializeField] private float xOffset;
     [SerializeField] private float yOffset;
 
@@ -19,7 +19,6 @@ public class FireTileSpawner : MonoBehaviour
 
     private List<Vector3> selectablePositions = new List<Vector3>();
     private HashSet<Vector3> occupiedPositions = new HashSet<Vector3>();
-
     public static FireTileSpawner Instance; //Singleton Pattern
 
     private void Awake()
