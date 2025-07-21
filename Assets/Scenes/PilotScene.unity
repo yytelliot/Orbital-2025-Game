@@ -2387,7 +2387,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
       propertyPath: maxEnemies
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
       propertyPath: enemyPrefab
@@ -2395,7 +2395,7 @@ PrefabInstance:
       objectReference: {fileID: 806573345378669415, guid: 44682de51ac886545ad104a8c8e4c53f, type: 3}
     - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
       propertyPath: spawnChance
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
       propertyPath: enemyCountTag
@@ -2403,10 +2403,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
       propertyPath: spawnInterval
-      value: 10
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
+      propertyPath: baseMaxEnemies
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
+      propertyPath: baseSpawnChance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
+      propertyPath: maxSpawnDistance
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
       propertyPath: minSpawnDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
+      propertyPath: baseSpawnInterval
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
+      propertyPath: baseMinSpawnDistance
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3076174973914033308, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
@@ -2862,6 +2882,53 @@ Transform:
   - {fileID: 883828463}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1972409529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1972409531}
+  - component: {fileID: 1972409530}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1972409530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972409529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc3e905f979a1d45a4e515c58872ce7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpCount: 0
+  difficultyMultiplier: 1
+  difficultyPerJump: 0.1
+--- !u!4 &1972409531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972409529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.0716715, y: -4.3725038, z: -19.143745}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3660977680258322164
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2987,16 +3054,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
+      propertyPath: spawnChance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
       propertyPath: enemyCountTag
       value: Seeker
       objectReference: {fileID: 0}
     - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
       propertyPath: spawnInterval
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
       propertyPath: spawnerEnabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
+      propertyPath: baseSpawnChance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
+      propertyPath: maxSpawnDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342428949794553383, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
+      propertyPath: minSpawnDistance
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3076174973914033308, guid: e1c46f65cdaa5e8449f23cdf443a8d48, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3063,3 +3146,4 @@ SceneRoots:
   - {fileID: 261430844}
   - {fileID: 6025222452441283542}
   - {fileID: 1588883283}
+  - {fileID: 1972409531}

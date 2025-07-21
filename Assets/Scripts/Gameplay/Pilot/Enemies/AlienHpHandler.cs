@@ -6,7 +6,8 @@ using Game.Events;
 public class AlienHpHandler : MonoBehaviour, ITakeDamage
 {
     [Header("Stats")]
-    public int maxHp;
+    public int baseMaxHp = 5;
+    private int maxHp;
     private int currentHp;
 
     [Header("Drops")]
@@ -16,8 +17,12 @@ public class AlienHpHandler : MonoBehaviour, ITakeDamage
     public float dropChance = 1f;
 
     void Awake()
-    {
+    {   
+        // difficulty multiplier
+        float dm = PilotGameController.Instance.difficultyMultiplier;
+        maxHp = Mathf.RoundToInt(baseMaxHp * dm);
         currentHp = maxHp;
+    
     }
 
     public void HandleProjectileHit(Component sender, object data)

@@ -5,19 +5,28 @@ using UnityEngine;
 public class ShipEnergyHandler : MonoBehaviour
 {
     public GameEvent readyToJump;
-    public GameEvent energyPercentageFilled;
+    public GameEvent energyPercentageFilledEvent;
 
-    public int energyToNextLevel = 25;
+    public int baseEnergyToNextLevel = 20;
     public int currentEnergy = 0;
     // Start is called before the first frame update
+    private int energyToNextLevel;
 
     [Header("Events")]
     public GameEvent updateUI;
 
+    public void Awake()
+    {
+        // difficulty multiplier
+        float dm = PilotGameController.Instance.difficultyMultiplier;
+
+        energyToNextLevel = Mathf.RoundToInt(baseEnergyToNextLevel * dm);
+    }
+
     public void AddEnergy(int amount)
     {
         currentEnergy += amount;
-        energyPercentageFilled.RaiseNetworked(this, (float)currentEnergy / energyToNextLevel);
+        energyPercentageFilledEvent.RaiseNetworked(this, (float)currentEnergy / energyToNextLevel);
         if (currentEnergy >= energyToNextLevel)
         {
             currentEnergy = energyToNextLevel;
@@ -31,7 +40,7 @@ public class ShipEnergyHandler : MonoBehaviour
     public void LoseEnergy(int amount)
     {
         currentEnergy -= amount;
-        energyPercentageFilled.RaiseNetworked(this, (float)currentEnergy / energyToNextLevel);
+        energyPercentageFilledEvent.RaiseNetworked(this, (float)currentEnergy / energyToNextLevel);
         if (currentEnergy <= 0)
         {
             currentEnergy = 0;

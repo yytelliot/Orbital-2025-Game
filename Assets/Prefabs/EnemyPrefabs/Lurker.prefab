@@ -178,13 +178,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511644a9b6c45354c9ac929a57930603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficultyScalingEnabled: 1
   revealRadius: 15
   proximityRevealTime: 2
   aggroRadius: 90
   tangibleDuration: 3
   despawnDistance: 90
   projectilePrefab: {fileID: 4777532058338760645, guid: 65e6528c93d43d2459462452bdeebed2, type: 3}
-  shootInterval: 2
+  shootInterval: 3
   bulletLifetime: 5
   numBullets: 3
   spread: 45
@@ -219,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0be696f1751ed84b9b010038f1d3881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 50
+  baseMaxHp: 25
   pickupPrefab: {fileID: 5882496880087046223, guid: fc8c3b68ab0586c44b59da419c033169, type: 3}
   dropChance: 1
 --- !u!114 &4178153448731537442
