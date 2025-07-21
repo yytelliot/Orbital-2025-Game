@@ -4,31 +4,36 @@ using UnityEngine;
 public enum SoundType
 {
     //Player
-    FOOTSTEP,               //0
-    INTERACT,               //1
+    FOOTSTEP1,              //0
+    FOOTSTEP2,              //1
+    FOOTSTEP3,              //2
+    FOOTSTEP4,              //3
+    FOOTSTEP5,              //4
+    INTERACT,               //5          
 
     //Fire
-    FIRESTART,              //2
-    FIREBURNING,            //3
-    FIREEXTINGUISH,         //4
+    FIRESTART,              //6
+    FIREBURNING,            //7
+    FIREEXTINGUISH,         //8
 
     //Reloading Station
-    AMMO1,                  //5
-    AMMO2,                  //6
-    AMMO3,                  //7
-    AMMO4,                  //8
+    RELOADOPEN,             //9
+    AMMO1,                  //10
 
     //Scanner Station
-    TYPING,                 //9
+    SCANNEROPEN,            //11
+    TYPING,                 //12
 
     //General Minigame
-    SUCCESS,                //10
-    FAIL,                   //11
+    SUCCESS,                //13
+    FAIL,                   //14
 
     //Settings
-    SETTINGOPEN,            //12
-    SETTINGCLICK            //13
+    SETTINGOPEN,            //15
+    SETTINGCLOSE            //16
 }
+
+[RequireComponent(typeof(AudioSource))]
 public class SoundManagerTechnican : MonoBehaviour
 {
     [SerializeField] private AudioClip[] soundList;
@@ -45,15 +50,52 @@ public class SoundManagerTechnican : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        for (int i = 0; i < soundList.Length; i++)
+        {
+            if (soundList[i] == null)
+            {
+                Debug.LogError($"soundList[{i}] is null! Enum: {(SoundType)i}");
+            }
+        }
     }
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();   
+        audioSource = GetComponent<AudioSource>();
     }
 
     public static void PlaySound(SoundType sound, float volume = 1)
     {
+
+        if (Instance == null)
+        {
+            Debug.LogError("SoundManagerTechnican instance is null!");
+            return;
+        }
+
+        if (Instance.audioSource == null)
+        {
+            Debug.LogError("AudioSource is not assigned on SoundManagerTechnican!");
+            return;
+        }
+
+        int index = (int)sound;
+        if (index < 0 || index >= Instance.soundList.Length)
+        {
+            Debug.LogError($"Invalid sound index {index} for sound {sound}");
+            return;
+        }
+
+        AudioClip clip = Instance.soundList[index];
+        if (clip == null)
+        {
+            Debug.LogError($"Clip for {sound} is null!");
+            return;
+        }
+
+        Debug.Log($"Playing sound: {sound} at volume {volume}");
+
         Instance.audioSource.PlayOneShot(Instance.soundList[(int)sound], volume);
     }
 }

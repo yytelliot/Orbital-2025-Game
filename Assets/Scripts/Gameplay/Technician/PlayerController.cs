@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         if (InputManager.GetKeyDown("interact"))
         {
             animator.SetBool("isInteracting", true);
+            SoundManagerTechnican.PlaySound(SoundType.INTERACT);  //Sound Effect
             StartCoroutine(TryInteractAnimation());
         }
         else
@@ -77,6 +78,7 @@ public class PlayerController : MonoBehaviour
     {
 
         Vector2 facingDir = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        
         if (facingDir.sqrMagnitude == 0f)
         {
             // if no input, set default
