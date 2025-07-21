@@ -7,7 +7,7 @@ public class PilotGameController : MonoBehaviour
 {
     public static PilotGameController Instance { get; private set; }
 
-    [Tooltip("How many times the player has jumped/reloaded")]
+    [Tooltip("How many times the player has jumped")]
     public int jumpCount = 0;
 
     [Tooltip("Base difficulty multiplier (1 = default)")]
@@ -35,7 +35,7 @@ public class PilotGameController : MonoBehaviour
     /// Call this when your ship “jumps” (full energy).
     /// It increments jumpCount, raises the multiplier, then reloads the scene.
     /// </summary>
-    public void DoJump()
+    public void OnJump()
     {
         jumpCount++;
         difficultyMultiplier += difficultyPerJump;
