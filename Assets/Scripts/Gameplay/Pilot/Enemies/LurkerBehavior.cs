@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Game.Events;
+using Photon.Pun.Demo.Cockpit;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
 
 
@@ -13,6 +15,7 @@ using UnityEngine;
 
 public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
 {
+    public bool difficultyScalingEnabled = true;
     public float revealRadius = 5f;
     public float proximityRevealTime = 2f;
     public float aggroRadius = 100f;
@@ -29,7 +32,7 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
     [Tooltip("Bullet lifetime in seconds")]
     public float bulletLifetime = 5f;
     [Tooltip("Number of bullets per spread")]
-    public int numBullets = 3;
+    public int numBullets = 1;
     [Tooltip("Spread of bullets in degrees")]
     public float spread = 45f;
 
@@ -45,6 +48,9 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
     private float stunTimer = 0f;
     private float revealTimer = 0f;
 
+    // for difficulty scaling
+    private int jumpCount;
+
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -55,6 +61,15 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
         if (isIntangible)
         {
             SetIntangible();
+        }
+
+        // Difficulty Scaling
+        jumpCount = PilotGameController.Instance.jumpCount;
+
+        if (difficultyScalingEnabled)
+        {
+            numBullets = 1 + 2 * (jumpCount / 3);
+            spread = 15.0f * numBullets;
         }
     }
 
@@ -169,6 +184,12 @@ public class LurkerBehavior : MonoBehaviour, IIntangible, IStunnable
     void ShootSpreadAtPlayer()
     {
         if (player == null) return;
+
+        if (numBullets <= 1)
+        {
+            ShootAtPlayer();
+            return;
+        }
         Vector2 dir = (player.position - transform.position).normalized;
         float baseAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 

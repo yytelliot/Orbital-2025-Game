@@ -44,9 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb61aad64cc08e42b0c4b17db0d2947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8975781882733378634, guid: 7749cae132627ca46820757ae25444fa, type: 3}
-  spawnInterval: 1.5
-  spawnChance: 0.8
   spawnerEnabled: 1
-  minSpawnDistance: 40
-  maxSpawnDistance: 60
+  enemyPrefab: {fileID: 8975781882733378634, guid: 7749cae132627ca46820757ae25444fa, type: 3}
+  enemyCountTag: Seeker
+  baseMaxEnemies: 10
+  baseSpawnInterval: 1.5
+  baseSpawnChance: 0.8
+  baseMinSpawnDistance: 40
+  baseMaxSpawnDistance: 60
+  scaleMaxEnemies: 1
+  scaleSpawnInterval: 1
+  scaleSpawnChance: 0
+  scaleMinSpawnDistance: 0
+  scaleMaxSpawnDistance: 0
+  intervalDecayRate: 0.2
+  minSpawnInterval: 0.3
+  maxEnemies: 0
+  spawnInterval: 0
+  spawnChance: 0
+  minSpawnDistance: 0
+  maxSpawnDistance: 0

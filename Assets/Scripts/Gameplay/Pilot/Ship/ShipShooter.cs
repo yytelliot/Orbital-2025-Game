@@ -32,7 +32,7 @@ public class ShipShooter : MonoBehaviour
         {
             firingRoutine = StartCoroutine(AutoFire());
         }
-            
+
     }
 
     // Auto Fire Coroutine
@@ -44,7 +44,7 @@ public class ShipShooter : MonoBehaviour
             yield return new WaitForSeconds(fireRate);
         }
         firingRoutine = null;
-        
+
     }
 
     // Shoots the bullet at the mouse
@@ -69,12 +69,19 @@ public class ShipShooter : MonoBehaviour
             bb.Initialize(dir, angle, bulletSpeed);
 
             // Raise onShoot Event
-            shotFired.RaiseNetworked(this, null);
+            shotFired.Raise(this, null);
         }
         else
         {
-            
+
         }
-       
+
     }
+    
+    void OnDisable()
+{
+    if (firingRoutine != null)
+        StopCoroutine(firingRoutine);
+    firingRoutine = null;
+}
 }
