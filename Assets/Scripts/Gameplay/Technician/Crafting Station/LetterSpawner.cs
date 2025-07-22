@@ -173,7 +173,7 @@ public class LetterSpawner : MonoBehaviour
     
     private string GetRandomWord()
     {
-        if (Random.Range(0, 2) == 0)
+        if (Random.Range(0, 10) >= 7)
         {
             return GetRandomLetters();
         }
@@ -240,10 +240,10 @@ public class LetterSpawner : MonoBehaviour
     {
         return currentDifficulty switch
         {
-            Difficulty.Easy => 1.5f,
-            Difficulty.Medium => 1.7f,
-            Difficulty.Hard => 2f,
-            _ => 1.5f
+            Difficulty.Easy => 1f,
+            Difficulty.Medium => 1.3f,
+            Difficulty.Hard => 1.5f,
+            _ => 1f
         };
     }
     #endregion
