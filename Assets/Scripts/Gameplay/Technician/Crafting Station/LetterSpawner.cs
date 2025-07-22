@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SocialPlatforms.Impl;
 public enum Difficulty {Easy, Medium, Hard}
 public class LetterSpawner : MonoBehaviour
 {
@@ -15,15 +17,28 @@ public class LetterSpawner : MonoBehaviour
     [Header("Game Setup")]
     [SerializeField] private RectTransform panel;
     [SerializeField] private Difficulty currentDifficulty;
-    [SerializeField] private float spawnInterval = 1.5f;
     [SerializeField] private Transform SpawnPos;
     [SerializeField] private float marginx;
     [SerializeField] private float marginy;
-    [SerializeField] private float lifeTime = 5f;
+    [SerializeField] private TextAsset wordListAsset;
+    private List<string> wordBank = new();
     
     private List<LetterController> activeBoxes = new();
     [SerializeField] private TMP_Text statusText;
     private int ciphersSolved = 0;
+
+    private void Awake()
+    {
+        if (wordListAsset != null)
+        {
+            wordBank = wordListAsset.text
+                .Split(new[] { '\r', '\n' }, System.StringSplitOptions.RemoveEmptyEntries)
+                .Where(word => !string.IsNullOrWhiteSpace(word))
+                .Select(word => word.ToUpper())
+                .ToList();
+        }
+    }
+
     void Update()
     {
         string input = Input.inputString.ToUpper();
@@ -33,7 +48,7 @@ public class LetterSpawner : MonoBehaviour
             {
                 if (box == null || box.gameObject == null)
                 {
-                    activeBoxes.Remove(box); // Cleanup destroyed box
+                    activeBoxes.Remove(box); 
                     continue;
                 }
                 
@@ -58,7 +73,7 @@ public class LetterSpawner : MonoBehaviour
         for (int i = 0; i < GetBoxesCount(); i++)
         {
             SpawnBox();
-            yield return new WaitForSeconds(spawnInterval);
+            yield return new WaitForSeconds(GetSpawnInterval());
         }
 
         StartCoroutine(WaitUntilMinigameEnds());
@@ -71,23 +86,50 @@ public class LetterSpawner : MonoBehaviour
         newBox.transform.SetParent(panel.transform, false); // important: false = keep local position
         LetterController box = newBox.GetComponent<LetterController>();
 
-        string letters = GetRandomLetters();
-        box.Initialize(letters, RandomPositionWithin(panel), lifeTime);
+        string word = GetRandomWord();
+        box.Initialize(word, RandomPositionWithin(panel), GetBoxLifetime());
+
+        AdjustBoxSize(newBox, word.Length);
+
         activeBoxes.Add(box);
+    }
+    
+    private void AdjustBoxSize(GameObject letterBox, int wordLength)
+    {
+        RectTransform rectTransform = letterBox.GetComponent<RectTransform>();
+        if (rectTransform == null) return;
+
+        // Base size values (adjust these to your needs)
+        float baseWidth = 100f; // Width for 1 character
+        float widthPerCharacter = 50f; // Additional width per character
+        float baseHeight = 120f; // Fixed height
+        
+        // Calculate new width
+        float newWidth = baseWidth + (widthPerCharacter * (wordLength - 1));
+        
+        // Apply the new size
+        rectTransform.sizeDelta = new Vector2(newWidth, baseHeight);
+        
+        // If you have a background image that needs to scale
+        Image bgImage = letterBox.GetComponent<Image>();
+        if (bgImage != null)
+        {
+            bgImage.preserveAspect = false;
+        }
     }
 
     private Vector2 RandomPositionWithin(RectTransform panel) //currently unable to find a way to convert panel coord accurately, so using hard code.
     {
-        float x = Random.Range(-1000, -50);
+        float x = Random.Range(-1000, -200); //not -50 to compensate for word length
         float y = Random.Range(-650, -50);
 
 
 
         return new Vector2(x, y);
-        
+
 
     }
-    public void EndMinigame()
+    private void EndMinigame()
     {
         foreach (var box in activeBoxes)
         {
@@ -111,7 +153,7 @@ public class LetterSpawner : MonoBehaviour
         // Minigame has ended
         CraftingStationController.Instance.SendResult(ciphersSolved >= GetTargetAmount()); 
         EndMinigame();
-    } 
+    }
 
     #region Difficulty Settings
     private string GetRandomLetters()
@@ -128,8 +170,40 @@ public class LetterSpawner : MonoBehaviour
         .Select(_ => (char)Random.Range('A', 'Z' + 1))
         .ToArray());
     }
+    
+    private string GetRandomWord()
+    {
+        if (Random.Range(0, 2) == 0)
+        {
+            return GetRandomLetters();
+        }
 
-    public int GetBoxesCount()
+        int minLength, maxLength;
+
+        switch (currentDifficulty)
+        {
+            case Difficulty.Easy:
+                minLength = 3; maxLength = 4;
+                break;
+            case Difficulty.Medium:
+                minLength = 5; maxLength = 7;
+                break;
+            case Difficulty.Hard:
+                minLength = 8; maxLength = 20;
+                break;
+            default:
+                minLength = 3; maxLength = 6;
+                break;
+        }
+
+        var validWords = wordBank.Where(w => w.Length >= minLength && w.Length <= maxLength).ToList();
+        if (validWords.Count == 0)
+            return "DEFAULT";
+
+        return validWords[Random.Range(0, validWords.Count)];
+    }
+
+    private int GetBoxesCount()
     {
         return currentDifficulty switch
         {
@@ -140,19 +214,41 @@ public class LetterSpawner : MonoBehaviour
         };
     }
 
-        public int GetTargetAmount()
+    private int GetTargetAmount()
     {
         return currentDifficulty switch
         {
             Difficulty.Easy => 6,
             Difficulty.Medium => 15,
             Difficulty.Hard => 25,
+            _ => 6
+        };
+    }
+    
+    private int GetBoxLifetime()
+    {
+        return currentDifficulty switch
+        {
+            Difficulty.Easy => 10,
+            Difficulty.Medium => 11,
+            Difficulty.Hard => 12,
             _ => 10
         };
     }
+
+        private float GetSpawnInterval()
+    {
+        return currentDifficulty switch
+        {
+            Difficulty.Easy => 1.5f,
+            Difficulty.Medium => 1.7f,
+            Difficulty.Hard => 2f,
+            _ => 1.5f
+        };
+    }
     #endregion
-    
-        public void AddScore()
+
+    public void AddScore()
     {
         ciphersSolved++;
         statusText.text = "Ciphers Solved: " + ciphersSolved + " / " + GetTargetAmount();

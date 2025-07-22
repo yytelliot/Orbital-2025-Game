@@ -21,9 +21,12 @@ public class AmmoNoteObject : MonoBehaviour
     {
         if (Input.GetKeyDown(keyToPress) && canBePressed)
         {
-  
+
             AmmoScroller.Instance.AddScore();
-            Destroy(gameObject); 
+            Destroy(gameObject);
+
+            //Sound Effect .....
+            SoundManagerTechnican.PlaySoundVariation(SoundType.AMMO1);
         }
     }
 

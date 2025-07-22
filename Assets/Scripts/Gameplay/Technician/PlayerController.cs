@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
     {
 
         Vector2 facingDir = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        
         if (facingDir.sqrMagnitude == 0f)
         {
             // if no input, set default

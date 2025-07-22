@@ -39,7 +39,14 @@ public class LetterController : MonoBehaviour
         if (expected.StartsWith(currentTyped + input))
         {
             currentTyped += input;
-            textDisplay.text = expected.Substring(currentTyped.Length);
+            //textDisplay.text = expected.Substring(currentTyped.Length);
+            string typedColored = $"<color=red>{currentTyped}</color>";
+            string untyped = expected.Substring(currentTyped.Length);
+            textDisplay.text = typedColored + untyped;
+
+
+            //Sound Effect ...
+            SoundManagerTechnican.PlaySoundVariation(SoundType.TYPING);
 
             if (currentTyped == expected)
             {

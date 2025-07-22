@@ -10,6 +10,7 @@ public class FireTracker : MonoBehaviour, Interactable
 
     [SerializeField] private Animator animator;
 
+
     public void Interact()
     {
         if (isExtinguished) return;
