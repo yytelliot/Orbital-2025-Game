@@ -58,6 +58,9 @@ public class ReloadStationController : MonoBehaviour, Interactable
         miniGame.SetActive(true);
         onAmmoMinigameStart.Raise(this, null);
 
+        //Sound Effect .....
+        SoundManagerTechnican.PlaySound(SoundType.RELOADOPEN);
+
     }
 
     public void SendResult(int score)

@@ -79,12 +79,15 @@ public class FireTileSpawner : MonoBehaviour
         // Track when the fire is destroyed so we can reuse the position
         FireTracker tracker = fire.GetComponent<FireTracker>();
         tracker.Init(spawnPos, () => occupiedPositions.Remove(spawnPos));
+
+
     }
 
     public void FireExtinguished()
     {
         FireUIHandler.Instance.removeFire();
         EmergencyRepairComplete.RaiseNetworked(this, null);
+
     }
     
 

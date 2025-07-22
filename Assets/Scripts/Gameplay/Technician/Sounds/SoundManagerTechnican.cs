@@ -65,7 +65,7 @@ public class SoundManagerTechnican : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public static void PlaySound(SoundType sound, float volume = 1)
+    public static void PlaySound(SoundType sound, float volume = 1, float pitchMin = 1f, float pitchMax = 1f)
     {
 
         if (Instance == null)
@@ -96,6 +96,14 @@ public class SoundManagerTechnican : MonoBehaviour
 
         Debug.Log($"Playing sound: {sound} at volume {volume}");
 
+        float pitch = Random.Range(pitchMin, pitchMax);
+        Instance.audioSource.pitch = pitch;
+
         Instance.audioSource.PlayOneShot(Instance.soundList[(int)sound], volume);
+
+        // Reset pitch to default after playing to avoid affecting future sounds
+        Instance.audioSource.pitch = 1f;
+
+        Debug.Log($"Playing sound: {sound} at volume {volume}, pitch {pitch}");
     }
 }

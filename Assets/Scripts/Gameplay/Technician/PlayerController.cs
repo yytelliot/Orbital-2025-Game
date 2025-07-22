@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
         if (InputManager.GetKeyDown("interact"))
         {
             animator.SetBool("isInteracting", true);
-            SoundManagerTechnican.PlaySound(SoundType.INTERACT);  //Sound Effect
             StartCoroutine(TryInteractAnimation());
         }
         else
