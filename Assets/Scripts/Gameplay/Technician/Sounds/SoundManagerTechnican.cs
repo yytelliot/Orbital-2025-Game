@@ -106,4 +106,22 @@ public class SoundManagerTechnican : MonoBehaviour
 
         Debug.Log($"Playing sound: {sound} at volume {volume}, pitch {pitch}");
     }
+
+    public static void PlaySoundVariation(SoundType sound, float volume = 1f)
+    {
+        int index = (int)sound;
+        AudioClip clip = Instance.soundList[index];
+
+        int[] pentatonicSemitones = new[] { 0, 2, 4, 7, 9 };
+        int semitone = pentatonicSemitones[Random.Range(0, pentatonicSemitones.Length)];
+
+        float pitch = Mathf.Pow(1.059463f, semitone); // Semitone-based pitch
+
+        Instance.audioSource.pitch = pitch;
+        Instance.audioSource.clip = clip;
+        Instance.audioSource.volume = volume;
+
+        Debug.Log($"Playing {sound} at pitch ({pitch}) with semitone offset: {semitone}");
+        Instance.audioSource.Play();
+    }
 }

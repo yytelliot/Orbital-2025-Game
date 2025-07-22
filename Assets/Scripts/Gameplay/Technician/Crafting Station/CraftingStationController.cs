@@ -49,6 +49,9 @@ public class CraftingStationController : MonoBehaviour, Interactable
         miniGame.SetActive(true);
         onCraftingMinigameStart.Raise(this, null);
 
+        //Sound Effect .....
+        SoundManagerTechnican.PlaySound(SoundType.SCANNEROPEN);
+
     }
     
     public void SendResult(bool result)

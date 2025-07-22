@@ -26,7 +26,7 @@ public class AmmoNoteObject : MonoBehaviour
             Destroy(gameObject);
 
             //Sound Effect .....
-            SoundManagerTechnican.PlaySound(SoundType.AMMO1, 1, 0.2f, 1.2f);
+            SoundManagerTechnican.PlaySoundVariation(SoundType.AMMO1);
         }
     }
 
