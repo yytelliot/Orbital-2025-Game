@@ -6,8 +6,8 @@ public class PlayerStats : MonoBehaviourPun, IPunObservable
     public static PlayerStats Instance { get; private set; }
 
     [Tooltip("The shared score")]
-    public int CurrentScore;
-    public int GalaxiesJumped;
+    public int CurrentScore = 0;
+    public int GalaxiesJumped = 0;
 
     void Awake()
     {
