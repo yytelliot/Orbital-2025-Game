@@ -50,13 +50,24 @@ public class CraftingStationController : MonoBehaviour, Interactable
         onCraftingMinigameStart.Raise(this, null);
 
         //Sound Effect .....
-        SoundManagerTechnican.PlaySound(SoundType.SCANNEROPEN);
+        SoundManagerTechnican.PlaySound(SoundType.SCANNEROPEN, 1.5f);
 
     }
     
     public void SendResult(bool result)
     { 
         player.SetCanMove(true);
+
+        if (result)
+        {
+            //Sound Effect .....
+            SoundManagerTechnican.PlaySound(SoundType.SUCCESS);
+        }
+        else
+        {
+            //Sound Effect .....
+            SoundManagerTechnican.PlaySound(SoundType.FAIL);
+        }
         Debug.Log("You " + (result ? "Pass" : "Fail"));
 
     }
