@@ -18,7 +18,7 @@ public class ReloadStationController : MonoBehaviour, Interactable
     [Header("Events")]
     public GameEvent onAmmoMinigameComplete;
     public GameEvent onAmmoMinigameStart;
-    public AmmoResourceBar ammoResourceBar;
+    public ProgressBar progressBar;
 
     void Awake()
     {
@@ -52,7 +52,6 @@ public class ReloadStationController : MonoBehaviour, Interactable
 
     public void Interact()
     {
-        ammoResourceBar.SetAmmoRes(-10);
         player.SetCanMove(false);
         Debug.Log("Reload minigame start!");
         miniGame.SetActive(true);
