@@ -6,7 +6,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SocialPlatforms.Impl;
-public enum Difficulty {Easy, Medium, Hard}
+public enum Difficulty {None, Easy, Medium, Hard}
 public class LetterSpawner : MonoBehaviour
 {
     [SerializeField] public GameObject miniGame;
@@ -16,7 +16,7 @@ public class LetterSpawner : MonoBehaviour
 
     [Header("Game Setup")]
     [SerializeField] private RectTransform panel;
-    [SerializeField] private Difficulty currentDifficulty;
+     private Difficulty currentDifficulty;
     [SerializeField] private Transform SpawnPos;
     [SerializeField] private float marginx;
     [SerializeField] private float marginy;
@@ -63,8 +63,10 @@ public class LetterSpawner : MonoBehaviour
             }
         }
     }
-    public void StartMinigame()
+    public void StartMinigame(Component sender, object difficulty)
     {
+        currentDifficulty = (Difficulty)difficulty;
+
         StartCoroutine(StartGame());
     }
 
