@@ -51,6 +51,14 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
             PhotonNetwork.LeaveRoom();
             return;
         }
+
+        PhotonNetwork.Instantiate(
+                "PlayerStats",
+                Vector3.zero,                 // position doesn't matter
+                Quaternion.identity,          // rotation doesn't matter
+                0                             
+        );
+
         PhotonNetwork.LoadLevel("MainMenu");
 
 

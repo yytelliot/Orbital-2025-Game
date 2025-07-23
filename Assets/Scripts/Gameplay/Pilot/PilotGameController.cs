@@ -37,6 +37,12 @@ public class PilotGameController : MonoBehaviour
     /// </summary>
     public void OnJump()
     {
+        // Add Score to Shared Scene
+        if (PlayerStats.Instance != null)
+        {
+            PlayerStats.Instance.AddGalaxiesJumped(1);
+        }
+        
         jumpCount++;
         difficultyMultiplier += difficultyPerJump;
 
@@ -44,33 +50,11 @@ public class PilotGameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-
-    public void TriggerGameOver()
+    public void OnGameOver()
     {
-        if (isGameOver) return;
-        isGameOver = true;
-
-        // 1. Stop game logic
-        Time.timeScale = 0f;             // freeze physics & animations  
-        DisablePlayerControls();         // your own method to turn off inputs  
-        
-        // 2. Show UI or load scene
-        if (gameOverUIPanel != null) {
-            gameOverUIPanel.SetActive(true);
-        } else if (!string.IsNullOrEmpty(gameOverSceneName)) {
-            Time.timeScale = 1f;        // reset before scene load
-            SceneManager.LoadScene(gameOverSceneName);
-        }
-
+        Destroy(gameObject);
     }
 
-    void DisablePlayerControls()
-    {
-        // find your pilot & technician controllers and disable them
-        var pilot = FindObjectOfType<PilotController>();
-        if (pilot != null) pilot.enabled = false;
 
-        var tech = FindObjectOfType<TechnicianController>();
-        if (tech != null) tech.enabled = false;
-    }
+    
 }
