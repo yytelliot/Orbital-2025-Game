@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameOverSoreText : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Text scoreText;
+    public Text scoreText;
     void Start()
     {
         int final = PlayerStats.Instance != null
