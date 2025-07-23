@@ -4272,7 +4272,7 @@ MonoBehaviour:
   maxAmmoCount: 20
   currentAmmoCount: 20
   defaultStunedTime: 0.5
-  onHitInvulTime: 2
+  onHitInvulTime: 1.5
   speedToRegainControl: 1
   onAmmoCountChange: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
   onOutOfAmmo: {fileID: 11400000, guid: 2adefaed1fc83024cb83ecc0b5a7cce2, type: 2}
@@ -5859,52 +5859,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1795763543 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 87689811552498002, guid: 6e4c3925b14a3cd4180981d2094259d5, type: 3}
-  m_PrefabInstance: {fileID: 2804357915288265659}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1795763545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1795763543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: c6c6ce8d7528bdd4bbe3c764f56c7c39, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1795763546}
-        m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
-        m_MethodName: OnGameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1795763546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1795763543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27ba76a757bccf44cbca0bb7b12a8838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameOverSceneName: GameOver
 --- !u!1 &1810685452
 GameObject:
   m_ObjectHideFlags: 0
@@ -6815,13 +6769,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 87689811552498002, guid: 6e4c3925b14a3cd4180981d2094259d5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1795763546}
-    - targetCorrespondingSourceObject: {fileID: 87689811552498002, guid: 6e4c3925b14a3cd4180981d2094259d5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1795763545}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e4c3925b14a3cd4180981d2094259d5, type: 3}
 --- !u!1001 &3660977680258322164
 PrefabInstance:
