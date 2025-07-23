@@ -1712,11 +1712,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.41
---- !u!1 &1346561917 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6480909117204783110, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
-  m_PrefabInstance: {fileID: 3660977680258322164}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1505957775
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,7 +1990,7 @@ MonoBehaviour:
   onShipHpChange: {fileID: 11400000, guid: f8732d738338d7e4ea2ef878ddedb8d1, type: 2}
   onShipHpReachZero: {fileID: 11400000, guid: 7edda2dd692f3114483a637ef2926990, type: 2}
   emergencyRepairsRequired: {fileID: 11400000, guid: c1ece8132a998304fbb435029170a70d, type: 2}
-  gameOverEvent: {fileID: 0}
+  gameOverEvent: {fileID: 11400000, guid: c6c6ce8d7528bdd4bbe3c764f56c7c39, type: 2}
 --- !u!114 &1505957785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3092,6 +3087,10 @@ PrefabInstance:
       propertyPath: response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4471504679008147797, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
+      propertyPath: gameEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: c6c6ce8d7528bdd4bbe3c764f56c7c39, type: 2}
     - target: {fileID: 6480909117204783110, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
       propertyPath: m_Name
       value: TestController
@@ -3143,41 +3142,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6480909117204783110, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3660977680258322166}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
 --- !u!114 &3660977680258322165 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7374463584469521298, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
   m_PrefabInstance: {fileID: 3660977680258322164}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1346561917}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79314c245e521af4ea2da352da6d0f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3660977680258322166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1346561917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 747dd9eb200eb434d8ae38c36280d85d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonRect:
-    serializedVersion: 2
-    x: 10
-    y: 10
-    width: 100
-    height: 30
-  gameEvent: {fileID: 0}
 --- !u!1001 &6025222452441283542
 PrefabInstance:
   m_ObjectHideFlags: 0
