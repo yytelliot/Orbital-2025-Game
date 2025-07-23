@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class CraftingStationController : MonoBehaviour, Interactable
 {
-    [SerializeField] public GameObject miniGame;
-    [SerializeField] public PlayerController player;
+    [SerializeField] private GameObject difficultyUI;
+    [SerializeField] private PlayerController player;
+  
     public static CraftingStationController Instance; // Singleton pattern
     public GameObject highlight;
 
-    [Header("Events")]
-    //public GameEvent onCraftingMinigameComplete;
-    public GameEvent onCraftingMinigameStart;
+   
+    //public GameEvent onCraftingdifficultyUIComplete;
+    //public GameEvent onCraftingdifficultyUIStart;
 
     void Awake()
     {
@@ -45,18 +46,28 @@ public class CraftingStationController : MonoBehaviour, Interactable
     public void Interact()
     {
         player.SetCanMove(false);
-        Debug.Log("Crafting minigame start!");
-        miniGame.SetActive(true);
-        onCraftingMinigameStart.Raise(this, null);
+        Debug.Log("Crafting difficultyUI start!");
+        difficultyUI.SetActive(true);
 
         //Sound Effect .....
-        SoundManagerTechnican.PlaySound(SoundType.SCANNEROPEN);
+        SoundManagerTechnican.PlaySound(SoundType.SCANNEROPEN, 1.5f);
 
     }
     
     public void SendResult(bool result)
     { 
         player.SetCanMove(true);
+
+        if (result)
+        {
+            //Sound Effect .....
+            SoundManagerTechnican.PlaySound(SoundType.SUCCESS);
+        }
+        else
+        {
+            //Sound Effect .....
+            SoundManagerTechnican.PlaySound(SoundType.FAIL);
+        }
         Debug.Log("You " + (result ? "Pass" : "Fail"));
 
     }

@@ -6,7 +6,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SocialPlatforms.Impl;
-public enum Difficulty {Easy, Medium, Hard}
+public enum Difficulty {None, Easy, Medium, Hard}
 public class LetterSpawner : MonoBehaviour
 {
     [SerializeField] public GameObject miniGame;
@@ -16,7 +16,7 @@ public class LetterSpawner : MonoBehaviour
 
     [Header("Game Setup")]
     [SerializeField] private RectTransform panel;
-    [SerializeField] private Difficulty currentDifficulty;
+     private Difficulty currentDifficulty;
     [SerializeField] private Transform SpawnPos;
     [SerializeField] private float marginx;
     [SerializeField] private float marginy;
@@ -63,8 +63,10 @@ public class LetterSpawner : MonoBehaviour
             }
         }
     }
-    public void StartMinigame()
+    public void StartMinigame(Component sender, object difficulty)
     {
+        currentDifficulty = (Difficulty)difficulty;
+
         StartCoroutine(StartGame());
     }
 
@@ -72,6 +74,11 @@ public class LetterSpawner : MonoBehaviour
     {
         for (int i = 0; i < GetBoxesCount(); i++)
         {
+            if (ciphersSolved >= GetTargetAmount())
+            {
+                break;
+            }
+
             SpawnBox();
             yield return new WaitForSeconds(GetSpawnInterval());
         }
@@ -147,6 +154,12 @@ public class LetterSpawner : MonoBehaviour
         {
             // Remove any destroyed boxes from the list
             activeBoxes.RemoveAll(box => box == null || box.gameObject == null);
+
+            if (ciphersSolved >= GetTargetAmount())
+            {
+                break; 
+            }
+
             yield return null;
         }
 
@@ -252,6 +265,13 @@ public class LetterSpawner : MonoBehaviour
     {
         ciphersSolved++;
         statusText.text = "Ciphers Solved: " + ciphersSolved + " / " + GetTargetAmount();
+
+        // Immediately end game if target reached
+        if (ciphersSolved >= GetTargetAmount())
+        {
+            StopAllCoroutines(); // Stop any ongoing spawning
+            StartCoroutine(WaitUntilMinigameEnds());
+        }
     }
 
 
