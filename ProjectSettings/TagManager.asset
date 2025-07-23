@@ -56,6 +56,18 @@ TagManager:
   - name: Background
     uniqueID: 532493783
     locked: 0
+  - name: 1Dust
+    uniqueID: 3324208951
+    locked: 0
+  - name: 2Nebula
+    uniqueID: 2266268415
+    locked: 0
+  - name: 3Stars
+    uniqueID: 3688167835
+    locked: 0
+  - name: 4Planets
+    uniqueID: 1597612193
+    locked: 0
   - name: Highlights
     uniqueID: 1051243531
     locked: 0
