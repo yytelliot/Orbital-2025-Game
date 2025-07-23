@@ -72,6 +72,11 @@ public class LetterSpawner : MonoBehaviour
     {
         for (int i = 0; i < GetBoxesCount(); i++)
         {
+            if (ciphersSolved >= GetTargetAmount())
+            {
+                break;
+            }
+
             SpawnBox();
             yield return new WaitForSeconds(GetSpawnInterval());
         }
@@ -147,6 +152,12 @@ public class LetterSpawner : MonoBehaviour
         {
             // Remove any destroyed boxes from the list
             activeBoxes.RemoveAll(box => box == null || box.gameObject == null);
+
+            if (ciphersSolved >= GetTargetAmount())
+            {
+                break; 
+            }
+
             yield return null;
         }
 
@@ -252,6 +263,13 @@ public class LetterSpawner : MonoBehaviour
     {
         ciphersSolved++;
         statusText.text = "Ciphers Solved: " + ciphersSolved + " / " + GetTargetAmount();
+
+        // Immediately end game if target reached
+        if (ciphersSolved >= GetTargetAmount())
+        {
+            StopAllCoroutines(); // Stop any ongoing spawning
+            StartCoroutine(WaitUntilMinigameEnds());
+        }
     }
 
 
