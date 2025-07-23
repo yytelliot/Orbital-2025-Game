@@ -21,6 +21,9 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
     [Tooltip("How long before despawn")]
     public float lifetime = 20;
 
+    [Header("SFX")]
+    [SerializeField] private AudioClip spawnNoise;
+
     private GameObject player;
     private Transform playerTransform;
     private Rigidbody2D rb;
@@ -55,6 +58,7 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
 
     IEnumerator LifetimeCoroutine(float seconds)
     {
+        AudioManager.Instance.PlaySFX(spawnNoise);
         fader.FadeToAlpha(1f, 2f);
         yield return new WaitForSeconds(seconds);
         Despawn();
