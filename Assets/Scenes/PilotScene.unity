@@ -1995,7 +1995,7 @@ MonoBehaviour:
   onShipHpChange: {fileID: 11400000, guid: f8732d738338d7e4ea2ef878ddedb8d1, type: 2}
   onShipHpReachZero: {fileID: 11400000, guid: 7edda2dd692f3114483a637ef2926990, type: 2}
   emergencyRepairsRequired: {fileID: 11400000, guid: c1ece8132a998304fbb435029170a70d, type: 2}
-  gameOverEvent: {fileID: 0}
+  gameOverEvent: {fileID: 11400000, guid: c6c6ce8d7528bdd4bbe3c764f56c7c39, type: 2}
 --- !u!114 &1505957785
 MonoBehaviour:
   m_ObjectHideFlags: 0
