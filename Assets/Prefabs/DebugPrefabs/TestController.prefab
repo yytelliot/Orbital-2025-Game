@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8765439558113095928}
   - component: {fileID: 7374463584469521298}
   - component: {fileID: 2949514467627174162}
+  - component: {fileID: 4471504679008147797}
   m_Layer: 0
   m_Name: TestController
   m_TagString: Untagged
@@ -73,3 +74,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4471504679008147797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6480909117204783110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 747dd9eb200eb434d8ae38c36280d85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonRect:
+    serializedVersion: 2
+    x: 10
+    y: 10
+    width: 100
+    height: 30
+  gameEvent: {fileID: 0}

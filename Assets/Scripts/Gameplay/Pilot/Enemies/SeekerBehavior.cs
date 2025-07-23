@@ -58,7 +58,7 @@ public class SeekerBehavior : MonoBehaviour, IStunnable
 
     IEnumerator LifetimeCoroutine(float seconds)
     {
-        AudioManager.Instance.PlaySFX(spawnNoise);
+        AudioManager.PlaySound(spawnNoise);
         fader.FadeToAlpha(1f, 2f);
         yield return new WaitForSeconds(seconds);
         Despawn();

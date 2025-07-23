@@ -38,6 +38,7 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
     public GameEvent onShipHpChange;
     public GameEvent onShipHpReachZero;
     public GameEvent emergencyRepairsRequired;
+    public GameEvent gameOverEvent;
 
     private Rigidbody2D rb;
     private SpriteBlinker blinker;
@@ -259,9 +260,10 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
         if (currentHp + amount <= 0 || currentMaxHp <= 0)
         {
             currentHp = 0;
-            Debug.Log("Lmao ded");
+            // Debug.Log("Lmao ded");
             updateUI.Raise();
-            onShipHpReachZero.RaiseNetworked(this, null);
+            // onShipHpReachZero.RaiseNetworked(this, null);
+            gameOverEvent.RaiseNetworked(this, null);
             return;
         }
 
