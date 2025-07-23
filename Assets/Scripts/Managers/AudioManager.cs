@@ -32,18 +32,40 @@ public class AudioManager : MonoBehaviour
     }
 
     // Play a one-shot SFX
-    public void PlaySFX(AudioClip clip, float volume = 1f)
+    public static void PlaySFX(AudioClip clip, float volume = 1, float pitchMin = 1f, float pitchMax = 1f)
     {
-        sfxSource.PlayOneShot(clip, volume);
+        // Debug.Log($"Playing sound: {clip} at volume {volume}");
+
+        float pitch = Random.Range(pitchMin, pitchMax);
+        Instance.sfxSource.pitch = pitch;
+        Instance.sfxSource.PlayOneShot(clip, volume);
+        Instance.sfxSource.pitch = 1f;
     }
 
-    // Start/switch BGM
-    public void PlayMusic(AudioClip clip, float volume = 1f)
+     public static void PlaySoundVariation(AudioClip clip, float volume = 1f)
     {
-        if (musicSource.clip == clip) return;  // already playing
-        musicSource.clip = clip;
-        musicSource.volume = volume;
-        musicSource.Play();
+
+        int[] pentatonicSemitones = new[] { 0, 2, 4, 7, 9 };
+        int semitone = pentatonicSemitones[Random.Range(0, pentatonicSemitones.Length)];
+
+        float pitch = Mathf.Pow(1.059463f, semitone); // Semitone-based pitch
+
+        Instance.sfxSource.pitch = pitch;
+        Instance.sfxSource.clip = clip;
+        Instance.sfxSource.volume = volume;
+
+        // Debug.Log($"Playing {clip} at pitch ({pitch}) with semitone offset: {semitone}");
+        Instance.sfxSource.Play();
+    }
+
+
+    // Start/switch BGM
+    public static void PlayMusic(AudioClip clip, float volume = 1f)
+    {
+        if (Instance.musicSource.clip == clip) return;  // already playing
+        Instance.musicSource.clip = clip;
+        Instance.musicSource.volume = volume;
+        Instance.musicSource.Play();
     }
 
     // Stop music

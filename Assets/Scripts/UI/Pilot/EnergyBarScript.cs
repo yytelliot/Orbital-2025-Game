@@ -9,7 +9,7 @@ public class EnergyBarScript : MonoBehaviour
 {
     public Slider slider;
 
-    public ShipEnergyHandler shipEnergyHandler;
+    private ShipEnergyHandler shipEnergyHandler;
 
 
     public void Awake()
@@ -35,7 +35,7 @@ public class EnergyBarScript : MonoBehaviour
         {
             SetEnergySlider(0);
         }
-        else SetEnergySlider(currentEnergy / maxEnergy);
+        else SetEnergySlider((float)currentEnergy / maxEnergy);
 
 
     }
