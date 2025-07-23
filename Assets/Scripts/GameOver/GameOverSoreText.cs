@@ -7,7 +7,7 @@ public class GameOverSoreText : MonoBehaviour
 {
     // Start is called before the first frame update
     private Text scoreText;
-    v void Start()
+    void Start()
     {
         int final = PlayerStats.Instance != null
                     ? PlayerStats.Instance.CurrentScore
