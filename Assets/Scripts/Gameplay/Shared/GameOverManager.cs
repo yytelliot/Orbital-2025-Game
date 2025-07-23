@@ -10,8 +10,8 @@ public class GameOverManager : MonoBehaviour
 
     public void OnGameOver()
     {
-        PlayerPrefs.SetInt("LastScore", PlayerStats.Instance.GalaxiesJumped);
-        PlayerPrefs.Save();
+        // PlayerPrefs.SetInt("LastScore", PlayerStats.Instance.GalaxiesJumped);
+        // PlayerPrefs.Save();
         SceneManager.LoadScene(gameOverSceneName);
     }
 

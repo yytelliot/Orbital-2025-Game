@@ -7,9 +7,12 @@ public class GameOverSoreText : MonoBehaviour
 {
     // Start is called before the first frame update
     private Text scoreText;
-    void Awake()
+    v void Start()
     {
-        scoreText.text = PlayerPrefs.GetInt("LastScore", 0).ToString();
+        int final = PlayerStats.Instance != null
+                    ? PlayerStats.Instance.CurrentScore
+                    : 0;
+        scoreText.text = $"Galaxies Jumped: {final}";
     }
 
 }
