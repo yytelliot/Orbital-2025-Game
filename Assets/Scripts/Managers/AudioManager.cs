@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
     }
 
     // Play a one-shot SFX
-    public static void PlaySFX(AudioClip clip, float volume = 1, float pitchMin = 1f, float pitchMax = 1f)
+    public static void PlaySound(AudioClip clip, float volume = 1, float pitchMin = 1f, float pitchMax = 1f)
     {
         // Debug.Log($"Playing sound: {clip} at volume {volume}");
 
