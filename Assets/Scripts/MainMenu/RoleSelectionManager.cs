@@ -51,30 +51,6 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
         backButton.onClick.AddListener(CancelSelection);
 
         UpdateStatus("Select your role");
-
-        StartCoroutine(DebugPlayerProperties());
-    }
-
-    private IEnumerator DebugPlayerProperties()
-    {
-        while (true)
-        {
-            foreach (Player player in PhotonNetwork.PlayerList)
-            {
-                object role;
-                object confirmed;
-
-                player.CustomProperties.TryGetValue("PlayerRole", out role);
-                player.CustomProperties.TryGetValue("HasConfirmed", out confirmed);
-
-                string roleStr = role != null ? role.ToString() : "None";
-                string confirmedStr = confirmed != null ? confirmed.ToString() : "False";
-
-                Debug.Log($"[Player {player.NickName} | Actor {player.ActorNumber}] Role: {roleStr}, Confirmed: {confirmedStr}");
-            }
-
-            yield return new WaitForSeconds(2f);
-        }
     }
 
     private void SelectRole(string role)
