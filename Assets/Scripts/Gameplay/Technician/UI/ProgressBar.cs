@@ -9,7 +9,7 @@ public class ProgressBar : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private float currentProgress = 0f;
     
-    [SerializeField] private float maxProgress = 100f;
+    [SerializeField] private float maxProgress = 1f;
     [Header("References")]
     [SerializeField] private Slider progressSlider;
     [SerializeField] private Image fillImage;
@@ -29,7 +29,7 @@ public class ProgressBar : MonoBehaviour
         currentProgress = Mathf.Clamp(currentProgress, 0f, maxProgress);
         float normalisedProgress = currentProgress / maxProgress;
         progressSlider.value = normalisedProgress;
-        progressResourceText.text = currentProgress + "/" + maxProgress;
+        progressResourceText.text = currentProgress * 100 + "% " + "/" + maxProgress * 100 + "%";
 
         if (currentProgress > midProgressThreshold)
         {

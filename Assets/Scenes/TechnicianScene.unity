@@ -4880,9 +4880,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0024455786, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.6307323
 --- !u!114 &678021974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13088,7 +13088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficultyUI: {fileID: 1045492037}
   player: {fileID: 678021970}
-  ScanComplete: {fileID: 0}
+  ScanComplete: {fileID: 11400000, guid: 4e5221a595fbb0e40ba320591013cb92, type: 2}
   highlight: {fileID: 1382368869}
 --- !u!1 &2145466881
 GameObject:
