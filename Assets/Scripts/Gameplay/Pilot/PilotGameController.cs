@@ -50,11 +50,18 @@ public class PilotGameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+
     public void OnGameOver()
     {
-        Destroy(gameObject);
+        StartCoroutine(DestroyNextFrame());
     }
 
+    private IEnumerator DestroyNextFrame()
+    {
+        // let the event system finish calling every subscriber
+        yield return null;
+        Destroy(gameObject);
+    }
 
     
 }
