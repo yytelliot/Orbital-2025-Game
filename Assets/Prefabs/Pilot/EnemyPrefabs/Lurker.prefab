@@ -269,7 +269,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8751112372294236305}
         m_TargetAssemblyTypeName: LurkerBehavior, Assembly-CSharp
-        m_MethodName: OnRevealLurkers
+        m_MethodName: OnScanLurker
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

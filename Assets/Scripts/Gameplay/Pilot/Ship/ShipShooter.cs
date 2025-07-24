@@ -68,6 +68,9 @@ public class ShipShooter : MonoBehaviour
             SimpleBulletBehavior bb = bullet.GetComponent<SimpleBulletBehavior>();
             bb.Initialize(dir, angle, bulletSpeed);
 
+            // Pew sound effect
+            AudioManager.PlaySound(AudioLibrary.GetClip("Pew"));
+
             // Raise onShoot Event
             shotFired.Raise(this, null);
         }
