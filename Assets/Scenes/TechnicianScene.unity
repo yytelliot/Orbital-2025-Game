@@ -486,13 +486,13 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 34008208}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 34008214}
+        m_TargetAssemblyTypeName: JumpHandler, Assembly-CSharp
+        m_MethodName: OnJumpReady
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1421,8 +1421,8 @@ Tilemap:
   - first: {x: 2, y: 1, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 8
-      m_TileSpriteIndex: 7
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1730,7 +1730,7 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 32
+  - m_RefCount: 33
     m_Data: {fileID: 11400000, guid: 7a8b41c352dd43943a9246cecb1ed8fc, type: 2}
   - m_RefCount: 7
     m_Data: {fileID: 11400000, guid: 4c7085c84878b6b4690ff1afe70aa29b, type: 2}
@@ -1746,7 +1746,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 4
     m_Data: {fileID: 11400000, guid: 0e7f71b104080194f97b2e3c1c5293b7, type: 2}
-  - m_RefCount: 3
+  - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 70c8f00f1bdbc9541a80d255aec3c0c1, type: 2}
   - m_RefCount: 4
     m_Data: {fileID: 11400000, guid: 0ce7a49b786bb8547805abadeef6fbb6, type: 2}
@@ -1783,7 +1783,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 3613b63e2f1096a4c87cdf6cebb89738, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 32
+  - m_RefCount: 33
     m_Data: {fileID: 383685338, guid: 9a2047285815f8948a7874f1e6fde552, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 1276146866, guid: 9a2047285815f8948a7874f1e6fde552, type: 3}
@@ -1797,7 +1797,7 @@ Tilemap:
     m_Data: {fileID: 1184539492, guid: 9a2047285815f8948a7874f1e6fde552, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: -630158056, guid: 9a2047285815f8948a7874f1e6fde552, type: 3}
-  - m_RefCount: 3
+  - m_RefCount: 2
     m_Data: {fileID: 879951564, guid: 9a2047285815f8948a7874f1e6fde552, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: -1235146548, guid: 9a2047285815f8948a7874f1e6fde552, type: 3}
@@ -4120,16 +4120,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 2, y: 1, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 6
-      m_TileSpriteIndex: 2
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: -8, y: 2, z: 0}
     second:
       serializedVersion: 2
@@ -4194,8 +4184,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 7ed8c698aa9f07d4da50321bb25b598c, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 7a8b41c352dd43943a9246cecb1ed8fc, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 2fa532d2b47f2be4ab1871078e095b2f, type: 2}
   - m_RefCount: 1
@@ -4217,8 +4207,8 @@ Tilemap:
     m_Data: {fileID: -469860696, guid: 9a2047285815f8948a7874f1e6fde552, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 383685338, guid: 9a2047285815f8948a7874f1e6fde552, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -415066689, guid: 9a2047285815f8948a7874f1e6fde552, type: 3}
   - m_RefCount: 1
@@ -4244,7 +4234,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: -269655350, guid: 9a2047285815f8948a7874f1e6fde552, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 16
+  - m_RefCount: 15
     m_Data:
       e00: 1
       e01: 0
@@ -4265,7 +4255,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
-  - m_RefCount: 16
+  - m_RefCount: 15
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -4660,7 +4650,7 @@ GameObject:
   - component: {fileID: 678021966}
   - component: {fileID: 678021971}
   - component: {fileID: 678021972}
-  - component: {fileID: 678021973}
+  - component: {fileID: 678021975}
   - component: {fileID: 678021970}
   - component: {fileID: 678021969}
   - component: {fileID: 678021974}
@@ -4848,8 +4838,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.62, y: 0.4}
   m_EdgeRadius: 0
---- !u!58 &678021973
-CircleCollider2D:
+--- !u!114 &678021974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678021965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 811b2d0fcd26af94980fabbaebaa8155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepClips: 0000000001000000020000000300000004000000
+  footstepInterval: 0.4
+  animator: {fileID: 678021969}
+--- !u!70 &678021975
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4880,24 +4885,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0024455786, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.6307323
---- !u!114 &678021974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678021965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 811b2d0fcd26af94980fabbaebaa8155, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  footstepClips: 0000000001000000020000000300000004000000
-  footstepInterval: 0.4
-  animator: {fileID: 678021969}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.78125, y: 1.1875}
+  m_Direction: 0
 --- !u!1 &714042501
 GameObject:
   m_ObjectHideFlags: 0
@@ -9220,7 +9210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentProgress: 0
-  maxProgress: 100
+  maxProgress: 1
   progressSlider: {fileID: 226788624}
   fillImage: {fileID: 1281753755}
   progressResourceText: {fileID: 580749514}

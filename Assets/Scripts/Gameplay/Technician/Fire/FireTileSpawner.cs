@@ -80,6 +80,9 @@ public class FireTileSpawner : MonoBehaviour
         FireTracker tracker = fire.GetComponent<FireTracker>();
         tracker.Init(spawnPos, () => occupiedPositions.Remove(spawnPos));
 
+        //Sound Effect .....
+        SoundManagerTechnican.PlaySound(SoundType.FIRESTART, 1);
+
 
     }
 

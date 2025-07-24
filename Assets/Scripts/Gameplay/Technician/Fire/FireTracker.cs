@@ -28,6 +28,7 @@ public class FireTracker : MonoBehaviour, Interactable
     {
         onDestroyed?.Invoke();
         FireTileSpawner.Instance.FireExtinguished();
+
         
     }
 
@@ -36,6 +37,10 @@ public class FireTracker : MonoBehaviour, Interactable
         isExtinguished = true;
         animator.SetTrigger("Extinguish");
         StartCoroutine(DestroyAfterAnimation());
+
+        //Sound Effect .....
+        SoundManagerTechnican.PlaySound(SoundType.FIREEXTINGUISH, 0.2f);
+        
         
     }
 
