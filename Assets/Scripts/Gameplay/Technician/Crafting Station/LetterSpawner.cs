@@ -164,7 +164,7 @@ public class LetterSpawner : MonoBehaviour
         }
 
         // Minigame has ended
-        CraftingStationController.Instance.SendResult(ciphersSolved >= GetTargetAmount()); 
+        CraftingStationController.Instance.SendResult(ciphersSolved >= GetTargetAmount(), GetDifficultyLevel()); 
         EndMinigame();
     }
 
@@ -249,7 +249,7 @@ public class LetterSpawner : MonoBehaviour
         };
     }
 
-        private float GetSpawnInterval()
+    private float GetSpawnInterval()
     {
         return currentDifficulty switch
         {
@@ -257,6 +257,17 @@ public class LetterSpawner : MonoBehaviour
             Difficulty.Medium => 1.3f,
             Difficulty.Hard => 1.5f,
             _ => 1f
+        };
+    }
+
+    private int GetDifficultyLevel()
+    {
+        return currentDifficulty switch
+        {
+            Difficulty.Easy => 1,
+            Difficulty.Medium => 2,
+            Difficulty.Hard => 3,
+            _ => 1
         };
     }
     #endregion

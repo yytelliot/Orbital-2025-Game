@@ -33,7 +33,7 @@ public class ReloadStationController : MonoBehaviour, Interactable
     }
 
 
-    private void OnTriggerEnter2D(UnityEngine.Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
@@ -42,7 +42,7 @@ public class ReloadStationController : MonoBehaviour, Interactable
 
     }
 
-    private void OnTriggerExit2D(UnityEngine.Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
