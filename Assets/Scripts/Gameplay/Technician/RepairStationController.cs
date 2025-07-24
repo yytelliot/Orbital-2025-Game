@@ -7,7 +7,7 @@ public class RepairStationController : MonoBehaviour, Interactable
     public GameEvent g;
     public void Interact()
     {
-        g.Raise(this, null);
+        g.Raise(this, 0.02f);
         Debug.Log("Repair minigame start!");
 
     }
