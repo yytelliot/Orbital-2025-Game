@@ -17,9 +17,9 @@ MonoBehaviour:
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
-    AppVersion: 
+    AppVersion: 1.0
     UseNameServer: 1
-    FixedRegion: 
+    FixedRegion: asia
     Server: 
     Port: 0
     ProxyServer: 
@@ -56,6 +56,9 @@ MonoBehaviour:
   - ConfirmRole
   - RPC_RelayToPilot
   - RPC_RaiseEvent
+  - ResetRoles
+  - SyncRoleSelection
+  - LoadSceneForPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
