@@ -6,29 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class UIHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject settingScreen;
 
     [Header("Events")]
     [SerializeField] private GameEvent leaveToLobbyEvent;
-    private bool settingScreenActive = false;
-    void Update()
-    {
-        if (InputManager.GetKeyDown("settings"))
-        {
-            if (settingScreenActive)
-            {
-                SoundManagerTechnican.PlaySound(SoundType.SETTINGCLOSE, 0.5f);
-                settingScreen.SetActive(false);
-                settingScreenActive = false;
-            }
-            else
-            {
-                SoundManagerTechnican.PlaySound(SoundType.SETTINGOPEN, 0.5f);
-                settingScreen.SetActive(true);
-                settingScreenActive = true;
-            }
-        }
-    }
 
     #region ("Exit To Lobby")
 
