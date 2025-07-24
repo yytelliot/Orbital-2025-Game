@@ -10,9 +10,17 @@ using UnityEngine.SceneManagement;
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
     public TMP_InputField createInput;
-    public TMP_InputField joinInput;
+    //public TMP_InputField joinInput;
     public TMP_Text statusText;
     [SerializeField] private int noOfPlayers = 2;
+
+    //public string roomNameToJoin = "test";
+
+    /*public override void OnJoinedLobby()
+    {
+        base.OnJoinedLobby();
+        PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
+    }*/
 
     public void CreateRoom()
     {
@@ -28,16 +36,17 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     }
 
-    public void JoinRoom()
+    public void JoinRoom(string roomName)
     {
-        if (string.IsNullOrEmpty(joinInput.text))
+        if (string.IsNullOrEmpty(roomName))
         {
             ShowError("Room name cannot be empty!");
             return;
         }
 
-        PhotonNetwork.JoinRoom(joinInput.text);
+        PhotonNetwork.JoinRoom(roomName);
     }
+    
 
     public override void OnJoinedRoom()
     {
