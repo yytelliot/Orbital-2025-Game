@@ -42,6 +42,13 @@ public class GlobalEnemySpawner : MonoBehaviour
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
 
+        
+    }
+
+    void Start()
+    {
+        StartCoroutine(SpawnEnemyCoroutine());
+        
         // Difficulty multiplier
         float dm = PilotGameController.Instance.difficultyMultiplier;
 
@@ -66,8 +73,6 @@ public class GlobalEnemySpawner : MonoBehaviour
         // Ensure min distance is non-negative
         minSpawnDistance = Mathf.Max(0, minSpawnDistance);
     }
-
-    void Start() => StartCoroutine(SpawnEnemyCoroutine());
 
     private IEnumerator SpawnEnemyCoroutine()
     {

@@ -9,13 +9,12 @@ public class ShipEnergyHandler : MonoBehaviour
 
     public int baseEnergyToNextLevel = 20;
     public int currentEnergy = 0;
-    // Start is called before the first frame update
     private int energyToNextLevel;
 
     [Header("Events")]
     public GameEvent updateUI;
 
-    public void Awake()
+    public void Start()
     {
         // difficulty multiplier
         float dm = PilotGameController.Instance.difficultyMultiplier;

@@ -69,3 +69,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentScore: 0
+  GalaxiesJumped: 0
