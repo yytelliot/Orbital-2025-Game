@@ -19,3 +19,5 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c98f2ed551bdcae40a515965e1ef2bb4, type: 3}
   - key: SeekerSpawnNoise
     clip: {fileID: 8300000, guid: edd9110009a58924485bce814eec7bc4, type: 3}
+  - key: ScanNoise
+    clip: {fileID: 8300000, guid: 955724fe17af94045b017d2ab68f0b2b, type: 3}

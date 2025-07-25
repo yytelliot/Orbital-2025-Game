@@ -23,6 +23,7 @@ public class ShipScanner : MonoBehaviour
             scannerRadius = defaultRadius + 0.5f * defaultRadius * (strength-1),
             scannerStrength = strength
         };
+        AudioManager.PlaySound(AudioLibrary.GetClip("ScanNoise"));
         onScan.Raise(this, payload);
     }
 
