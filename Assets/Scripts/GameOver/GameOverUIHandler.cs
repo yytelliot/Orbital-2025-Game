@@ -4,53 +4,13 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 
-public class UIHandler : MonoBehaviour
+public class GameOverUIHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject settingScreen;
-    [SerializeField] private GameObject InstructionPanel;
-    [SerializeField] private GameObject ControlPanel;
 
     [Header("Events")]
     [SerializeField] private GameEvent leaveToLobbyEvent;
-    private bool settingScreenActive = false;
-    void Update()
-    {
-        if (InputManager.GetKeyDown("settings"))
-        {
-            if (settingScreenActive)
-            {
-                SoundManagerTechnican.PlaySound(SoundType.SETTINGCLOSE, 0.5f);
-                settingScreen.SetActive(false);
-                settingScreenActive = false;
-            }
-            else
-            {
-                SoundManagerTechnican.PlaySound(SoundType.SETTINGOPEN, 0.5f);
-                settingScreen.SetActive(true);
-                settingScreenActive = true;
-            }
-        }
-    }
 
-    public void CloseInstructions()
-    {
-        InstructionPanel.SetActive(false);
-    }
 
-    public void OpenInstructions()
-    {
-        InstructionPanel.SetActive(true);
-    }
-
-        public void CloseControls()
-    {
-        ControlPanel.SetActive(false);
-    }
-
-        public void OpenSettings()
-    {
-        ControlPanel.SetActive(true);
-    }
 
     #region ("Exit To Lobby")
 
