@@ -156,8 +156,8 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIHandler, Assembly-CSharp
+      - m_Target: {fileID: 219472676}
+        m_TargetAssemblyTypeName: GameOverUIHandler, Assembly-CSharp
         m_MethodName: DisconnectOtherPlayer
         m_Mode: 0
         m_Arguments:

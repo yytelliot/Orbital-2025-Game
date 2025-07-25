@@ -9924,7 +9924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultColour: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   pressedColour: {r: 0.5882353, g: 0.19607843, b: 0.19607843, a: 1}
-  keyToPress: 46
+  keyToPress: 98
 --- !u!212 &970491626
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10098,7 +10098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultColour: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   pressedColour: {r: 0.5882353, g: 0.19607843, b: 0.19607843, a: 1}
-  keyToPress: 122
+  keyToPress: 99
 --- !u!212 &987155414
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11061,7 +11061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultColour: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   pressedColour: {r: 0.5882353, g: 0.19607843, b: 0.19607843, a: 1}
-  keyToPress: 47
+  keyToPress: 110
 --- !u!212 &1143018763
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11633,7 +11633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultColour: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   pressedColour: {r: 0.5882353, g: 0.19607843, b: 0.19607843, a: 1}
-  keyToPress: 120
+  keyToPress: 118
 --- !u!212 &1365054384
 SpriteRenderer:
   m_ObjectHideFlags: 0
