@@ -10,7 +10,7 @@ public class GameOverSoreText : MonoBehaviour
     void Start()
     {
         int final = PlayerStats.Instance != null
-                    ? PlayerStats.Instance.CurrentScore
+                    ? PlayerStats.Instance.GalaxiesJumped
                     : 0;
         scoreText.text = $"Galaxies Jumped: {final}";
     }

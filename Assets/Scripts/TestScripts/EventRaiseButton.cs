@@ -16,6 +16,6 @@ public class DebugOnGUIButton : MonoBehaviour
     private void DoDebugCallback()
     {
         Debug.Log("Event button pressed!");
-        gameEvent.Raise(this, 2);
+        gameEvent.Raise(this, null);
     }
 }

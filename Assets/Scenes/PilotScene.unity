@@ -681,7 +681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367a0ae87b9ece94daa63c2c9dbc169c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingScreen: {fileID: 917552446}
   leaveToLobbyEvent: {fileID: 11400000, guid: cb0ff065db529fa4aa77a23a2868e4bd, type: 2}
 --- !u!4 &145905588
 Transform:
@@ -7582,7 +7581,7 @@ PrefabInstance:
     - target: {fileID: 2949514467627174162, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
       propertyPath: gameEvent
       value: 
-      objectReference: {fileID: 11400000, guid: f8732d738338d7e4ea2ef878ddedb8d1, type: 2}
+      objectReference: {fileID: 11400000, guid: a54e73056bc57a34eb134efad67bc2c4, type: 2}
     - target: {fileID: 2949514467627174162, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -7626,7 +7625,7 @@ PrefabInstance:
     - target: {fileID: 4471504679008147797, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
       propertyPath: gameEvent
       value: 
-      objectReference: {fileID: 11400000, guid: 4e5221a595fbb0e40ba320591013cb92, type: 2}
+      objectReference: {fileID: 11400000, guid: a54e73056bc57a34eb134efad67bc2c4, type: 2}
     - target: {fileID: 6480909117204783110, guid: da8bb4faf4012d649bfe1a7b0246f2c0, type: 3}
       propertyPath: m_Name
       value: TestController
