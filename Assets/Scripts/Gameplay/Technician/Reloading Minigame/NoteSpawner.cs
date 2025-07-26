@@ -5,7 +5,9 @@ using UnityEngine;
 public class NoteSpawner : MonoBehaviour
 {
     [SerializeField] public GameObject miniGame;
-    
+
+    [Header("Note Prefabs")]
+    [SerializeField] private GameObject[] notePrefabs = new GameObject[4];
 
     [Header("Timing and Spawning")]
     [SerializeField] private float spawnInterval = 0.15f; // Spawn every 0.5 seconds
@@ -16,15 +18,19 @@ public class NoteSpawner : MonoBehaviour
     [SerializeField] private Transform noteParent;
     
 
-    [SerializeField] private NoteFactory factory;
+    private NoteFactory factory;
 
+    private void Awake()
+    {
+        factory = new NoteFactory(notePrefabs, noteParent);
+    }
 
     public void StartMinigame()
     {
         //SpawnNotePattern();
         StartCoroutine(GameLoop());
-        
-        
+
+
     }
 
     public void ResetMinigame()

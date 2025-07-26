@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class NoteFactory : MonoBehaviour
 {
-    [SerializeField] private GameObject[] notePrefabs = new GameObject[4];
-    [SerializeField] private Transform parent;
+    private GameObject[] notePrefabs;
+    private Transform parent;
 
     public NoteFactory(GameObject[] prefabs, Transform noteParent)
     {
