@@ -681,7 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367a0ae87b9ece94daa63c2c9dbc169c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingScreen: {fileID: 0}
+  settingScreen: {fileID: 917552446}
   InstructionPanel: {fileID: 0}
   ControlPanel: {fileID: 0}
   leaveToLobbyEvent: {fileID: 11400000, guid: cb0ff065db529fa4aa77a23a2868e4bd, type: 2}

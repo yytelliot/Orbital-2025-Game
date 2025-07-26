@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 
+
 public class RoomManager : MonoBehaviourPunCallbacks
 {
 
@@ -29,6 +30,19 @@ public class RoomManager : MonoBehaviourPunCallbacks
             Destroy(gameObject);
         }
 
+        StartCoroutine(AutoRefresh());
+
+    }
+
+    IEnumerator AutoRefresh()
+    {
+        while (true)
+        {
+            Debug.Log("a");
+            RefreshRoomList();
+            yield return new WaitForSeconds(5);
+        }
+        
     }
 
     IEnumerator Start()
@@ -44,6 +58,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.ConnectUsingSettings();
     }
+    
 
     public override void OnConnectedToMaster()
     {
