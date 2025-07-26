@@ -34,6 +34,8 @@ public class AudioManager : MonoBehaviour
     // Play a one-shot SFX
     public static void PlaySound(AudioClip clip, float volume = 1, float pitchMin = 1f, float pitchMax = 1f)
     {
+        if (clip == null) return;
+        if (Instance == null) return;
         // Debug.Log($"Playing sound: {clip} at volume {volume}");
 
         float pitch = Random.Range(pitchMin, pitchMax);
@@ -62,6 +64,8 @@ public class AudioManager : MonoBehaviour
     // Start/switch BGM
     public static void PlayMusic(AudioClip clip, float volume = 1f)
     {
+        if (clip == null) return;
+
         if (Instance.musicSource.clip == clip) return;  // already playing
         Instance.musicSource.clip = clip;
         Instance.musicSource.volume = volume;

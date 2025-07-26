@@ -230,7 +230,7 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
         }
         else if (currentHpThrehsolds + thresholds > maxHpThresholds)
         {
-            currentHp = maxHpThresholds;
+            currentHpThrehsolds = maxHpThresholds;
         }
         else
         {
