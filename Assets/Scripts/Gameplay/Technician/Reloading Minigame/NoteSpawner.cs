@@ -6,8 +6,6 @@ public class NoteSpawner : MonoBehaviour
 {
     [SerializeField] public GameObject miniGame;
     
-    [Header("Note Prefabs")]
-    public GameObject[] notePrefabs = new GameObject[4]; // Assign 4 prefabs in Inspector
 
     [Header("Timing and Spawning")]
     [SerializeField] private float spawnInterval = 0.15f; // Spawn every 0.5 seconds
@@ -18,7 +16,7 @@ public class NoteSpawner : MonoBehaviour
     [SerializeField] private Transform noteParent;
     
 
-    private float startTime;
+    [SerializeField] private NoteFactory factory;
 
 
     public void StartMinigame()
@@ -99,7 +97,10 @@ public class NoteSpawner : MonoBehaviour
         // Calculate position (x for lane, y for spacing)
         Vector3 spawnPos = new Vector3(ammoPos[laneIndex].position.x, verticalPos, 0f);
         
-        GameObject note = Instantiate(notePrefabs[laneIndex], spawnPos, Quaternion.identity, noteParent);
+        factory.CreateNote(laneIndex, spawnPos);
+
+
+        /*GameObject note = Instantiate(notePrefabs[laneIndex], spawnPos, Quaternion.identity, noteParent);
 
         // Fix any inherited distortion
         //note.transform.localScale = Vector3.one;
@@ -120,6 +121,8 @@ public class NoteSpawner : MonoBehaviour
         {
             noteScript.keyToPress = keyOptions[laneIndex];
         }*/
+
+
     }
 
 
