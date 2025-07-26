@@ -4768,8 +4768,8 @@ MonoBehaviour:
   currentHp: 100
   maxHpThresholds: 4
   currentHpThrehsolds: 4
-  maxAmmoCount: 20
-  currentAmmoCount: 20
+  maxAmmoCount: 100
+  currentAmmoCount: 0
   defaultStunedTime: 0.5
   onHitInvulTime: 1.5
   speedToRegainControl: 1
