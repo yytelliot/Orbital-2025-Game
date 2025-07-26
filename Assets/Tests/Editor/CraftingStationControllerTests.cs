@@ -5,9 +5,9 @@ using UnityEngine.TestTools;
 
 namespace Tests
 {
-    public class CraftingStationControllerTests
+    public class ScanningStationControllerTests
     {
-        CraftingStationController controller;
+        ScanningStationController controller;
         GameObject stationGO;
         GameObject difficultyUI;
         GameObject highlight;
@@ -22,19 +22,19 @@ namespace Tests
         public void SetUp()
         {
             // Reset singleton
-            typeof(CraftingStationController)
+            typeof(ScanningStationController)
                 .GetField("Instance", BindingFlags.Public | BindingFlags.Static)
                 .SetValue(null, null);
 
             // Create the station and grab its private Unity‐message methods
             stationGO = new GameObject("Station");
-            controller = stationGO.AddComponent<CraftingStationController>();
+            controller = stationGO.AddComponent<ScanningStationController>();
 
-            awakeMethod   = typeof(CraftingStationController)
+            awakeMethod   = typeof(ScanningStationController)
                                 .GetMethod("Awake", BindingFlags.Instance | BindingFlags.NonPublic);
-            onEnterMethod = typeof(CraftingStationController)
+            onEnterMethod = typeof(ScanningStationController)
                                 .GetMethod("OnTriggerEnter2D", BindingFlags.Instance | BindingFlags.NonPublic);
-            onExitMethod  = typeof(CraftingStationController)
+            onExitMethod  = typeof(ScanningStationController)
                                 .GetMethod("OnTriggerExit2D", BindingFlags.Instance | BindingFlags.NonPublic);
 
             // Dummy UI & highlight
@@ -44,7 +44,7 @@ namespace Tests
             highlight.SetActive(false);
 
             // Inject them into the private fields
-            var t = typeof(CraftingStationController);
+            var t = typeof(ScanningStationController);
             t.GetField("difficultyUI", BindingFlags.NonPublic | BindingFlags.Instance)
              .SetValue(controller, difficultyUI);
             t.GetField("highlight",    BindingFlags.Public    | BindingFlags.Instance)
@@ -73,7 +73,7 @@ namespace Tests
         public void Awake_SetsSingletonInstance()
         {
             awakeMethod.Invoke(controller, null);
-            Assert.AreEqual(controller, CraftingStationController.Instance);
+            Assert.AreEqual(controller, ScanningStationController.Instance);
         }
 
         [Test]

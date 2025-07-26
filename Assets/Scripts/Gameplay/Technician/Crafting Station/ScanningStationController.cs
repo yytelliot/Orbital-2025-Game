@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CraftingStationController : MonoBehaviour, Interactable
+public class ScanningStationController : MonoBehaviour, Interactable
 {
 
     [Header("References")]
@@ -11,7 +11,7 @@ public class CraftingStationController : MonoBehaviour, Interactable
 
     [Header(("Events"))]
     [SerializeField] private GameEvent ScanComplete;
-    public static CraftingStationController Instance; // Singleton pattern
+    public static ScanningStationController Instance; // Singleton pattern
     public GameObject highlight;
 
    

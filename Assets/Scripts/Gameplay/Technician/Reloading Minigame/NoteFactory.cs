@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteFactory : MonoBehaviour
+public class NoteFactory
 {
     private GameObject[] notePrefabs;
     private Transform parent;

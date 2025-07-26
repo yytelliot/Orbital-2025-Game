@@ -55,7 +55,7 @@ public class SoundManagerTechnican : MonoBehaviour
         {
             if (soundList[i] == null)
             {
-                Debug.LogError($"soundList[{i}] is null! Enum: {(SoundType)i}");
+                Debug.LogError($"soundList[{i}] is null! Enum: {(SoundType)i}"); //Debugging
             }
         }
     }
@@ -67,34 +67,14 @@ public class SoundManagerTechnican : MonoBehaviour
 
     public static void PlaySound(SoundType sound, float volume = 1, float pitchMin = 1f, float pitchMax = 1f)
     {
+        
 
-        if (Instance == null)
-        {
-            Debug.LogError("SoundManagerTechnican instance is null!");
-            return;
-        }
-
-        if (Instance.audioSource == null)
-        {
-            Debug.LogError("AudioSource is not assigned on SoundManagerTechnican!");
-            return;
-        }
 
         int index = (int)sound;
-        if (index < 0 || index >= Instance.soundList.Length)
-        {
-            Debug.LogError($"Invalid sound index {index} for sound {sound}");
-            return;
-        }
+
 
         AudioClip clip = Instance.soundList[index];
-        if (clip == null)
-        {
-            Debug.LogError($"Clip for {sound} is null!");
-            return;
-        }
 
-        Debug.Log($"Playing sound: {sound} at volume {volume}");
 
         float pitch = Random.Range(pitchMin, pitchMax);
         Instance.audioSource.pitch = pitch;
@@ -104,7 +84,8 @@ public class SoundManagerTechnican : MonoBehaviour
         // Reset pitch to default after playing to avoid affecting future sounds
         Instance.audioSource.pitch = 1f;
 
-        Debug.Log($"Playing sound: {sound} at volume {volume}, pitch {pitch}");
+        // Debugging
+        //Debug.Log($"Playing sound: {sound} at volume {volume}, pitch {pitch}");
     }
 
     public static void PlaySoundVariation(SoundType sound, float volume = 1f)
@@ -120,8 +101,9 @@ public class SoundManagerTechnican : MonoBehaviour
         Instance.audioSource.pitch = pitch;
         Instance.audioSource.clip = clip;
         Instance.audioSource.volume = volume;
-
-        Debug.Log($"Playing {sound} at pitch ({pitch}) with semitone offset: {semitone}");
         Instance.audioSource.Play();
+        //Debugging
+        //Debug.Log($"Playing {sound} at pitch ({pitch}) with semitone offset: {semitone}");
+        
     }
 }

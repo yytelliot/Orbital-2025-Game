@@ -148,7 +148,7 @@ public class LetterSpawner : MonoBehaviour
         }
 
         // Minigame has ended
-        CraftingStationController.Instance.SendResult(ciphersSolved >= GetTargetAmount(), GetDifficultyLevel()); 
+        ScanningStationController.Instance.SendResult(ciphersSolved >= GetTargetAmount(), GetDifficultyLevel()); 
         EndMinigame();
     }
 
