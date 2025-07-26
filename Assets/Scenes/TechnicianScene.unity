@@ -418,7 +418,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 34008209}
-  - component: {fileID: 34008210}
   - component: {fileID: 34008214}
   - component: {fileID: 34008213}
   - component: {fileID: 34008212}
@@ -445,34 +444,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1853330063}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &34008210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 34008208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cadf24baece74354fb3fb8e44b545539, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: ecfbc97fa25ff49479b88a003d5ef5e0, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 34008208}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!61 &34008211
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2921,7 +2892,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &242327647
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9737,7 +9708,7 @@ RectTransform:
   m_Father: {fileID: 1397644224}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -5.000061, y: 0.00014686584}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12684,7 +12655,7 @@ RectTransform:
   m_Father: {fileID: 1974352685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 3.6799622, y: -0.31000996}
   m_SizeDelta: {x: 7.35, y: 10.330002}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15156,7 +15127,7 @@ MonoBehaviour:
   - {fileID: 2352859739859584802, guid: efc4c13d80b5bcb42a049e257d08e23a, type: 3}
   - {fileID: 3438096284777932175, guid: 78a5efaf4ed2c0447b088fad0f68b123, type: 3}
   spawnInterval: 0.15
-  gameDuration: 10
+  gameDuration: 5
   ammoPos:
   - {fileID: 987155412}
   - {fileID: 1365054382}
