@@ -131,8 +131,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 219472675}
-  - component: {fileID: 219472673}
   - component: {fileID: 219472676}
+  - component: {fileID: 219472673}
   m_Layer: 0
   m_Name: UIHandler
   m_TagString: Untagged
