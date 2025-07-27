@@ -4927,7 +4927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   readyToJump: {fileID: 11400000, guid: ecfbc97fa25ff49479b88a003d5ef5e0, type: 2}
   energyPercentageFilledEvent: {fileID: 11400000, guid: 4817172ff453a0c4a9768e6f3e27d034, type: 2}
-  baseEnergyToNextLevel: 30
+  baseEnergyToNextLevel: 25
   currentEnergy: 0
   updateUI: {fileID: 11400000, guid: 2f5ce04b7db80744a98927c82a980759, type: 2}
 --- !u!114 &1505957792
@@ -4998,7 +4998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9653bc32c59a648a3155f2c4cfe7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultRadius: 50
+  defaultRadius: 100
   onScan: {fileID: 11400000, guid: 14c9c16956ca80642922fa07d31bb852, type: 2}
   player: {fileID: 0}
 --- !u!114 &1505957795
