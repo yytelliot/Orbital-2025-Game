@@ -13,6 +13,7 @@ namespace Tests
         GameObject highlight;
         GameObject playerGO;
         BoxCollider2D playerCollider;
+   
 
         MethodInfo awakeMethod;
         MethodInfo onEnterMethod;
@@ -30,34 +31,37 @@ namespace Tests
             stationGO = new GameObject("Station");
             controller = stationGO.AddComponent<ScanningStationController>();
 
-            awakeMethod   = typeof(ScanningStationController)
+            awakeMethod = typeof(ScanningStationController)
                                 .GetMethod("Awake", BindingFlags.Instance | BindingFlags.NonPublic);
             onEnterMethod = typeof(ScanningStationController)
                                 .GetMethod("OnTriggerEnter2D", BindingFlags.Instance | BindingFlags.NonPublic);
-            onExitMethod  = typeof(ScanningStationController)
+            onExitMethod = typeof(ScanningStationController)
                                 .GetMethod("OnTriggerExit2D", BindingFlags.Instance | BindingFlags.NonPublic);
 
             // Dummy UI & highlight
             difficultyUI = new GameObject("UI");
             difficultyUI.SetActive(false);
-            highlight    = new GameObject("Highlight");
+            highlight = new GameObject("Highlight");
             highlight.SetActive(false);
 
             // Inject them into the private fields
             var t = typeof(ScanningStationController);
             t.GetField("difficultyUI", BindingFlags.NonPublic | BindingFlags.Instance)
              .SetValue(controller, difficultyUI);
-            t.GetField("highlight",    BindingFlags.Public    | BindingFlags.Instance)
+            t.GetField("highlight", BindingFlags.Public | BindingFlags.Instance)
              .SetValue(controller, highlight);
 
             // Player GameObject with Collider
-            playerGO      = new GameObject("Player");
-            playerGO.tag  = "Player";
+            playerGO = new GameObject("Player");
+            playerGO.tag = "Player";
             playerCollider = playerGO.AddComponent<BoxCollider2D>();
+            playerGO.AddComponent<Rigidbody2D>();
 
             var realPC = playerGO.AddComponent<PlayerController>();
             t.GetField("player", BindingFlags.NonPublic | BindingFlags.Instance)
              .SetValue(controller, realPC);
+             
+             
         }
 
         [TearDown]

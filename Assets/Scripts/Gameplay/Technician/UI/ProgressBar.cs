@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class ProgressBar : MonoBehaviour
 {
@@ -29,7 +30,9 @@ public class ProgressBar : MonoBehaviour
         currentProgress = Mathf.Clamp(currentProgress, 0f, maxProgress);
         float normalisedProgress = currentProgress / maxProgress;
         progressSlider.value = normalisedProgress;
-        progressResourceText.text = currentProgress * 100 + "% " + "/" + maxProgress * 100 + "%";
+
+        float rounded = Mathf.Ceil(currentProgress *100);
+        progressResourceText.text = rounded + "% " + "/" + maxProgress * 100 + "%";
 
         if (currentProgress > midProgressThreshold)
         {

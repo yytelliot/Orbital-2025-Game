@@ -60,9 +60,6 @@ public class DifficultyUIManager : MonoBehaviour
             {
                 // Player changed mind
                 ResetSelection();
-                /*selected = input;
-                awaitingConfirmation = true;
-                ShowOnlySelectedArrow(input);*/
             }
         }
     }

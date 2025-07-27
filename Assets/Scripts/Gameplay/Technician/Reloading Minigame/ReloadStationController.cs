@@ -9,16 +9,16 @@ using Photon.Realtime;
 
 public class ReloadStationController : MonoBehaviour, Interactable
 {
-    //[SerializeField] private string stationID = "AmmoReload";
-    [SerializeField] public GameObject miniGame;
-    [SerializeField] public PlayerController player;
+    
+    [SerializeField] private GameObject miniGame;
+    [SerializeField] private PlayerController player;
     public static ReloadStationController Instance; // Singleton pattern
-    public GameObject highlight;
+    [SerializeField] private GameObject highlight;
 
     [Header("Events")]
-    public GameEvent onAmmoMinigameComplete;
-    public GameEvent onAmmoMinigameStart;
-    public ProgressBar progressBar;
+    [SerializeField] private GameEvent onAmmoMinigameComplete;
+    [SerializeField] private GameEvent onAmmoMinigameStart;
+    [SerializeField] private ProgressBar progressBar;
 
     void Awake()
     {
