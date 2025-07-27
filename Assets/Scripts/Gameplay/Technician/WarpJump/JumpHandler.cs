@@ -65,7 +65,7 @@ public class JumpHandler : MonoBehaviour
             if (jumpReady)
             {
                 Debug.Log("resetstate");
-                PlayerStats.Instance.AddGalaxiesJumped(1);
+                //PlayerStats.Instance.AddGalaxiesJumped(1);
                 EnergyProgressBarUpdate.Raise(this, 0f);
                 ResetState();
             }
