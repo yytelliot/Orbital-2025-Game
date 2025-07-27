@@ -5702,6 +5702,7 @@ GameObject:
   - component: {fileID: 740972619}
   - component: {fileID: 740972618}
   - component: {fileID: 740972623}
+  - component: {fileID: 740972624}
   m_Layer: 7
   m_Name: ReloadStation
   m_TagString: Untagged
@@ -6000,6 +6001,41 @@ MonoBehaviour:
   onAmmoMinigameComplete: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
   onAmmoMinigameStart: {fileID: 11400000, guid: 17f2b2ec98ebb414d8eb5b124180fd6d, type: 2}
   progressBar: {fileID: 0}
+--- !u!58 &740972624
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740972616}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 4.5478497, y: 0.55553436}
+  serializedVersion: 2
+  m_Radius: 2.026372
 --- !u!1 &751607169
 GameObject:
   m_ObjectHideFlags: 0
@@ -15222,6 +15258,7 @@ GameObject:
   - component: {fileID: 2077437685}
   - component: {fileID: 2077437684}
   - component: {fileID: 2077437689}
+  - component: {fileID: 2077437690}
   m_Layer: 7
   m_Name: ScannerStation
   m_TagString: Untagged
@@ -15524,6 +15561,41 @@ MonoBehaviour:
   player: {fileID: 678021970}
   ScanComplete: {fileID: 11400000, guid: 4e5221a595fbb0e40ba320591013cb92, type: 2}
   highlight: {fileID: 1382368869}
+--- !u!58 &2077437690
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077437681}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -7.5008736, y: 2.2206209}
+  serializedVersion: 2
+  m_Radius: 1.1244764
 --- !u!1 &2098828453
 GameObject:
   m_ObjectHideFlags: 0
