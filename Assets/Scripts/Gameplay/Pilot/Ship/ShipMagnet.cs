@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 [RequireComponent(typeof(CircleCollider2D))]
-public class PickupMagnet : MonoBehaviour
+public class ShipMagnet : MonoBehaviour
 {
     [Header("Magnet Settings")]
     public CircleCollider2D magnetCollider;   // drag your child here
@@ -20,6 +20,11 @@ public class PickupMagnet : MonoBehaviour
     private HashSet<Rigidbody2D> trackedPickups = new();
 
     void OnTriggerEnter2D(Collider2D other) {
+        HandleCollision(other);
+    }
+
+    void HandleCollision(Collider2D other)
+    { 
         if (((1 << other.gameObject.layer) & pickupLayer.value) != 0) {
             var rb = other.attachedRigidbody;
             if (rb != null) trackedPickups.Add(rb);

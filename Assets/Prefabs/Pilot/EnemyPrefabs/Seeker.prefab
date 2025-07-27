@@ -170,7 +170,6 @@ MonoBehaviour:
   moveSpeed: 20
   stopThreshold: 0.2
   lifetime: 10
-  spawnNoise: {fileID: 8300000, guid: edd9110009a58924485bce814eec7bc4, type: 3}
 --- !u!114 &5793977891324644681
 MonoBehaviour:
   m_ObjectHideFlags: 0

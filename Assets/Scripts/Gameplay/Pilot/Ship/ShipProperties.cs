@@ -19,7 +19,7 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
     public int currentAmmoCount;
 
     [Header("Ship Stun Attributes")]
-    public float defaultStunedTime = 0.5f;
+    public float defaultStunnedTime = 0.5f;
     private bool isStunned = false;
     [Header("Damage Invul")]
     public float onHitInvulTime = 3;
@@ -50,7 +50,7 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
 
     public void Stun()
     {
-        StartCoroutine(StunCoroutine(defaultStunedTime));
+        StartCoroutine(StunCoroutine(defaultStunnedTime));
     }
     public void Stun(float time)
     {
