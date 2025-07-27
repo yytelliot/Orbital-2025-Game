@@ -9,9 +9,13 @@ using UnityEngine.SocialPlatforms.Impl;
 public enum Difficulty {None, Easy, Medium, Hard}
 public class LetterSpawner : MonoBehaviour
 {
-    [SerializeField] public GameObject miniGame;
+    
 
-    [Header("Letter Prefab")]
+    [Header("References")]
+    public GameObject miniGame;
+    
+
+    [Header("Prefab")]
     [SerializeField] private GameObject LetterBoxPrefab;
 
     [Header("Game Setup")]
@@ -26,6 +30,7 @@ public class LetterSpawner : MonoBehaviour
     private List<LetterController> activeBoxes = new();
     [SerializeField] private TMP_Text statusText;
     private int ciphersSolved = 0;
+    private CipherFactory cipherFactory;
 
     private void Awake()
     {
@@ -37,6 +42,8 @@ public class LetterSpawner : MonoBehaviour
                 .Select(word => word.ToUpper())
                 .ToList();
         }
+
+        cipherFactory = new CipherFactory(LetterBoxPrefab, panel);
     }
 
     void Update()
@@ -89,41 +96,18 @@ public class LetterSpawner : MonoBehaviour
 
     private void SpawnBox()
     {
-        GameObject newBox = Instantiate(LetterBoxPrefab);
+        string word = GetRandomWord();
+        Vector2 position = RandomPositionWithin(panel);
+        int lifetime = GetBoxLifetime();
+
+        GameObject newBox = cipherFactory.CreateCipher(word, position, lifetime);
+
         newBox.transform.SetParent(panel.transform, false); // important: false = keep local position
         LetterController box = newBox.GetComponent<LetterController>();
-
-        string word = GetRandomWord();
-        box.Initialize(word, RandomPositionWithin(panel), GetBoxLifetime());
-
-        AdjustBoxSize(newBox, word.Length);
 
         activeBoxes.Add(box);
     }
     
-    private void AdjustBoxSize(GameObject letterBox, int wordLength)
-    {
-        RectTransform rectTransform = letterBox.GetComponent<RectTransform>();
-        if (rectTransform == null) return;
-
-        // Base size values (adjust these to your needs)
-        float baseWidth = 100f; // Width for 1 character
-        float widthPerCharacter = 50f; // Additional width per character
-        float baseHeight = 120f; // Fixed height
-        
-        // Calculate new width
-        float newWidth = baseWidth + (widthPerCharacter * (wordLength - 1));
-        
-        // Apply the new size
-        rectTransform.sizeDelta = new Vector2(newWidth, baseHeight);
-        
-        // If you have a background image that needs to scale
-        Image bgImage = letterBox.GetComponent<Image>();
-        if (bgImage != null)
-        {
-            bgImage.preserveAspect = false;
-        }
-    }
 
     private Vector2 RandomPositionWithin(RectTransform panel) //currently unable to find a way to convert panel coord accurately, so using hard code.
     {
@@ -164,7 +148,7 @@ public class LetterSpawner : MonoBehaviour
         }
 
         // Minigame has ended
-        CraftingStationController.Instance.SendResult(ciphersSolved >= GetTargetAmount(), GetDifficultyLevel()); 
+        ScanningStationController.Instance.SendResult(ciphersSolved >= GetTargetAmount(), GetDifficultyLevel()); 
         EndMinigame();
     }
 

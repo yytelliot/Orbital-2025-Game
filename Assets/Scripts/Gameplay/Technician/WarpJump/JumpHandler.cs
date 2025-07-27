@@ -70,14 +70,7 @@ public class JumpHandler : MonoBehaviour
 
     private Color DesaturateColor(Color original)
     {
-        Debug.Log("did");
-
-        /*float gray = 50;
-        return new Color(gray, gray, gray, original.a);*/
-
-        return Color.gray;
- 
-        
+        return Color.gray;   
     }
 
     private void SetButtonGreyedOut(GameObject button, bool greyOut)

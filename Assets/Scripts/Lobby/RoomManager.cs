@@ -21,6 +21,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        
         if (Instance == null)
         {
             Instance = this;
@@ -31,8 +32,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
 
         StartCoroutine(AutoRefresh());
-
     }
+
 
     IEnumerator AutoRefresh()
     {

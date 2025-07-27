@@ -3079,7 +3079,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 327591155}
-  - {fileID: 1627351718}
   m_Father: {fileID: 39756663}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -6279,7 +6278,7 @@ MonoBehaviour:
   m_text: "If there are any fires that appear, help me to extinguish them.\n\nUse
     your Fire Extinguisher (Left & Right Arrow Keys) to aim at the fire. (Green Zone)\n\nOnce
     the Progress Bar Reaches 100%, hit the blue button to warp jump.\n\nWe'll get
-    through this together.\n\t\t\t\t\tLove, Inko"
+    through this together.\n\t\t\t\tLove, Inko"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 572add32a5c5a5d48ac48b0f0a1cebe0, type: 2}
   m_sharedMaterial: {fileID: 6016242530291518603, guid: 572add32a5c5a5d48ac48b0f0a1cebe0, type: 2}
@@ -10594,7 +10593,7 @@ GameObject:
   - component: {fileID: 1077342522}
   - component: {fileID: 1077342521}
   m_Layer: 5
-  m_Name: Instrctions
+  m_Name: Instructions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12888,41 +12887,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1627351717
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1627351718}
-  m_Layer: 7
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1627351718
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627351717}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 280604829}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -496, y: -314}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1649180473
 GameObject:
   m_ObjectHideFlags: 0
