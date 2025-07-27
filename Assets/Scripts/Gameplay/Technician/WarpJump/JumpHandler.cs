@@ -64,6 +64,9 @@ public class JumpHandler : MonoBehaviour
 
             if (jumpReady)
             {
+                Debug.Log("resetstate");
+                PlayerStats.Instance.AddGalaxiesJumped(1);
+                EnergyProgressBarUpdate.Raise(this, 0f);
                 ResetState();
             }
         }
@@ -93,11 +96,10 @@ public class JumpHandler : MonoBehaviour
 
     private void ResetState()
     {
-        //PlayerStats.Instance.AddGalaxiesJumped(1);
-
+        
         ButtonDown.SetActive(false);
         ButtonUp.SetActive(true);
-        EnergyProgressBarUpdate.Raise(this, 0f);
+        
 
         SetButtonGreyedOut(ButtonDown, true);
         SetButtonGreyedOut(ButtonUp, true);
