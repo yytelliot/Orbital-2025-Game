@@ -11,6 +11,7 @@ public class JumpHandler : MonoBehaviour
 
     [Header("Events")]
     [SerializeField] private GameEvent JumpComplete;
+    [SerializeField] private GameEvent EnergyProgressBarUpdate;
 
     private bool jumpReady = false;
     private Color originalUpColor;
@@ -92,8 +93,11 @@ public class JumpHandler : MonoBehaviour
 
     private void ResetState()
     {
+        //PlayerStats.Instance.AddGalaxiesJumped(1);
+
         ButtonDown.SetActive(false);
         ButtonUp.SetActive(true);
+        EnergyProgressBarUpdate.Raise(this, 0f);
 
         SetButtonGreyedOut(ButtonDown, true);
         SetButtonGreyedOut(ButtonUp, true);

@@ -144,7 +144,9 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsMasterClient)
         {
-            Invoke(nameof(CheckAllPlayersReady), 1f); //delay for RPC
+            Debug.Log("confirm run");
+            //Invoke(nameof(CheckAllPlayersReady), 1f); //delay for RPC
+            
         }
         
     }
@@ -231,6 +233,7 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            Debug.Log("properties run");
             CheckAllPlayersReady();
         }
     }
