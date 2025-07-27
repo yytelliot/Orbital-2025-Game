@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
         // Check for interaction
         if (InputManager.GetKeyDown("interact"))
+
         {
             animator.SetBool("isInteracting", true);
             StartCoroutine(TryInteractAnimation());
@@ -107,8 +108,12 @@ public class PlayerController : MonoBehaviour
     public void SetCanMove(bool value)
     {
         canMove = value;
-        rb.velocity = Vector2.zero; // Stop movement immediately
-        animator.SetBool("isMoving", false);
+
+        if (rb != null) // for Unit Testing Purposes to disregard animation
+            rb.velocity = Vector2.zero;
+
+        if (animator != null && animator.runtimeAnimatorController != null)
+            animator.SetBool("isMoving", false);
     }
 
     private IEnumerator TryInteractAnimation()

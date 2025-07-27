@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NoteSpawner : MonoBehaviour
 {
-    [SerializeField] public GameObject miniGame;
+    [SerializeField] private GameObject miniGame;
 
     [Header("Note Prefabs")]
     [SerializeField] private GameObject[] notePrefabs = new GameObject[4];
@@ -104,30 +104,6 @@ public class NoteSpawner : MonoBehaviour
         Vector3 spawnPos = new Vector3(ammoPos[laneIndex].position.x, verticalPos, 0f);
         
         factory.CreateNote(laneIndex, spawnPos);
-
-
-        /*GameObject note = Instantiate(notePrefabs[laneIndex], spawnPos, Quaternion.identity, noteParent);
-
-        // Fix any inherited distortion
-        //note.transform.localScale = Vector3.one;
-
-        // Instantiate the note prefab for that lane
-        if (laneIndex == 0 || laneIndex == 1)
-        {
-            note.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-        }
-        else
-        {
-            note.transform.rotation = Quaternion.Euler(0f, 0f, -90f);
-        }
-
-        // Assign the key to the note script
-        /*AmmoNoteObject noteScript = note.GetComponent<AmmoNoteObject>();
-        if (noteScript != null && keyOptions.Length > laneIndex)
-        {
-            noteScript.keyToPress = keyOptions[laneIndex];
-        }*/
-
 
     }
 

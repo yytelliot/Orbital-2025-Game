@@ -74,7 +74,7 @@ namespace Tests
         {
             // initial state
             Assert.AreEqual(0, scroller.GetScore());
-            Assert.IsEmpty(tmpText.text);
+            Assert.IsNull(tmpText.text);
 
             scroller.AddScore();
             Assert.AreEqual(1, scroller.GetScore());
