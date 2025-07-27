@@ -839,7 +839,6 @@ GameObject:
   m_Component:
   - component: {fileID: 231939641}
   - component: {fileID: 231939643}
-  - component: {fileID: 231939642}
   m_Layer: 0
   m_Name: BackgroundParallax
   m_TagString: Untagged
@@ -867,18 +866,6 @@ Transform:
   - {fileID: 1546518152}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &231939642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 231939640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecf7adfdbea2fd048880d88218ba76f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &231939643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4768,8 +4755,8 @@ MonoBehaviour:
   currentHp: 100
   maxHpThresholds: 4
   currentHpThrehsolds: 4
-  maxAmmoCount: 100
-  currentAmmoCount: 100
+  maxAmmoCount: 50
+  currentAmmoCount: 50
   defaultStunnedTime: 0.5
   onHitInvulTime: 1.5
   speedToRegainControl: 1
@@ -4940,7 +4927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   readyToJump: {fileID: 11400000, guid: ecfbc97fa25ff49479b88a003d5ef5e0, type: 2}
   energyPercentageFilledEvent: {fileID: 11400000, guid: 4817172ff453a0c4a9768e6f3e27d034, type: 2}
-  baseEnergyToNextLevel: 20
+  baseEnergyToNextLevel: 30
   currentEnergy: 0
   updateUI: {fileID: 11400000, guid: 2f5ce04b7db80744a98927c82a980759, type: 2}
 --- !u!114 &1505957792
