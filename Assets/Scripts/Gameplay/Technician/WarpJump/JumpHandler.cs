@@ -47,11 +47,6 @@ public class JumpHandler : MonoBehaviour
         {
             ButtonDown.SetActive(true);
             ButtonUp.SetActive(false);
-
-            if (jumpReady)
-            {
-                JumpComplete.RaiseNetworked(this, null);
-            }
         }
     }
 
@@ -66,6 +61,7 @@ public class JumpHandler : MonoBehaviour
             {
                 Debug.Log("resetstate");
                 PlayerStats.Instance.AddGalaxiesJumped(1);
+                JumpComplete.RaiseNetworked(this, null);
                 EnergyProgressBarUpdate.Raise(this, 0f);
                 ResetState();
             }
