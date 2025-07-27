@@ -4770,7 +4770,7 @@ MonoBehaviour:
   currentHpThrehsolds: 4
   maxAmmoCount: 100
   currentAmmoCount: 0
-  defaultStunedTime: 0.5
+  defaultStunnedTime: 0.5
   onHitInvulTime: 1.5
   speedToRegainControl: 1
   onAmmoCountChange: {fileID: 11400000, guid: f38e4bdd32832da4c888307b51c4c1f6, type: 2}
