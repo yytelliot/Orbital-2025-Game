@@ -7,7 +7,7 @@ using Photon.Realtime;
 
 
 
-public class ReloadStationController : MonoBehaviour, Interactable
+public class ReloadStationController : MonoBehaviour, IInteractable
 {
     
     [SerializeField] private GameObject miniGame;

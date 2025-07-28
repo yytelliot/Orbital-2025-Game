@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CraftingStationController : MonoBehaviour, Interactable
+public class CraftingStationController : MonoBehaviour, IInteractable
 {
 
     [Header("References")]

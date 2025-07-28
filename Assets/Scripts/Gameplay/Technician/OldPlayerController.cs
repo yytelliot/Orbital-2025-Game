@@ -109,7 +109,7 @@ public class OldPlayerController : MonoBehaviour
         var collider = Physics2D.OverlapCircle(interactPos, colliderAdjustment, interactablesLayer);
         if (collider != null)
         {
-            collider.GetComponent<Interactable>()?.Interact();
+            collider.GetComponent<IInteractable>()?.Interact();
         }
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireTracker : MonoBehaviour, Interactable
+public class FireTracker : MonoBehaviour, IInteractable
 {
     private Vector3 position;
     private System.Action onDestroyed;

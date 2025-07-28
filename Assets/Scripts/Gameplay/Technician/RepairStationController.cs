@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RepairStationController : MonoBehaviour, Interactable
+public class RepairStationController : MonoBehaviour, IInteractable
 {
     public GameEvent g;
     public void Interact()

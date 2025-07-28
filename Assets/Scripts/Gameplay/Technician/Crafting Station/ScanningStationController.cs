@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScanningStationController : MonoBehaviour, Interactable
+public class ScanningStationController : MonoBehaviour, IInteractable
 {
 
     [Header("References")]
