@@ -40,6 +40,7 @@ public class PilotGameController : MonoBehaviour
         // Add Score to Shared Scene
         if (PlayerStats.Instance != null)
         {
+            Debug.Log("Jump!");
             PlayerStats.Instance.AddGalaxiesJumped(1);
         }
         

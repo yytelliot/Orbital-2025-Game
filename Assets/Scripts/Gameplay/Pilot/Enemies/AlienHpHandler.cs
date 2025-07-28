@@ -44,7 +44,7 @@ public class AlienHpHandler : MonoBehaviour, ITakeDamage
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
-        AudioManager.PlaySound(AudioLibrary.GetClip("DamageNoise"));
+        AudioManager.PlaySound(AudioLibrary.GetClip("DamageNoise"), 2f);
         Debug.Log(currentHp);
         if (currentHp <= 0)
         {

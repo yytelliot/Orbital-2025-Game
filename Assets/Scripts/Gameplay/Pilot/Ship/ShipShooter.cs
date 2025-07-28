@@ -69,7 +69,7 @@ public class ShipShooter : MonoBehaviour
             bb.Initialize(dir, angle, bulletSpeed);
 
             // Pew sound effect
-            AudioManager.PlaySound(AudioLibrary.GetClip("Pew"));
+            AudioManager.PlaySound(AudioLibrary.GetClip("Pew"), 0.5f);
 
             // Raise onShoot Event
             shotFired.Raise(this, null);

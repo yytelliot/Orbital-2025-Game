@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class AlienCollisionHandler : MonoBehaviour
@@ -41,10 +42,15 @@ public class AlienCollisionHandler : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        HandleCollision(collision);
+    }
+
+    void HandleCollision(Collision2D collision)
+    { 
         var intangible = GetComponent<IIntangible>();
         if (!collision.collider.CompareTag("Player")) return;
         if (intangible != null && intangible.isIntangible) return;
-        
+
         Rigidbody2D playerRb = collision.collider.attachedRigidbody;
 
         //Get force vectors
@@ -63,6 +69,6 @@ public class AlienCollisionHandler : MonoBehaviour
         shipProperties.TakeDamage(damage);
 
         onPilotHitStun.RaiseNetworked(this, playerHitstun);
-        
+
     }
 }

@@ -178,7 +178,7 @@ public class ShipProperties : MonoBehaviour, IStunnable, ITakeDamage
         Debug.Log("Took damage:");
         Debug.Log(amount);
         DeductHp(amount);
-        AudioManager.PlaySound(AudioLibrary.GetClip("DamageNoise"));
+        AudioManager.PlaySound(AudioLibrary.GetClip("DamageNoise"), 2f);
         StartCoroutine(InvulCorutine(onHitInvulTime));
     }
     private bool DeductHp(int amount)
