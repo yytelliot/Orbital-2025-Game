@@ -42,6 +42,5 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private void NotifyFullRoom()
     {
         Debug.Log("Room is full!");
-        // Add your full-room logic here
     }
 }

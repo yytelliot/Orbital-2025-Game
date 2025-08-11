@@ -145,7 +145,6 @@ public class RoleSelectionManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.Log("confirm run");
-            //Invoke(nameof(CheckAllPlayersReady), 1f); //delay for RPC
             
         }
         
